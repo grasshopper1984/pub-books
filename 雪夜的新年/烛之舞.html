@@ -56,10 +56,10 @@ input { accent-color: var(--accent); }
 .tint-control { cursor: pointer; }
 .tint-control input { width: 1rem; height: 1rem; }
 .strength-control { display: flex; align-items: center; gap: .45rem; min-width: 0; color: var(--muted); }
-.strength-slider { display: grid; gap: .25rem; width: 6rem; }
+.strength-slider { display: grid; gap: .25rem; width: 4.5rem; }
 .strength-slider input { width: 100%; margin: 0; }
 .strength-stops { display: flex; justify-content: space-between; font-size: .6rem; line-height: 1; }
-.strength-control output { min-width: 2.5em; text-align: right; font-variant-numeric: tabular-nums; }
+.strength-control output { min-width: 1.8em; text-align: right; font-variant-numeric: tabular-nums; }
 :root[data-scene-tints="off"] .strength-control { opacity: .55; }
 main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25rem, 5vw, 3rem); background: var(--paper); box-shadow: 0 8px 35px rgb(0 0 0 / .05); font-family: var(--book-font); font-size: var(--font-size); line-height: 1.95; }
 .book-cover { min-height: 21rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 0 4rem; }
@@ -108,17 +108,33 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
   main { margin-top: 1rem; }
 }
 @media (max-width: 540px) {
-  html { scroll-padding-top: 11rem; }
+  html { scroll-padding-top: 8rem; }
   .reading-area { padding: 0 0 1rem; }
-  .reader-controls { padding: .6rem .75rem; justify-content: space-between; }
+  .reader-controls { padding: .5rem; gap: .3rem; justify-content: space-between; }
   .reader-controls .mobile-toc { flex: 1 1 100%; max-width: none; }
-  .size-control input { width: 3.5rem; }
-  .tint-control span { font-size: .7rem; }
-  .reader-controls .strength-control { flex: 1 1 100%; justify-content: flex-end; }
+  .reader-controls > :not(.mobile-toc) { flex: 0 0 auto; white-space: nowrap; }
+  .reader-controls label, .strength-control { gap: .25rem; }
+  .style-control select { max-width: 5.5rem; padding-inline: .4rem; }
+  .reader-controls .style-control > span, .reader-controls .strength-control > label {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+  .size-control input { width: 2.75rem; margin: 0; min-height: 2.65rem; }
+  .tint-control { min-height: 2.65rem; }
+  .tint-control input { margin: 0; }
+  .strength-slider { width: 3rem; }
+  .strength-slider input { min-height: 2rem; }
+  .strength-control output { min-width: 1.5em; }
   main { margin-top: 0; padding: 1.1rem .8rem; box-shadow: none; }
   .book-cover { min-height: 18rem; padding-inline: .7rem; }
   .chapter-heading, .book-section h2 { margin-inline: .6rem; }
   .scene { padding: .8em .55em; }
+}
+@media (max-width: 400px) {
+  :lang(en) .size-control > span {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
 @media print {
@@ -247,12 +263,12 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <div class="reading-area">
 <header class="reader-controls">
 <label class="mobile-toc"><span>目录</span><select id="mobile-toc" aria-label="选择章节"><option value="book">烛之舞.md</option><optgroup label="烛之舞"><option value="chapter-000001">章首 · 烛之舞</option><option value="section-000001">狮城迷踪</option><option value="section-000002">南洋小记</option><option value="section-000003">科技博览会</option><option value="section-000004">消失的人偶</option><option value="section-000005">少年梦</option><option value="section-000006">天使之城</option><option value="section-000007">金光寺</option><option value="section-000008">风信子</option><option value="section-000009">医院应聘</option><option value="section-000010">清明节</option><option value="section-000011">大学生</option><option value="section-000012">浮生记</option><option value="section-000013">诊所探访</option><option value="section-000014">黑市拳赛</option><option value="section-000015">漂流瓶</option><option value="section-000016">阿琼的记忆</option><option value="section-000017">斯卡蒂冰风号</option><option value="section-000018">甘美区</option><option value="section-000019">蓝卡宝石号</option><option value="section-000020">宵禁之夜</option><option value="section-000021">红木人偶</option><option value="section-000022">出租屋</option><option value="section-000023">悄悄话</option><option value="section-000024">王子的园区</option><option value="section-000025">任务完成</option><option value="section-000026">最后一舞</option></optgroup></select></label>
-<label><span>装帧</span><select id="book-style"><option value="classic" selected>经典</option><option value="sci-fi">科幻</option><option value="romantic">浪漫</option><option value="fantasy">奇幻</option><option value="minimal">简约</option></select></label>
+<label class="style-control"><span>装帧</span><select id="book-style"><option value="classic" selected>经典</option><option value="sci-fi">科幻</option><option value="romantic">浪漫</option><option value="fantasy">奇幻</option><option value="minimal">简约</option></select></label>
 <label class="size-control"><span>字号</span><input id="font-size" type="range" min="16" max="26" step="1" value="19" aria-label="字号"></label>
 <label class="tint-control"><input id="scene-tints" type="checkbox" checked><span>色调</span></label>
-<div class="strength-control"><label for="scene-strength">增强</label><span class="strength-slider"><input id="scene-strength" type="range" min="0" max="3" step="1" value="0" aria-label="增强" aria-valuetext="1×"><span class="strength-stops" aria-hidden="true"><span>1×</span><span>2×</span><span>5×</span><span>10×</span></span></span><output id="scene-strength-value" for="scene-strength">1×</output></div>
+<div class="strength-control"><label for="scene-strength">增强</label><span class="strength-slider"><input id="scene-strength" type="range" min="0" max="2" step="1" value="0" aria-label="增强" aria-valuetext="1×"><span class="strength-stops" aria-hidden="true"><span>1×</span><span>2×</span><span>5×</span></span></span><output id="scene-strength-value" for="scene-strength">1×</output></div>
 </header>
-<main id="book" tabindex="-1"><header class="book-cover"><div class="cover-rule"></div><p class="cover-kicker">阅读本</p><h1>烛之舞.md</h1><div class="cover-rule"></div></header><article class="book-body"><section class="chapter" id="chapter-000001" aria-label="烛之舞"><header class="chapter-heading"><p class="chapter-number">01</p><h1>烛之舞</h1></header><section class="book-section" id="section-000001" aria-label="狮城迷踪"><h2>狮城迷踪</h2><div class="scene" id="scene-000001" data-theme="t001"><div class="prose"><p><strong>3月18日 · 星期三  · 正午</strong></p>
+<main id="book" tabindex="-1"><header class="book-cover"><div class="cover-rule"></div><p class="cover-kicker">阅读本</p><h1>烛之舞.md</h1><div class="cover-rule"></div></header><article class="book-body"><section class="chapter" id="chapter-000001" aria-label="烛之舞"><header class="chapter-heading"><p class="chapter-number">01</p><h1>烛之舞</h1></header><section class="book-section" id="section-000001" aria-label="狮城迷踪"><h2>狮城迷踪</h2><div class="scene" id="scene-000001" data-theme="t043"><div class="prose"><p><strong>3月18日 · 星期三  · 正午</strong></p>
 <p>阳光透过玻璃穹顶洒下细碎的光点，棕榈树叶在微风中慵懒地摇曳。<br>江辰拉着梦小雪的橄榄色行李箱，走出海关。<br>梦小雪穿着一双轻便的人字拖，随性又悠闲。</p>
 <p>轻轨站台，梦小雪忽然抬起脚，歪头示意江辰。<br>“怎么样，不错吧？”</p>
 <p>江辰扫了一眼，只见她的脚趾甲上涂着闪亮的金色甲油，在阳光下格外晃眼。<br>“金子做的？”他语气里带着几分调侃。</p>
@@ -311,14 +327,14 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>地牢场景再现：苏耶伏地，死寂不动。墙上画着一只眼，血水缓缓汇向它，滴入瞳孔。</p>
 <p>而王冠上的珍珠，在帷幕后，忽然再度一闪而过。</p>
 </div></div>
-<div class="scene" id="scene-000003" data-theme="t073"><div class="prose"><p><strong>海螺号</strong></p>
+<div class="scene" id="scene-000003" data-theme="t001"><div class="prose"><p><strong>海螺号</strong></p>
 <p>演出结束，两人走入夜色中。风吹熄了几盏灯，纸影在地面上轻轻摇晃。<br>一阵海螺号声从远方传来，古老而深沉，仿佛来自海底。</p>
 <p>梦小雪停下脚步，侧耳听了一会儿。<br>“有人说这是生命的轮回，也有人说，是海神遗落的信物。小白，你觉得是哪种？”</p>
 <p>“大海是生命的起源……或许也是灵魂的归宿。”江辰望向远方。<br>“哎，小白——你开始相信灵魂的存在了吗？”梦小雪笑了起来。</p>
 <p>“没有。”他摆了摆手，继续向前走去。</p>
 <p>他们来到水边，站在栏杆前。<br>一尊鱼尾狮立在灯光与雾气之间，狮首高昂，鱼尾翻卷，口中喷出一道水弧，落入湖中，溅起四散的水花。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E7%8B%AE%E5%9F%8E%E8%BF%B7%E8%B8%AA.jpg" alt="狮城迷踪" decoding="async" data-illustration><figcaption>狮城迷踪</figcaption></figure></section>
-<section class="book-section" id="section-000002" aria-label="南洋小记"><h2>南洋小记</h2><div class="scene" id="scene-000004" data-theme="t001"><div class="prose"><p>第二天，阳光温和。梦小雪陪着江辰在南洋大学闲逛。</p>
+<section class="book-section" id="section-000002" aria-label="南洋小记"><h2>南洋小记</h2><div class="scene" id="scene-000004" data-theme="t007"><div class="prose"><p>第二天，阳光温和。梦小雪陪着江辰在南洋大学闲逛。</p>
 <p>江辰滑动手机，上面是几张他翻拍的旧照片，参差不齐，相纸已经褪色，光斑模糊了影像。<br>他走走停停，偶尔抬头对照眼前的景色。梦小雪安静地跟在他身后，看着他发呆。</p>
 <p>花园。八角亭伫立在朱槿花丛中，琉璃瓦片泛着淡绿的光，微风拂过花影，带来轻柔水声。</p>
 <p>文化馆。展厅里挂着几幅水墨画，墨色流动，画着波涛起伏的海岛与隐约的远山。<br>梦小雪站在画前，指着海中央一点细墨。<br>“画海的人，大概也在找回家的路吧。”</p>
@@ -348,7 +364,7 @@ It is collapsed.&quot;</p>
 <p>无人机起动，垂直升起，调整姿态，掠入飞行轨道，在障碍之间灵巧穿梭。<br>场地尽头，无人机倒飞俯冲，在快落地时猛然翻转拉起，稳稳落在平台上。<br>场边掌声和惊呼同时响起。</p>
 <p>江辰在一侧收起设备，视线在她和无人机间来回。梦小雪放下操纵杆走来。<br>“换你了。”<br>“我？”<br>“别想逃。FPS那边你肯定有兴趣。”</p>
 </div></div>
-<div class="scene" id="scene-000006" data-theme="t085"><div class="prose"><p><strong>荒原古堡</strong></p>
+<div class="scene" id="scene-000006" data-theme="t091"><div class="prose"><p><strong>荒原古堡</strong></p>
 <p>VR体验区安静了许多，全沉浸设备呈弧形排开，光线昏暗。<br>大屏幕上显示着任务简报，语音从耳机中传来——<br>「目标：攻入边境古堡，摧毁藏匿在地窖中的信号核心。」</p>
 <p>寒风夹着苔藓的味道扑面而来，视野标识不断更新。<br>江辰端着步枪，躲在一辆废弃的卡车后，塔楼方向传来一声枪响。  </p>
 <p>“高处有狙击手！”队员在频道里喊。</p>
@@ -369,7 +385,7 @@ It is collapsed.&quot;</p>
 <p>她退开半步，脸上带着笑意。<br>“那现在——感觉到真实了吗？”</p>
 <p>江辰看着她，没说话，耳朵却红了一点。</p>
 </div></div>
-<div class="scene" id="scene-000008" data-theme="t087"><div class="prose"><p><strong>海洋展区</strong></p>
+<div class="scene" id="scene-000008" data-theme="t085"><div class="prose"><p><strong>海洋展区</strong></p>
 <p>展馆的光线转为幽蓝，走廊两侧挂着长长的仿生水母灯，触须缓慢起伏。<br>江辰拍下展出的海洋矿产。</p>
 <p>梦小雪跳上一台深海潜水器，轻轻敲了敲舱门的外壳。<br>“还挺结实的。”她眯眼看着舱体的接缝，“就是不知道能不能挡住怪物。”</p>
 <p>展台后方的工作人员闻言抬头，<br>投来一个『又是外行』的眼神，连例行解说都省去了。</p>
@@ -422,7 +438,7 @@ It is collapsed.&quot;</p>
 <p>“既然要起风了，不知这风往何处吹？”江辰若有所思。</p>
 <p>她伸展手臂，袖口的光影凝成一颗星。<br>“那要看江先生从何处来。”声音很轻，她没戴麦克风。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E7%A7%91%E6%8A%80%E5%8D%9A%E8%A7%88%E4%BC%9A.jpg" alt="科技博览会" decoding="async" data-illustration><figcaption>科技博览会</figcaption></figure></section>
-<section class="book-section" id="section-000004" aria-label="消失的人偶"><h2>消失的人偶</h2><div class="scene" id="scene-000012" data-theme="t044"><div class="prose"><p>三月的季风清凉干燥，街道也清爽了几分。<br>七点刚过，朝阳从港湾升起，光线淡金，带回海潮的气息。</p>
+<section class="book-section" id="section-000004" aria-label="消失的人偶"><h2>消失的人偶</h2><div class="scene" id="scene-000012" data-theme="t051"><div class="prose"><p>三月的季风清凉干燥，街道也清爽了几分。<br>七点刚过，朝阳从港湾升起，光线淡金，带回海潮的气息。</p>
 <p>梦小雪拉着行李箱走在前面，回头看向江辰，笑意藏在眼角。<br>“江公子此刻神思游离，莫非昨夜梦回大唐，鲜衣怒马？”</p>
 <p>江辰从天边收回目光，语气低缓。<br>“雪山如刃，孤松立垭，风过戈壁，剑刻纵横。”</p>
 <p>“哎，小白你也会做这样的梦？快说，还看到什么了？”</p>
@@ -440,7 +456,7 @@ It is collapsed.&quot;</p>
 <p>江辰看了一眼散落一地的破布和绒线。<br>“所以不是为了破坏演出。也许是有人想拿它们进行某种仪式？”</p>
 <p>“大侦探不是向来不信邪的吗？”梦小雪眨了眨眼。</p>
 </div></div>
-<div class="scene" id="scene-000014" data-theme="t043"><div class="prose"><p>他们来到酒店楼顶的天空花园，晨风吹过草坪，港湾与城市尽收眼底。<br>江辰四处查看可疑地点。</p>
+<div class="scene" id="scene-000014" data-theme="t049"><div class="prose"><p>他们来到酒店楼顶的天空花园，晨风吹过草坪，港湾与城市尽收眼底。<br>江辰四处查看可疑地点。</p>
 <p>设备间阁楼上伸出几根管道，一群海鸥扑棱着翅膀，聚集在管道顶端。</p>
 <p>江辰翻过栏杆，顺着铁梯爬上阁楼。白灰相间的海鸥扑簌簌地飞散了。<br>地上散落着羽毛和珍珠。两尊人偶摆放成一个阴阳鱼的图案。</p>
 <p>塔万随后赶到，喘了口气蹲下查看，眼中掠过一丝沉痛。<br>萨蒂雅的人偶倒在地上裂开，像被鸟啄过。衣摆破碎，身上的线轴散落风中。</p>
@@ -462,7 +478,7 @@ It is collapsed.&quot;</p>
 <p>“小白，小白！下车吃饭了！”</p>
 <p>梦小雪的声音把他从梦中唤醒。<br>江辰睁开眼，车已停稳。窗外，饭馆的招牌已经褪了色。</p>
 </div></div>
-<div class="scene" id="scene-000017" data-theme="t002"><div class="prose"><p>塔万团长在门口招呼，引两人走进店里。<br>“这家店的本地菜很地道，尝尝看。”他热情地说。</p>
+<div class="scene" id="scene-000017" data-theme="t001"><div class="prose"><p>塔万团长在门口招呼，引两人走进店里。<br>“这家店的本地菜很地道，尝尝看。”他热情地说。</p>
 <p>饭馆里弥漫着香料气味。落座后，塔万笑了笑。<br>“两位是第一次来南洋？”</p>
 <p>梦小雪用勺子搅着碗里的木瓜粥。<br>“是呀，我对这边的灵异传说比较感兴趣。”<br>她朝江辰抬了抬下巴。<br>“他嘛，是陪我出来玩的。”</p>
 <p>江辰没接话，专心致志地对付着面前那盘香气扑鼻的炒河粉。</p>
@@ -481,17 +497,17 @@ It is collapsed.&quot;</p>
 <p>梦小雪没有回答。她的呼吸渐渐变得均匀而绵长，似乎已经睡着了。</p>
 <p>车窗外，明月如洗。<br>忽有一道幽暗从边缘侵入，月光褪尽，只余一抹血红，静静悬在夜空。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E5%B0%91%E5%B9%B4%E6%A2%A6.jpg" alt="少年梦" decoding="async" data-illustration><figcaption>少年梦</figcaption></figure></section>
-<section class="book-section" id="section-000006" aria-label="天使之城"><h2>天使之城</h2><div class="scene" id="scene-000019" data-theme="t001"><div class="prose"><p>巴士抵达时已近正午，道路与桥梁在纵横交错的水道间穿梭延展。<br>鎏金佛塔沐浴在阳光下，辉煌耀眼，不留一丝阴影。<br>传说天神将祝福倾注于此，遣下使者日夜守望，自此战火不侵，哀伤止息，永世安宁。</p>
+<section class="book-section" id="section-000006" aria-label="天使之城"><h2>天使之城</h2><div class="scene" id="scene-000019" data-theme="t043"><div class="prose"><p>巴士抵达时已近正午，道路与桥梁在纵横交错的水道间穿梭延展。<br>鎏金佛塔沐浴在阳光下，辉煌耀眼，不留一丝阴影。<br>传说天神将祝福倾注于此，遣下使者日夜守望，自此战火不侵，哀伤止息，永世安宁。</p>
 <p>两人下车，与塔万和他的剧团挥手道别。<br>“一路顺风，”塔万靠着车门，眼神探究，“如果有什么需要，随时可以找我。”<br>江辰点头，梦小雪则笑嘻嘻地摆了摆手。</p>
 </div></div>
-<div class="scene" id="scene-000020" data-theme="t002"><div class="prose"><p>他们在考山路的街角找了一间不起眼的旅舍住下。房间不大，但还算干净。<br>一台老旧的吊扇在天花板上慢悠悠地转着。</p>
+<div class="scene" id="scene-000020" data-theme="t001"><div class="prose"><p>他们在考山路的街角找了一间不起眼的旅舍住下。房间不大，但还算干净。<br>一台老旧的吊扇在天花板上慢悠悠地转着。</p>
 <p>江辰拉上窗帘。<br>“我睡一会儿。”<br>“行，我出去逛逛。”<br>梦小雪背上她那个小巧的帆布包。</p>
 <p>江辰再醒来时，天色已染上温暖的橘红，光线昏暗。<br>一股食物的香气从门缝里飘了进来，还伴随着一阵轻快的哼唱声。</p>
 <p>他走出房间。梦小雪站在公用的小厨房里，背对着他。<br>她一手握着锅铲，一手叉着腰，正哼着伦敦桥的小调。<br>平底锅滋滋作响，煎着一个蛋，看起来比寻常鸡蛋大上一圈，蛋黄颜色也更深，更红。</p>
 <p>“这是什么？”江辰问。<br>“凤凰蛋。”梦小雪头也没回。<br>“下午在集市上，跟哪个戴头巾的老婆婆买的？”江辰笑了笑。</p>
 <p>梦小雪这才转过身，用锅铲指了指他，轻哼一声。<br>“小白，看你虚弱成这样，给你补一补身体。”<br>说罢，她利索地将煎好的蛋盛进盘子，递到他面前。</p>
 </div></div>
-<div class="scene" id="scene-000021" data-theme="t001"><div class="prose"><p>晚饭过后，两人出门闲逛。<br>夜幕降临，白日的酷热消散，街头巷尾的烟火气息却愈发浓烈。<br>烤肉的滋滋声、香料的辛辣味、人们的谈笑声混杂在一起，空气中充满了鲜活的生命力。</p>
+<div class="scene" id="scene-000021" data-theme="t080"><div class="prose"><p>晚饭过后，两人出门闲逛。<br>夜幕降临，白日的酷热消散，街头巷尾的烟火气息却愈发浓烈。<br>烤肉的滋滋声、香料的辛辣味、人们的谈笑声混杂在一起，空气中充满了鲜活的生命力。</p>
 <p>梦小雪跟在江辰身侧，看着来来往往的人群。<br>“我们接下来怎么查？总不能随便抓个路人问话吧。”</p>
 <p>江辰环顾四周，食摊上灯火通明。<br>摊主们翻转着烤串，与食客们偶尔聊上两句。他在生意最好的摊位前停下，思索了片刻。</p>
 <p>“要不，”他转头看向梦小雪，“我们开个烧烤摊吧。”</p>
@@ -502,7 +518,7 @@ It is collapsed.&quot;</p>
 <p>还没开张，江辰便用白色油漆在防水布上刷了个招牌——<br>「雪风烧烤」</p>
 <p>梦小雪躺在新买的折叠椅上，满意地打量着那块布。<br>“这名字多好听，一定能招财进宝。”她信誓旦旦地说。</p>
 </div></div>
-<div class="scene" id="scene-000023" data-theme="t001"><div class="prose"><p>金光寺不好找。他们一边筹备摊子，一边向人打听它的位置。</p>
+<div class="scene" id="scene-000023" data-theme="t073"><div class="prose"><p>金光寺不好找。他们一边筹备摊子，一边向人打听它的位置。</p>
 <p>城南。寺院内香火鼎盛。一个扫地的老和尚听完描述，眯眼想了很久。<br>“那座小庙，”他慢悠悠地说，“应该在北边的山上。”</p>
 <p>他们转了几次车，从喧嚣的城市一路到了山脚下。<br>江辰拎着镇上买的酒菜，和梦小雪沿小路上山。<br>到达山顶，天色已近黄昏，最后一抹晚霞正从山峦间隐去。</p>
 <p>木鱼声伴着山风传来，小庙孤零零立在山巅，院中几点烛光在夜色下跳动。</p>
@@ -518,7 +534,7 @@ It is collapsed.&quot;</p>
 <p>他顿了顿。</p>
 <p>“是一个奇怪的女子救了我。她……或者说，那具身体，没有活人的气息，像一具女尸。”<br>“她披着一件男式夹克，将我送回岸边，然后转身消失在了海里。”</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E9%87%91%E5%85%89%E5%AF%BA.jpg" alt="金光寺" decoding="async" data-illustration><figcaption>金光寺</figcaption></figure></section>
-<section class="book-section" id="section-000008" aria-label="风信子"><h2>风信子</h2><div class="scene" id="scene-000025" data-theme="t001"><div class="prose"><p><strong>昂记服装</strong></p>
+<section class="book-section" id="section-000008" aria-label="风信子"><h2>风信子</h2><div class="scene" id="scene-000025" data-theme="t002"><div class="prose"><p><strong>昂记服装</strong></p>
 <p>四月的午后，空气闷热，街道空旷，偶尔有嘟嘟车驶过，打破了昏沉的寂静。<br>昂记服装店，瓦拉斜倚在柜台后，翻看着一本时装杂志。<br>她合上杂志，目光落在封面故事上——《蓝卡宝石号上的时尚派对》。</p>
 <p>门口，贝壳风铃清脆地响起。</p>
 <p>瓦拉抬头，一个女人走了进来。<br>她看起来像个游客，背着水洗褪色的帆布包，精灵短发，眼神明亮。<br>她好奇地打量着挂在墙上的各色布料。</p>
@@ -547,7 +563,7 @@ It is collapsed.&quot;</p>
 <p>“你整天都在逗Iris玩？”</p>
 <p>“才不是呢，”梦小雪收回手机，“艾酱分析了几个地点。”<br>“甘美区学校附近。西隆区夜生活圈。但她说丹林区最有意思——”<br>“这里靠近港口，街巷里藏着许多隐蔽场所，就像一张蜘蛛网的中心。”</p>
 </div></div>
-<div class="scene" id="scene-000028" data-theme="t073"><div class="prose"><p>夜色渐深，丹林区褪去喧嚣。炉中炭火正旺。<br>“开业半价。”<br>几个码头工人走了过来，脸上写满疲惫，嗓门却格外洪亮。</p>
+<div class="scene" id="scene-000028" data-theme="t001"><div class="prose"><p>夜色渐深，丹林区褪去喧嚣。炉中炭火正旺。<br>“开业半价。”<br>几个码头工人走了过来，脸上写满疲惫，嗓门却格外洪亮。</p>
 <p>“老板，先来二十串！五花肉，鸡翅，蘑菇……都来点。”<br>领头的人把纸币拍在桌板上。</p>
 <p>肉串铺上烤架。酱汁滴落，滋啦作响，香气顿时更加浓郁。</p>
 <p>“累死我了。”一个工人接过冰水，猛灌几口，“这加班费真香。还得连干三天。”<br>“可不是，”另一人接话，“压着的船太多了，都赶着卸货。”</p>
@@ -646,14 +662,14 @@ It is collapsed.&quot;</p>
 <p>江辰还注意到了那个大学生。他与周围的环境格格不入。<br>面对逃跑的毒贩，他有些慌张，看到流浪汉喂猫，他一脸迷茫。<br>而看见流浪汉和舞女大口吃串时，他眼神中满是嫌弃。</p>
 <p>此刻，他又站在不远处。手在口袋里摸了摸，似乎也想买两串。<br>他最终还是什么都没做，转身走进了更深的夜色中。</p>
 </div></div>
-<div class="scene" id="scene-000038" data-theme="t001"><div class="prose"><p>梦小雪深夜归来，讲起鬼怪故事。<br>“这两天的事。”她说。<br>“城西有座公寓，里面住着一个金发女人，好像中了邪。”<br>“白天她把自己锁在房里，用床单遮住所有窗户。还说：‘阳光里有蝎子。’”<br>“晚上她又跑到街上，对着路灯说话，时而痛哭，时而大笑。”</p>
+<div class="scene" id="scene-000038" data-theme="t073"><div class="prose"><p>梦小雪深夜归来，讲起鬼怪故事。<br>“这两天的事。”她说。<br>“城西有座公寓，里面住着一个金发女人，好像中了邪。”<br>“白天她把自己锁在房里，用床单遮住所有窗户。还说：‘阳光里有蝎子。’”<br>“晚上她又跑到街上，对着路灯说话，时而痛哭，时而大笑。”</p>
 <p>“听着像毒瘾发作。”江辰收拾烤炉。</p>
 <p>梦小雪从包里取出一件花衬衫，递给他。</p>
 <p>江辰接过衬衫，捏起领口凑到路灯下，一根一根地数着上面的针脚。<br>数到二十，梦小雪终于忍不住开口。<br>“停，你在干嘛？”</p>
 <p>“老裁缝说，好衬衫一寸三十针。”江辰回答，“我看看这件。”</p>
 <p>“小白，”梦小雪看着他，摇了摇头，“你一定是坏掉了。”</p>
 </div></div>
-<div class="scene" id="scene-000039" data-theme="t037"><div class="prose"><p>第二天，泼水节到了。整座城市都陷入了水的狂欢。</p>
+<div class="scene" id="scene-000039" data-theme="t001"><div class="prose"><p>第二天，泼水节到了。整座城市都陷入了水的狂欢。</p>
 <p>江辰提了一整桶水，在街角等到梦小雪，兜头浇了下去。</p>
 <p>梦小雪尖叫一声，想追上去报复，但脚上穿着拖鞋，又湿又滑，根本跑不快。</p>
 <p>江辰站在远处笑着喊她。</p>
@@ -697,7 +713,7 @@ It is collapsed.&quot;</p>
 <p>桑杰愣住，他看看江辰，又看看拳台，似乎明白了什么。<br>他点了点头，默默离开。</p>
 <p>“他明白什么了？”梦小雪问。<br>“谁知道。”江辰耸耸肩。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E9%BB%91%E5%B8%82%E6%8B%B3%E8%B5%9B.jpg" alt="黑市拳赛" decoding="async" data-illustration><figcaption>黑市拳赛</figcaption></figure></section>
-<section class="book-section" id="section-000015" aria-label="漂流瓶"><h2>漂流瓶</h2><div class="scene" id="scene-000044" data-theme="t001"><div class="prose"><p>月末的丹林区。几场雷雨后，湿热里渗出一丝凉意。<br>江辰的烧烤摊开了一个月。</p>
+<section class="book-section" id="section-000015" aria-label="漂流瓶"><h2>漂流瓶</h2><div class="scene" id="scene-000044" data-theme="t037"><div class="prose"><p>月末的丹林区。几场雷雨后，湿热里渗出一丝凉意。<br>江辰的烧烤摊开了一个月。</p>
 <p>他大致摸清了『基因强化剂』的流向——<br>东洋货船，港口，丹林区冷藏点，黑市，地下诊所。<br>最终，流入拳手或特定客户体内。</p>
 <p>Z病毒是另一个目标，更像幽灵。<br>西隆区的舞女叫它『美容针』。她们提到过一个医生，贾斯珀。<br>一月份，贾斯珀消失了。<br>亚辛被害后不久。<br>江辰怀疑，贾斯珀就是Z病毒在本地的实验执行者。<br>一个幽灵，主动藏进了人海。</p>
 <p>江辰支好烤炉，扯开一条纱布，浇上酒精，引火点燃。<br>透明的火焰在炉中无声燃烧。<br>炉底的木炭被均匀引燃，开始散发出清冽的香气。<br>那个戴金边眼镜的男人走了过来。</p>
@@ -722,13 +738,13 @@ It is collapsed.&quot;</p>
 <p>苦水沉吟。<br>“我带他沿海岸走走。熟悉的环境或许能唤醒记忆。寻不到也不强求。”  </p>
 <p>“海边？”梦小雪眼睛亮了，“我也去！”<br>“算我一个，好有个照应。”江辰说。</p>
 </div></div>
-<div class="scene" id="scene-000047" data-theme="t001"><div class="prose"><p>嘟嘟车驶向渔港。他们租下老渔民黎叔的长尾船。<br>搬运剩下的矿泉水和烤肉串上船。</p>
+<div class="scene" id="scene-000047" data-theme="t049"><div class="prose"><p>嘟嘟车驶向渔港。他们租下老渔民黎叔的长尾船。<br>搬运剩下的矿泉水和烤肉串上船。</p>
 <p>苦水大师的禅杖压在行李上。<br>江辰俯身去拿，入手一愣——传说中八十斤的禅杖竟轻若寻常木棍。</p>
 <p>“哟，”梦小雪见状，“烧烤摊练出力气了？都能单手拿大师的禅杖啦。”<br>江辰掂着禅杖，满脸怀疑——八十斤怎么可能这般轻松？</p>
 <p>苦水微笑。<br>“这禅杖不多不少，正好八十斤。”<br>“万物轻重，在心不在物。施主觉得它轻，它便是轻了，自然拿得起。”<br>他示意江辰把禅杖递给阿琼。</p>
 <p>阿琼接过，手臂猛然一沉。<br>“很……很重。”<br>江辰望向苦水大师，眼中不由多了几分敬畏。</p>
 </div></div>
-<div class="scene" id="scene-000048" data-theme="t001"><div class="prose"><p>物资装船完毕，黎叔解开缆绳。<br>发动机“突突”作响，小船驶离码头。</p>
+<div class="scene" id="scene-000048" data-theme="t049"><div class="prose"><p>物资装船完毕，黎叔解开缆绳。<br>发动机“突突”作响，小船驶离码头。</p>
 <p>一直沉默寡言的阿琼动了。<br>他利落地盘好绳索，穿过甲板，在船头坐下，动作如行云流水。</p>
 <p>“这位兄弟脚下生根，怕是常年在海上讨生活的。”黎叔笑着说。<br>望着这一幕，众人心中升起希望——<br>或许这次航行，真能帮阿琼找回遗失在大海中的记忆。</p>
 </div></div>
@@ -743,7 +759,7 @@ It is collapsed.&quot;</p>
 <p>苦水大师回头看着他，微微一笑。<br>“但吃无妨，莫忘修行本心便是。”  </p>
 <p>“多谢师父！”明心雀跃地挑了品相最佳的肉串，先奉给师父与阿琼。<br>然后回到船篷下大快朵颐，还不忘听从江辰的提醒，蘸上调料。</p>
 </div></div>
-<div class="scene" id="scene-000050" data-theme="t075"><div class="prose"><p>夜幕降临，黎叔将船泊在一处平缓的沙滩旁。<br>恰逢满月当空，清冷月辉洒满海面，随潮汐起伏荡漾出粼粼银光。</p>
+<div class="scene" id="scene-000050" data-theme="t073"><div class="prose"><p>夜幕降临，黎叔将船泊在一处平缓的沙滩旁。<br>恰逢满月当空，清冷月辉洒满海面，随潮汐起伏荡漾出粼粼银光。</p>
 <p>江辰坐在梦小雪身旁，看她取出一张塔罗牌·女祭司。<br>她的手指轻轻拂过牌面，口中念念有词。</p>
 <p>牌面上，白纱蒙面的修女手捧红月，<br>仅露出的双眸令江辰感到莫名熟悉，却一时想不起在何处见过。<br>“这画的是……”江辰刚想开口。</p>
 <p>忽然，一直沉默坐在船头，望海发呆的阿琼有了反应。<br>他猛地抬起头，望向天空中的明月。嘴里用一种含混不清的声音念叨。<br>“月亮……月亮出来了……”<br>“风……就停了。”</p>
@@ -764,7 +780,7 @@ It is collapsed.&quot;</p>
 <p>明心盯着那些如符咒般的图形和数字，<br>它们旋转，扭曲，直到他的视线变得模糊。</p>
 <p>他起身跑到船头。阿琼仍望着海，沉默不语。<br>明心在他身旁坐下，双手合十。<br>“阿琼施主，我……还是为你诵经吧。”</p>
 </div></div>
-<div class="scene" id="scene-000052" data-theme="t049"><div class="prose"><p>日暮时分，海风渐起。黎叔驾船驶入避风湾，投宿在渔民巴颂家中。</p>
+<div class="scene" id="scene-000052" data-theme="t050"><div class="prose"><p>日暮时分，海风渐起。黎叔驾船驶入避风湾，投宿在渔民巴颂家中。</p>
 <p>油灯昏黄，鱼汤炖着香茅和南姜，热气腾腾。<br>浪涛轰鸣，木屋温暖。然而气氛却格外沉闷。</p>
 <p>“范围太大了。”黎叔喝着主人自酿的米酒，长叹一声。<br>“风眼只是个推测，不一定就在海边。说不定是从哪条河里冲下来的。”</p>
 <p>“他身上有脑机接口痕迹，又熟悉航海。”江辰分析。<br>“他的来历可能比我们想的更复杂，甚至是来自大洋彼岸的某个地方。”</p>
@@ -773,12 +789,12 @@ It is collapsed.&quot;</p>
 <p>巴颂正在续茶，水壶悬停。<br>“老人家，是想起什么了吗？”梦小雪问。</p>
 <p>“邪门事……”他放下茶壶，压低嗓音。<br>“桑达前后，北边红树林。”<br>“晚归的渔民说能看见一个村子。”<br>烟袋明灭间，他皱纹里透出诡秘。<br>“怪的是，那村子只有夜里出现，亮着绿莹莹的灯火。”<br>“白天再去，就什么都没了。”<br>“后来人都叫它『鬼渔村』，说是住着风暴里的冤魂，没人敢靠近。”<br>“再后来，村子也不再出现，就成了老一辈嘴里的传说。”</p>
 </div></div>
-<div class="scene" id="scene-000053" data-theme="t055"><div class="prose"><p>第四天破晓。黎叔看着他们坚定的神情，最终点头，发动了引擎。</p>
+<div class="scene" id="scene-000053" data-theme="t049"><div class="prose"><p>第四天破晓。黎叔看着他们坚定的神情，最终点头，发动了引擎。</p>
 <p>小船驶入一片广袤的红树林。<br>海与陆的交界，气生根织成绿色迷宫。四下寂静，偶尔传来鸟叫。</p>
 <p>“阴气凝重。”苦水大师忽然睁眼，“此地冤魂不散，正在四处徘徊。”<br>明心缩起脖子，黎叔脸色发白。</p>
 <p>正逢大潮退去，一条淹没的水道显露出来。<br>“就是这儿。”黎叔声音发颤，驾船缓缓驶入狭窄水道。<br>船身擦过虬结的树根，腐叶漂浮。不知过了多久，前方豁然开朗——<br>林间高地上，赫然出现一片村落的轮廓。</p>
 </div></div>
-<div class="scene" id="scene-000054" data-theme="t001"><div class="prose"><p><strong>灵感之源</strong></p>
+<div class="scene" id="scene-000054" data-theme="t049"><div class="prose"><p><strong>灵感之源</strong></p>
 <p>腐烂树叶与咸湿淤泥的气味混杂。风穿过破屋，发出呜咽。<br>村落死寂。</p>
 <p>渔村风格的房屋，但布局却十分规整。<br>村落中心，一座信号塔歪斜倒地，锈迹斑斑，如巨兽骸骨。</p>
 <p>梦小雪举起手机，拍下塔，拍下棚屋，传给Iris。<br>屏幕亮起，却没有分析结果。<br>「警告：侦测到强烈的情感共鸣……恐惧、悲伤、绝望……」<br>「数据源模糊，存在似曾相识的节点……」</p>
@@ -790,12 +806,12 @@ It is collapsed.&quot;</p>
 <p>仿佛受到某种指引，他跪在废墟中，用手拨开泥土和木屑。<br>挖了很久，他停下。</p>
 <p>他捧起一个人偶，红树林木头，刀痕歪斜，上面有一个名字——<br>『萨罗嘉』</p>
 </div></div>
-<div class="scene" id="scene-000055" data-theme="t049"><div class="prose"><p>傍晚。小船返回巴颂老人的渔村。几个村民围上来。<br>“怎么样？那地方是不是很邪门？”<br>“大师，您找到什么了吗？”  </p>
+<div class="scene" id="scene-000055" data-theme="t001"><div class="prose"><p>傍晚。小船返回巴颂老人的渔村。几个村民围上来。<br>“怎么样？那地方是不是很邪门？”<br>“大师，您找到什么了吗？”  </p>
 <p>众人沉默。<br>苦水大师上前一步，双手合十，神情悲悯而庄重。<br>“阿弥陀佛。那片林中确有诸多亡魂滞留。”<br>“贫僧已为他们做了法事，助其往生。此后，那里的阴气便会渐渐散去。”</p>
 <p>村民们纷纷露出信服与感激的神情，合十回礼。<br>“多谢大师慈悲！”<br>“这下我们晚上出海也安心多了。”</p>
 <p>次日，众人离开渔村，踏上返航之路。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E9%98%BF%E7%90%BC%E7%9A%84%E8%AE%B0%E5%BF%86.jpg" alt="阿琼的记忆" decoding="async" data-illustration><figcaption>阿琼的记忆</figcaption></figure></section>
-<section class="book-section" id="section-000017" aria-label="斯卡蒂冰风号"><h2>斯卡蒂冰风号</h2><div class="scene" id="scene-000056" data-theme="t043"><div class="prose"><p>斯卡蒂冰风号，清晨靠岸。<br>航行十四天，海况平稳，能见度好。<br>第二天起，自动航速锁定在12节。<br>省油。弗兰克没动。<br>他知道冷箱几乎是空的。</p>
+<section class="book-section" id="section-000017" aria-label="斯卡蒂冰风号"><h2>斯卡蒂冰风号</h2><div class="scene" id="scene-000056" data-theme="t079"><div class="prose"><p>斯卡蒂冰风号，清晨靠岸。<br>航行十四天，海况平稳，能见度好。<br>第二天起，自动航速锁定在12节。<br>省油。弗兰克没动。<br>他知道冷箱几乎是空的。</p>
 <p>一箱写着『医疗废品回收』。<br>登记合规，编号干净。<br>那两个人跟着箱子下船。<br>没说话。他们常跟船。</p>
 <p>弗兰克下船。<br>签字，打印，盖章。一小时搞定。</p>
 </div></div>
@@ -829,7 +845,7 @@ It is collapsed.&quot;</p>
 <p>“能治吗？”苦水问。<br>“可以。需要开颅，把这些电极和探针全部取出。”<br>“风险如何？”<br>“中等。这是一台精密的异物移除手术，术后需要一段恢复期。”</p>
 <p>纳塔蓬和苦水交换了一个眼神。<br>“就按你的方案来。”纳塔蓬说。</p>
 </div></div>
-<div class="scene" id="scene-000062" data-theme="t001"><div class="prose"><p><strong>老顾客</strong></p>
+<div class="scene" id="scene-000062" data-theme="t037"><div class="prose"><p><strong>老顾客</strong></p>
 <p>江辰把摊子搬到了甘美区的小巷。<br>转过街角是医院，直走不远是中央科技大学。<br>学生们来来去去，步子快，没人看他的摊子。</p>
 <p>他生了炭火。炭在炉子里烧得发白。</p>
 <p>一个人走了过来。是那个老裁缝。<br>提着一个深蓝色的布袋。<br>袋子不晃，他拿得很稳。</p>
@@ -861,7 +877,7 @@ It is collapsed.&quot;</p>
 <p>塔万看着江辰。他脸上的表情很平静。<br>过了一会，他忽然大笑起来。</p>
 <p>“鬼故事，”他重复了一遍，摇了摇头。<br>“那确实比大学里的剧本有意思多了。”</p>
 </div></div>
-<div class="scene" id="scene-000064" data-theme="t001"><div class="prose"><p><strong>鬼故事</strong></p>
+<div class="scene" id="scene-000064" data-theme="t073"><div class="prose"><p><strong>鬼故事</strong></p>
 <p><strong>5月3日 · 星期天</strong></p>
 <p>夜色如墨，甘美区的小巷里亮着一团橙光，空气中飘着炭火和烤肉的香气。</p>
 <p>这是阿琼手术前一天。<br>苦水大师带着明心探望完阿琼，来到江辰的烧烤摊。<br>梦小雪也早早回来了，几人围坐在小桌旁。</p>
@@ -883,7 +899,7 @@ It is collapsed.&quot;</p>
 <p>“对。明天有一位巴努王子乘船到访。”江辰语气平静。<br>“他让我去跟踪报道，看看能不能抓到什么独家新闻。”</p>
 <p>“王子啊……”梦小雪拉长了音调，“那好吧，你可别拍糊了。早点休息。”<br>“你也是。”江辰说。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E7%94%98%E7%BE%8E%E5%8C%BA.jpg" alt="甘美区" decoding="async" data-illustration><figcaption>甘美区</figcaption></figure></section>
-<section class="book-section" id="section-000019" aria-label="蓝卡宝石号"><h2>蓝卡宝石号</h2><div class="scene" id="scene-000066" data-theme="t049"><div class="prose"><p>清晨，港口。海风中带着一丝灼热。<br>江辰调整背带，混在寥寥几位记者中，静静等待。</p>
+<section class="book-section" id="section-000019" aria-label="蓝卡宝石号"><h2>蓝卡宝石号</h2><div class="scene" id="scene-000066" data-theme="t050"><div class="prose"><p>清晨，港口。海风中带着一丝灼热。<br>江辰调整背带，混在寥寥几位记者中，静静等待。</p>
 <p>九点。蓝卡宝石号靠岸。<br>巴努王子现身舷梯，白色西装，微笑着挥手。<br>他面容俊朗，气质现代。<br>他身后跟着一个女人——<br>红色长裙。神情冷峻，宛如出鞘利刃。</p>
 <p>江辰按动快门，镜头对准红裙女人，多停了两秒。<br>「这是谁？资料里没有她。」</p>
 <p>巴努王子走下舷梯，与政府首脑握手寒暄。<br>政商代表们鱼贯而下，官方流程。</p>
@@ -997,7 +1013,7 @@ It is collapsed.&quot;</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E7%BA%A2%E6%9C%A8%E4%BA%BA%E5%81%B6.jpg" alt="红木人偶" decoding="async" data-illustration><figcaption>红木人偶</figcaption></figure></section>
 <section class="book-section" id="section-000022" aria-label="出租屋"><h2>出租屋</h2><div class="scene" id="scene-000079" data-theme="t001"><div class="prose"><p>江辰在会议室，记者们熬了一夜。梦小雪发来消息——<br>「大师见到萨罗嘉了，就是王子身边那个红裙女人。」<br>「人偶已交给她，可她并不记得阿琼。」<br>「大师说这样也好，等阿琼养好身体，带他回山里，不再过问世事。」</p>
 </div></div>
-<div class="scene" id="scene-000080" data-theme="t001"><div class="prose"><p>中午十二点，记者发布会。</p>
+<div class="scene" id="scene-000080" data-theme="t005"><div class="prose"><p>中午十二点，记者发布会。</p>
 <p>萨罗嘉走上台。<br>她穿着一身素黑套装，脸上带着疲惫和哀伤，眼睛红肿。<br>“王子殿下已经苏醒，情况稳定，但仍需留院观察。”</p>
 <p>“秘书小姐！”一个声音抢先发问，“视频？音频？民众需要看到。”</p>
 <p>萨罗嘉抬起头，眼中满是泪水。<br>“他刚从生死线上挣扎回来……每一次呼吸都会疼得发抖……”<br>“你们……你们这些记者，为了抢头条，还有一点人性吗？”</p>
@@ -1112,7 +1128,7 @@ It is collapsed.&quot;</p>
 <p>徐少发转身离开。</p>
 <p>房间里只剩下两人。巴努将萨罗嘉唤到身前，轻抚她发烫的脸颊。<br>“你，”他低声说，“就是我的风信子。”</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E7%8E%8B%E5%AD%90%E7%9A%84%E5%9B%AD%E5%8C%BA.jpg" alt="王子的园区" decoding="async" data-illustration><figcaption>王子的园区</figcaption></figure></section>
-<section class="book-section" id="section-000025" aria-label="任务完成"><h2>任务完成</h2><div class="scene" id="scene-000093" data-theme="t002"><div class="prose"><p><strong>5月11日 · 星期一</strong></p>
+<section class="book-section" id="section-000025" aria-label="任务完成"><h2>任务完成</h2><div class="scene" id="scene-000093" data-theme="t006"><div class="prose"><p><strong>5月11日 · 星期一</strong></p>
 <p><strong>上午 · 昂记服装</strong></p>
 <p>露西走进里屋。瓦拉坐在窗边，阳光温柔地洒在她身上。<br>她一针一线地缝着纱帐，腹部已微微隆起。<br>“恭喜。”露西说。<br>“谢谢。”瓦拉笑了笑，“任务结束了？”</p>
 <p>“差不多。”露西点头，随手拿起桌上的《亚瑟王之死》。</p>
@@ -1141,7 +1157,7 @@ It is collapsed.&quot;</p>
 <p>梦小雪摇头，语气低了下来。<br>“不像。他们没有那种……执掌生死、代天巡狩的威严。”<br>“你觉得，萨罗嘉像吗？”她问。</p>
 <p>江辰沉默了一会儿。<br>“我不知道。”</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E4%BB%BB%E5%8A%A1%E5%AE%8C%E6%88%90.jpg" alt="任务完成" decoding="async" data-illustration><figcaption>任务完成</figcaption></figure></section>
-<section class="book-section" id="section-000026" aria-label="最后一舞"><h2>最后一舞</h2><div class="scene" id="scene-000096" data-theme="t001"><div class="prose"><p>宵禁结束了。<br>城市像个退烧的病人。<br>街上开始有了人，但都走得轻。空气还带着药味，像刚醒。</p>
+<section class="book-section" id="section-000026" aria-label="最后一舞"><h2>最后一舞</h2><div class="scene" id="scene-000096" data-theme="t079"><div class="prose"><p>宵禁结束了。<br>城市像个退烧的病人。<br>街上开始有了人，但都走得轻。空气还带着药味，像刚醒。</p>
 <p>黑市拳赛没撑过一晚。<br>纳塔蓬少校带队冲进去，抓了十几个人。<br>动静很大。有人穿着内裤被拖出来。有人跳窗，摔断了腿。</p>
 <p>丹林区。后屋。无窗，无风。烟重。</p>
 <p>金边眼镜的男人坐着，指节敲桌。慢，但响。</p>
@@ -1152,7 +1168,7 @@ It is collapsed.&quot;</p>
 <p>没人答。他们盯着他。</p>
 <p>他抬头。眼镜反光。<br>“派人去西隆区。盯死。不管是谁，搅了局，别想脱身。”</p>
 </div></div>
-<div class="scene" id="scene-000097" data-theme="t001"><div class="prose"><p>西隆区，夜市。<br>“雪风烧烤”还在。<br>生意不急。</p>
+<div class="scene" id="scene-000097" data-theme="t073"><div class="prose"><p>西隆区，夜市。<br>“雪风烧烤”还在。<br>生意不急。</p>
 <p>江辰看调料罐。<br>快空了。<br>他们停得太久。</p>
 <p>远处灯塔一闪一闪。<br>像喘气。<br>再几天，“斯卡蒂冰风号”靠岸。</p>
 <p>江辰已经决定走。<br>他要走这艘船。<br>东洋。</p>
@@ -1192,7 +1208,7 @@ It is collapsed.&quot;</p>
   const tints = document.getElementById('scene-tints');
   const strength = document.getElementById('scene-strength');
   const strengthValue = document.getElementById('scene-strength-value');
-  const strengthMultipliers = [1, 2, 5, 10];
+  const strengthMultipliers = [1, 2, 5];
   const toc = document.getElementById('mobile-toc');
   const styles = Array.from(style.options, item => item.value);
   let preferences = {};
@@ -1200,7 +1216,8 @@ It is collapsed.&quot;</p>
   if (styles.includes(preferences.style)) style.value = preferences.style;
   if (Number.isInteger(preferences.size) && preferences.size >= 16 && preferences.size <= 26) size.value = preferences.size;
   if (typeof preferences.tints === 'boolean') tints.checked = preferences.tints;
-  if (strengthMultipliers.includes(preferences.strengthMultiplier)) strength.value = String(strengthMultipliers.indexOf(preferences.strengthMultiplier));
+  const savedStrength = preferences.strengthMultiplier === 10 ? 5 : preferences.strengthMultiplier;
+  if (strengthMultipliers.includes(savedStrength)) strength.value = String(strengthMultipliers.indexOf(savedStrength));
   function apply(save = true) {
     const strengthMultiplier = strengthMultipliers[Number(strength.value)] ?? 1;
     root.dataset.bookStyle = style.value;
