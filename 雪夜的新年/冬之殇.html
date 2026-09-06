@@ -56,10 +56,10 @@ input { accent-color: var(--accent); }
 .tint-control { cursor: pointer; }
 .tint-control input { width: 1rem; height: 1rem; }
 .strength-control { display: flex; align-items: center; gap: .45rem; min-width: 0; color: var(--muted); }
-.strength-slider { display: grid; gap: .25rem; width: 6rem; }
+.strength-slider { display: grid; gap: .25rem; width: 4.5rem; }
 .strength-slider input { width: 100%; margin: 0; }
 .strength-stops { display: flex; justify-content: space-between; font-size: .6rem; line-height: 1; }
-.strength-control output { min-width: 2.5em; text-align: right; font-variant-numeric: tabular-nums; }
+.strength-control output { min-width: 1.8em; text-align: right; font-variant-numeric: tabular-nums; }
 :root[data-scene-tints="off"] .strength-control { opacity: .55; }
 main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25rem, 5vw, 3rem); background: var(--paper); box-shadow: 0 8px 35px rgb(0 0 0 / .05); font-family: var(--book-font); font-size: var(--font-size); line-height: 1.95; }
 .book-cover { min-height: 21rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 0 4rem; }
@@ -108,17 +108,33 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
   main { margin-top: 1rem; }
 }
 @media (max-width: 540px) {
-  html { scroll-padding-top: 11rem; }
+  html { scroll-padding-top: 8rem; }
   .reading-area { padding: 0 0 1rem; }
-  .reader-controls { padding: .6rem .75rem; justify-content: space-between; }
+  .reader-controls { padding: .5rem; gap: .3rem; justify-content: space-between; }
   .reader-controls .mobile-toc { flex: 1 1 100%; max-width: none; }
-  .size-control input { width: 3.5rem; }
-  .tint-control span { font-size: .7rem; }
-  .reader-controls .strength-control { flex: 1 1 100%; justify-content: flex-end; }
+  .reader-controls > :not(.mobile-toc) { flex: 0 0 auto; white-space: nowrap; }
+  .reader-controls label, .strength-control { gap: .25rem; }
+  .style-control select { max-width: 5.5rem; padding-inline: .4rem; }
+  .reader-controls .style-control > span, .reader-controls .strength-control > label {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+  .size-control input { width: 2.75rem; margin: 0; min-height: 2.65rem; }
+  .tint-control { min-height: 2.65rem; }
+  .tint-control input { margin: 0; }
+  .strength-slider { width: 3rem; }
+  .strength-slider input { min-height: 2rem; }
+  .strength-control output { min-width: 1.5em; }
   main { margin-top: 0; padding: 1.1rem .8rem; box-shadow: none; }
   .book-cover { min-height: 18rem; padding-inline: .7rem; }
   .chapter-heading, .book-section h2 { margin-inline: .6rem; }
   .scene { padding: .8em .55em; }
+}
+@media (max-width: 400px) {
+  :lang(en) .size-control > span {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
 @media print {
@@ -247,12 +263,12 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <div class="reading-area">
 <header class="reader-controls">
 <label class="mobile-toc"><span>目录</span><select id="mobile-toc" aria-label="选择章节"><option value="book">冬之殇.md</option><optgroup label="冬之殇"><option value="chapter-000001">章首 · 冬之殇</option><option value="section-000001">凶案现场</option><option value="section-000002">拉赫曼夫人</option><option value="section-000003">整理线索</option><option value="section-000004">时之砂滨</option><option value="section-000005">小岛书屋</option><option value="section-000006">夜探住所</option><option value="section-000007">工会采访</option><option value="section-000008">基因强化剂</option><option value="section-000009">啤酒馆</option><option value="section-000010">李优民</option><option value="section-000011">腊八粥</option><option value="section-000012">佐藤晴子</option><option value="section-000013">权杖五</option><option value="section-000014">希瑟·语风</option><option value="section-000015">南半岛</option><option value="section-000016">变革前夜</option><option value="section-000017">码头罢工</option><option value="section-000018">特别报道</option><option value="section-000019">醉猫酒吧</option><option value="section-000020">陌生电话</option><option value="section-000021">谷山诊所</option><option value="section-000022">脑机接口</option><option value="section-000023">小林健一</option><option value="section-000024">红灯笼</option><option value="section-000025">北港晴风</option><option value="section-000026">韩文忠</option><option value="section-000027">写字的人</option><option value="section-000028">胁迫的妥协</option></optgroup></select></label>
-<label><span>装帧</span><select id="book-style"><option value="classic" selected>经典</option><option value="sci-fi">科幻</option><option value="romantic">浪漫</option><option value="fantasy">奇幻</option><option value="minimal">简约</option></select></label>
+<label class="style-control"><span>装帧</span><select id="book-style"><option value="classic" selected>经典</option><option value="sci-fi">科幻</option><option value="romantic">浪漫</option><option value="fantasy">奇幻</option><option value="minimal">简约</option></select></label>
 <label class="size-control"><span>字号</span><input id="font-size" type="range" min="16" max="26" step="1" value="19" aria-label="字号"></label>
 <label class="tint-control"><input id="scene-tints" type="checkbox" checked><span>色调</span></label>
-<div class="strength-control"><label for="scene-strength">增强</label><span class="strength-slider"><input id="scene-strength" type="range" min="0" max="3" step="1" value="0" aria-label="增强" aria-valuetext="1×"><span class="strength-stops" aria-hidden="true"><span>1×</span><span>2×</span><span>5×</span><span>10×</span></span></span><output id="scene-strength-value" for="scene-strength">1×</output></div>
+<div class="strength-control"><label for="scene-strength">增强</label><span class="strength-slider"><input id="scene-strength" type="range" min="0" max="2" step="1" value="0" aria-label="增强" aria-valuetext="1×"><span class="strength-stops" aria-hidden="true"><span>1×</span><span>2×</span><span>5×</span></span></span><output id="scene-strength-value" for="scene-strength">1×</output></div>
 </header>
-<main id="book" tabindex="-1"><header class="book-cover"><div class="cover-rule"></div><p class="cover-kicker">阅读本</p><h1>冬之殇.md</h1><div class="cover-rule"></div></header><article class="book-body"><section class="chapter" id="chapter-000001" aria-label="冬之殇"><header class="chapter-heading"><p class="chapter-number">01</p><h1>冬之殇</h1></header><section class="book-section" id="section-000001" aria-label="凶案现场"><h2>凶案现场</h2><div class="scene" id="scene-000001" data-theme="t003"><div class="prose"><p><strong>1月4日 · 星期天 · 下午两点 · 东区</strong></p>
+<main id="book" tabindex="-1"><header class="book-cover"><div class="cover-rule"></div><p class="cover-kicker">阅读本</p><h1>冬之殇.md</h1><div class="cover-rule"></div></header><article class="book-body"><section class="chapter" id="chapter-000001" aria-label="冬之殇"><header class="chapter-heading"><p class="chapter-number">01</p><h1>冬之殇</h1></header><section class="book-section" id="section-000001" aria-label="凶案现场"><h2>凶案现场</h2><div class="scene" id="scene-000001" data-theme="t043"><div class="prose"><p><strong>1月4日 · 星期天 · 下午两点 · 东区</strong></p>
 <p>新年过后，天气晴朗，冬日的冷意笼罩在街头。</p>
 <p>警官武田走出案发现场。<br>他揉了揉太阳穴，点燃一支『山』，深吸一口。<br>烟雾在寒风中散开，带走了血腥和药水的味道。视线一时模糊。</p>
 <p>合讯报记者江辰站在警戒线外。<br>“江君。”武田招呼，“来看戏，还是来搅局？”<br>“戏还没开场，我先看看剧本。”江辰说。</p>
@@ -269,7 +285,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>医疗器械靠墙摆放整齐。用于人体实验？<br>墙上的徽标被撬动过，歪斜地挂着。</p>
 <p>除此之外，实验室很干净，近期仍在运作。</p>
 </div></div>
-<div class="scene" id="scene-000003" data-theme="t001"><div class="prose"><p>江辰走出实验室。  </p>
+<div class="scene" id="scene-000003" data-theme="t085"><div class="prose"><p>江辰走出实验室。  </p>
 <p>武田靠着警车，正在翻看一台笔记本电脑。他丢给江辰一张塑封证件。<br>“高木警长刚派人送来的，方便你查案。”</p>
 <p>江辰接住证件，举起来对着阳光看了看。<br>“安保呢？”</p>
 <p>“新年嘛，监控也放假了。安保官叫斯文森。听说最近很忙。”武田顿了顿，<br>“法医说死亡时间早上八点左右。没人动过尸体。快中午才被一个送货员发现。”</p>
@@ -302,7 +318,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 </blockquote>
 <p>⚜️Iris人员和信息简报：拉赫曼夫妇</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E5%87%B6%E6%A1%88%E7%8E%B0%E5%9C%BA.jpg" alt="凶案现场" decoding="async" data-illustration><figcaption>凶案现场</figcaption></figure></section>
-<section class="book-section" id="section-000002" aria-label="拉赫曼夫人"><h2>拉赫曼夫人</h2><div class="scene" id="scene-000004" data-theme="t080"><div class="prose"><p>西斜的太阳刺穿车窗。街景像一幅燃着的油画，引擎低吼唱着时代的挽歌。</p>
+<section class="book-section" id="section-000002" aria-label="拉赫曼夫人"><h2>拉赫曼夫人</h2><div class="scene" id="scene-000004" data-theme="t091"><div class="prose"><p>西斜的太阳刺穿车窗。街景像一幅燃着的油画，引擎低吼唱着时代的挽歌。</p>
 <p>“这玩意儿算古董了。”武田拍了下中控台。CD机滋啦复活，溢出几个世纪的回声。</p>
 <p>“都是有钱人的玩具。”</p>
 <p>“江君见多识广。这几件案子离不开你。不过这次……”</p>
@@ -322,7 +338,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>“最后一个问题。今早八点，您在哪？”<br>“出门右转的街角咖啡馆。我每天跑完步，会去那里坐一会。”<br>“很好的习惯，夫人。”<br>“以前养成的。”她望向窗外。</p>
 <p>江辰和武田起身。塞巴斯送他们到门口。<br>“我在爵士身边工作五年了，夫人说的都是实话。”<br>“您最近见过斯文森吗？”江辰问。<br>“前天下午，”塞巴斯回忆着，“他送来新钥匙，和爵士谈了一会就走了。”</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E6%8B%89%E8%B5%AB%E6%9B%BC%E5%A4%AB%E4%BA%BA.jpg" alt="拉赫曼夫人" decoding="async" data-illustration><figcaption>拉赫曼夫人</figcaption></figure></section>
-<section class="book-section" id="section-000003" aria-label="整理线索"><h2>整理线索</h2><div class="scene" id="scene-000006" data-theme="t071"><div class="prose"><p><strong>深夜</strong></p>
+<section class="book-section" id="section-000003" aria-label="整理线索"><h2>整理线索</h2><div class="scene" id="scene-000006" data-theme="t073"><div class="prose"><p><strong>深夜</strong></p>
 <p>“整理好线索，我稍后发你。”江辰对武田挥了挥手。</p>
 <p>他回到住处，一间位于北港附近的单人公寓。</p>
 <p>墙壁斑驳，仿佛在现实与虚幻之间摇摆不定。<br>桌上放着两本书，一台相机，是他赖以生存的工具。<br>窗外偶尔传来汽笛声。<br>月光洒在床前，是这个时代剩下不多的浪漫。</p>
@@ -334,7 +350,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>江辰想起了三年前。</p>
 <p>他摩挲着手机上的塔罗牌，点开一个隐藏程序——<br>「星灵社」<br>屏幕上，只有一个灰色的头像——<br>「冬眠的梦小雪」</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E6%95%B4%E7%90%86%E7%BA%BF%E7%B4%A2.jpg" alt="整理线索" decoding="async" data-illustration><figcaption>整理线索</figcaption></figure></section>
-<section class="book-section" id="section-000004" aria-label="时之砂滨"><h2>时之砂滨</h2><div class="scene" id="scene-000007" data-theme="t079"><div class="prose"><p><strong>1月5日 · 星期一 · 黎明前</strong></p>
+<section class="book-section" id="section-000004" aria-label="时之砂滨"><h2>时之砂滨</h2><div class="scene" id="scene-000007" data-theme="t081"><div class="prose"><p><strong>1月5日 · 星期一 · 黎明前</strong></p>
 <p>江辰拉紧衣领，斜挎背包。他踩过霓虹灯下的水痕，地上映出一张冷峻的脸。</p>
 <p>五点半，他登上首班巴士。车厢里是黎明的倦意。<br>穿着蓝色反光条服的工人倚在窗边昏睡。<br>后排几个家政工人聊着时薪和八卦，不时搓着手取暖。</p>
 <p>巴士驶离站台，轮胎碾过坑洼。电子屏幕循环滚动。<br>「蓝盾科技 · CobaltSync | 劳动者的脑机接口 | 招募测试志愿者 · 终身免费维护」</p>
@@ -421,7 +437,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>武田夹着烟，看着他，缓缓吐出烟雾。<br>“明白了。拜托你了。”</p>
 <p>江辰迈步离开。<br>夜色沉沉，危险在暗处潜伏。真相，总是伴随着风险与代价。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E5%A4%9C%E6%8E%A2%E4%BD%8F%E6%89%80.jpg" alt="夜探住所" decoding="async" data-illustration><figcaption>夜探住所</figcaption></figure></section>
-<section class="book-section" id="section-000007" aria-label="工会采访"><h2>工会采访</h2><div class="scene" id="scene-000014" data-theme="t103"><div class="prose"><p>七点，码头。</p>
+<section class="book-section" id="section-000007" aria-label="工会采访"><h2>工会采访</h2><div class="scene" id="scene-000014" data-theme="t049"><div class="prose"><p>七点，码头。</p>
 <p>轰鸣声中夹杂着海风的咸腥和锈蚀的燃油味。<br>钢铁轮廓隐在晨雾之中，吊臂下的集装箱缓缓移动。</p>
 <p>工会总部在二楼，栏杆摇摇欲坠。</p>
 <p>昏暗的房间里，藤原茂抬了下头，手搭在咖啡杯上——<br>现年五十三岁，肩膀宽厚，手掌粗糙得像老树皮。</p>
@@ -487,7 +503,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>“年纪不大，作风老派。”</p>
 <p>出租车尾灯一闪，消失在夜色里。</p>
 </div></div>
-<div class="scene" id="scene-000017" data-theme="t079"><div class="prose"><p>出租车后座，江辰靠着车窗。<br>「茶树叶的标志吻合。北港回收中心，就是那条伪装转运的暗线。」</p>
+<div class="scene" id="scene-000017" data-theme="t081"><div class="prose"><p>出租车后座，江辰靠着车窗。<br>「茶树叶的标志吻合。北港回收中心，就是那条伪装转运的暗线。」</p>
 <p>蓝色卡车驶入偏僻后巷停下，几个身穿黑皮夹克的人从阴影中走出。<br>清洁工与接头人迅速交接，搬下几个没有标签的金属箱。</p>
 <p>一名黑帮成员迫不及待地撬开锁扣。箱盖翻开，一抹幽蓝冷光映亮一张贪婪的脸。</p>
 <p>江辰几乎可以确定，医疗废物没有这种储存装置。<br>「基因强化剂？」</p>
@@ -567,7 +583,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>长琦夹着烟，低头又是一阵咳嗽，末了，嘶哑地笑了。<br>“你还是这副鬼样。”</p>
 <p>门开了。寒风灌入。江辰的身影消失在冬夜里。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E8%85%8A%E5%85%AB%E7%B2%A5.jpg" alt="腊八粥" decoding="async" data-illustration><figcaption>腊八粥</figcaption></figure></section>
-<section class="book-section" id="section-000012" aria-label="佐藤晴子"><h2>佐藤晴子</h2><div class="scene" id="scene-000024" data-theme="t002"><div class="prose"><p>12月31日，跨年夜。</p>
+<section class="book-section" id="section-000012" aria-label="佐藤晴子"><h2>佐藤晴子</h2><div class="scene" id="scene-000024" data-theme="t068"><div class="prose"><p>12月31日，跨年夜。</p>
 <p>李优民的舞会。</p>
 <p>大厅的灯光下，金色香槟散发出温暖而迷人的气息。<br>亚辛拉着她的手，穿过觥筹交错的人群。<br>“放松点，我告诉她，我去了实验室。”他在她耳边低语。</p>
 <p>「他对薇薇安撒谎了。」</p>
@@ -581,7 +597,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>李优民参观了实验室。时间不长，却异常谨慎——<br>他拒绝让随行人员进入核心区。  </p>
 <p>斯文森开始更换锁具。独立的机械锁。</p>
 </div></div>
-<div class="scene" id="scene-000025" data-theme="t085"><div class="prose"><p>1月3日。</p>
+<div class="scene" id="scene-000025" data-theme="t087"><div class="prose"><p>1月3日。</p>
 <p>郑秀贤的邀请。明天早上七点，一个私密聚会。<br>“只有特定人才能参加的仪式。”</p>
 <p>当晚，亚辛又一次邀她去实验室。一个借口。</p>
 <p>冬天的阴冷潮湿沿着地面渗进实验室。<br>佐藤晴子站在操作台旁，看着玻璃器皿里沉淀的蓝色液体。<br>「Z病毒的研究进展比最初想象的要快得多。」<br>杯壁上倒映着亚辛专注的神情。</p>
@@ -599,7 +615,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>她沉默了一瞬，然后笑了。<br>“那你现在信了？”<br>“我不知道。”亚辛也笑了。</p>
 <p>空气里弥漫着缓慢蒸发的试剂味道，实验室的灯光落在两人之间，拉长了彼此的影子。<br>这一刻，谁也没再多说什么。</p>
 </div></div>
-<div class="scene" id="scene-000026" data-theme="t001"><div class="prose"><p>1月4日。</p>
+<div class="scene" id="scene-000026" data-theme="t085"><div class="prose"><p>1月4日。</p>
 <p>清晨六点，天未亮。她离开实验室，前去赴郑秀贤之约。</p>
 <p>中午，聚会结束。消息传来：<br>「拉赫曼实验室遭遇袭击，亚辛·拉赫曼身亡，Z病毒样本与数据丢失。」</p>
 <p>她坐在车里，手指攥紧方向盘，呼吸缓慢而冰冷。</p>
@@ -641,7 +657,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>高木指向货船。<br>“这艘船两周前从南洋出发。斯文森的货被人带走了。”</p>
 <p>江辰望向码头。<br>海浪一遍遍拍打泊位，夜色渐深——袭击者为何能精准锁定斯文森？</p>
 </div></div>
-<div class="scene" id="scene-000029" data-theme="t049"><div class="prose"><p><strong>梦小雪</strong></p>
+<div class="scene" id="scene-000029" data-theme="t054"><div class="prose"><p><strong>梦小雪</strong></p>
 <p>清晨，彼岸的天际线染上一抹深橙。<br>风带着夜晚的微凉，吹散她黑色的长发，拂开那双淡然如水的眼眸。</p>
 <p>梦小雪站在船舷边，白皙的手指翻动着三张塔罗牌——<br>逆位的权杖五，正位的圣杯二，正位的宝剑三。</p>
 <p>她眼中笑意似灵光一闪，冰蓝色光晕亮起，消息发出。</p>
@@ -653,7 +669,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 </blockquote>
 <p>她望向远方，朝阳挥洒在海上，涛声诉说着未揭晓的结局。<br>风掀起宽袖，银铃轻响，在晨光里像一句无人能解的咒语——<br>“春雪能融化你的心吗？”她喃喃道。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E6%9D%83%E6%9D%96%E4%BA%94.jpg" alt="权杖五" decoding="async" data-illustration><figcaption>权杖五</figcaption></figure></section>
-<section class="book-section" id="section-000014" aria-label="希瑟·语风"><h2>希瑟·语风</h2><div class="scene" id="scene-000030" data-theme="t054"><div class="prose"><blockquote>
+<section class="book-section" id="section-000014" aria-label="希瑟·语风"><h2>希瑟·语风</h2><div class="scene" id="scene-000030" data-theme="t049"><div class="prose"><blockquote>
 <p>&quot;With the rising tide, we reunite—no farewells until the sea commands.&quot;</p>
 </blockquote>
 <p><strong>1月24日 · 正午 · 入港</strong></p>
@@ -669,7 +685,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>“不聚不归。”语风回应。</p>
 <p>浪花轻拍码头，海风翻卷她们的衣角。<br>她们并肩而行，影子在水中交错晕开。</p>
 </div></div>
-<div class="scene" id="scene-000031" data-theme="t002"><div class="prose"><p><strong>下午两点</strong></p>
+<div class="scene" id="scene-000031" data-theme="t001"><div class="prose"><p><strong>下午两点</strong></p>
 <p>光透过百叶窗，落在木质桌面。空气里是咖啡的微苦香气。</p>
 <p>语风站在门口。</p>
 <p>对面坐着一位目光犀利的中年男人，双手交叠，桌上的文件摊开着。<br>“欢迎你的到来，『蓝雀』。”他语气严肃，<br>“坐吧，我们需要谈谈。”</p>
@@ -731,7 +747,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>“祭拜快要开始了。”他说。</p>
 <p>语风点头，转身继续整理圣物。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E5%8D%97%E5%8D%8A%E5%B2%9B.jpg" alt="南半岛" decoding="async" data-illustration><figcaption>南半岛</figcaption></figure></section>
-<section class="book-section" id="section-000016" aria-label="变革前夜"><h2>变革前夜</h2><div class="scene" id="scene-000035" data-theme="t001"><div class="prose"><p>窗外，风声凛冽。<br>北港码头枪战的细节被封锁，调查陷入僵局。武田也没有任何消息。<br>一切都停滞了。</p>
+<section class="book-section" id="section-000016" aria-label="变革前夜"><h2>变革前夜</h2><div class="scene" id="scene-000035" data-theme="t073"><div class="prose"><p>窗外，风声凛冽。<br>北港码头枪战的细节被封锁，调查陷入僵局。武田也没有任何消息。<br>一切都停滞了。</p>
 <p>江辰点亮手机屏幕，『星灵社』的对话框停留在最上方。</p>
 <blockquote>
 <p>🌙 <strong>漂泊的梦小雪</strong><br>清风降临时，雪自会相逢。小白，你不会又一个人在发呆吧？❄️✨</p>
@@ -762,7 +778,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>蓝盾的人来，李优民也会来。<br>罢工以来，他的表态一直很微妙，支持工会，谴责剥削，但无实质干预。</p>
 <p>远处机械臂低沉的轰鸣声消失了。<br>今晚，安静得出奇。<br>明天，这里注定将被喧嚣打破。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E5%8F%98%E9%9D%A9%E5%89%8D%E5%A4%9C.jpg" alt="变革前夜" decoding="async" data-illustration><figcaption>变革前夜</figcaption></figure></section>
-<section class="book-section" id="section-000017" aria-label="码头罢工"><h2>码头罢工</h2><div class="scene" id="scene-000037" data-theme="t049"><div class="prose"><p><strong>1月26日 · 星期一 · 清晨 · 北港码头</strong></p>
+<section class="book-section" id="section-000017" aria-label="码头罢工"><h2>码头罢工</h2><div class="scene" id="scene-000037" data-theme="t003"><div class="prose"><p><strong>1月26日 · 星期一 · 清晨 · 北港码头</strong></p>
 <p>寒潮袭来，海风卷着铁锈和柴油的气味，刺骨彻心。<br>码头广场上，工人们高举横幅——<br>「我们是工人，不是机器的零件。」</p>
 <p>罢工队伍聚集，吊臂停滞，运输车静止，港口陷入沉寂。<br>愤怒的呐喊夹杂低声交流，在寒风中翻涌，仿佛蓄势待发的浪潮。</p>
 </div></div>
@@ -772,7 +788,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>台下的怒火燃起。<br>“要是下一个出事的是你呢？”<br>“下一个倒下的会是谁！”</p>
 <p>嘶吼、质问，铺天盖地。<br>也有人犹豫，低头思索新技术可能带来的变革。<br>但很快，他们的声音被愤怒吞没。</p>
 </div></div>
-<div class="scene" id="scene-000039" data-theme="t079"><div class="prose"><p>人群后方，一阵骚动。<br>助理簇拥下，李优民缓步走来。<br>他扫视四周，像是要将所有不满尽收眼底。</p>
+<div class="scene" id="scene-000039" data-theme="t049"><div class="prose"><p>人群后方，一阵骚动。<br>助理簇拥下，李优民缓步走来。<br>他扫视四周，像是要将所有不满尽收眼底。</p>
 <p>“实验有它该去的地方——不是码头，不是工人的血汗里！”<br>“我们的生命，不能成为资本的赌注！”</p>
 <p>参议员一开口，码头上的喧嚣更盛。<br>有人惊呼，带着期待。也有人怀疑，警惕政客的承诺。</p>
 <p>李优民登上集装箱，声音回荡在码头上空——<br>“我和你们站在一起！”<br>“任何将工人当试验品的行为，都是对人性的亵渎！”</p>
@@ -879,14 +895,14 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>蓝盾科技？想把我从罢工事件和脑机接口上引开？有可能。</p>
 <p>但这不代表他们会关心北港的凶手，除非……蓝盾也在调查Z病毒。</p>
 </div></div>
-<div class="scene" id="scene-000051" data-theme="t005"><div class="prose"><p><strong>黑沢剑藏</strong></p>
+<div class="scene" id="scene-000051" data-theme="t001"><div class="prose"><p><strong>黑沢剑藏</strong></p>
 <p>是线索，是警告，还是陷阱？<br>江辰在一张纸片上写下这个名字，沉思片刻。</p>
 <blockquote>
 <p>✅ 调查他。确认他与北港、与Z病毒的关联。<br>✅ 然后，在合适的时机，把这个名字告诉武田。<br>✅ 再用北港现场的信息，去试探各方的反应。</p>
 </blockquote>
 <p>他折起纸片，塞进口袋。   </p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E9%99%8C%E7%94%9F%E7%94%B5%E8%AF%9D.jpg" alt="陌生电话" decoding="async" data-illustration><figcaption>陌生电话</figcaption></figure></section>
-<section class="book-section" id="section-000021" aria-label="谷山诊所"><h2>谷山诊所</h2><div class="scene" id="scene-000052" data-theme="t001"><div class="prose"><p><strong>星期三 · 上午 · 多云</strong></p>
+<section class="book-section" id="section-000021" aria-label="谷山诊所"><h2>谷山诊所</h2><div class="scene" id="scene-000052" data-theme="t085"><div class="prose"><p><strong>星期三 · 上午 · 多云</strong></p>
 <p><strong>仁医馆</strong>  </p>
 <p>江辰推开门。<br>消毒水的气味很淡。光线柔和，墙角的风扇呼呼吹着。<br>谷山仁正在给一个老头包扎手臂，棉纱渗出血迹。<br>江辰拿起桌上的报纸，翻了翻。</p>
 <p>“港口还瘫着？”谷山收拾着药箱。<br>“市民在骂。”江辰把报纸丢下，“超市进不了货，有人想换全自动清关。”<br>谷山冷笑。<br>“工人要权益，商人要利润，百姓要生活。搅在一起，谁都别想痛快。”</p>
@@ -1040,7 +1056,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>有人打了电话，围观窃语。老板杉本叹气，让人把小林扶出去。<br>“喂，带他去谷山那里吧。”有人拍了拍他的肩。</p>
 <p>夜风一吹，小林被人搀着，朝熟悉的巷口走去。</p>
 </div></div>
-<div class="scene" id="scene-000062" data-theme="t001"><div class="prose"><p>光线惨白，谷山仁叼着烟，看见被扶进来的小林。</p>
+<div class="scene" id="scene-000062" data-theme="t085"><div class="prose"><p>光线惨白，谷山仁叼着烟，看见被扶进来的小林。</p>
 <p>“又惹事？”  </p>
 <p>小林没说话，盯着手臂新裂的口子。血渗着，他仍感觉不到疼。</p>
 <p>谷山看了一眼，叹气，动手处理。</p>
@@ -1050,7 +1066,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>“接下来呢？”谷山问。</p>
 <p>小林没回答。疲惫像潮水压来，他靠着椅背，耳边的声音远去。<br>灯光晃动，他合上眼。</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E5%B0%8F%E6%9E%97%E5%81%A5%E4%B8%80.jpg" alt="小林健一" decoding="async" data-illustration><figcaption>小林健一</figcaption></figure></section>
-<section class="book-section" id="section-000024" aria-label="红灯笼"><h2>红灯笼</h2><div class="scene" id="scene-000063" data-theme="t001"><div class="prose"><p>夜色如墨，本町通上稀疏的车辆诉说着萧索。<br>拐进滨城小路，两侧的店铺一字排开，几串红灯笼在风中摇晃。</p>
+<section class="book-section" id="section-000024" aria-label="红灯笼"><h2>红灯笼</h2><div class="scene" id="scene-000063" data-theme="t073"><div class="prose"><p>夜色如墨，本町通上稀疏的车辆诉说着萧索。<br>拐进滨城小路，两侧的店铺一字排开，几串红灯笼在风中摇晃。</p>
 <p>一家夜店。两个黑皮夹克守在门口，手里的烟头在阴影中明灭。</p>
 <p>半小时前，谷山的消息：“药已经备好。”<br>定位确认，就在二楼。江辰给武田发消息：“带人过来。”</p>
 <p>一只手轻轻拍在他肩上。江辰心中一凛。<br>「什么时候我的警惕性变得这么差了？」</p>
@@ -1199,7 +1215,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
 <p>开始写。</p>
 <p>📜彼港往事</p>
 </div></div><figure class="illustration" hidden><img src="illustrations/%E5%86%99%E5%AD%97%E7%9A%84%E4%BA%BA.jpg" alt="写字的人" decoding="async" data-illustration><figcaption>写字的人</figcaption></figure></section>
-<section class="book-section" id="section-000028" aria-label="胁迫的妥协"><h2>胁迫的妥协</h2><div class="scene" id="scene-000073" data-theme="t001"><div class="prose"><p>每个人出生的年代都会被写上一个主题，<br>而长大之后，人只是学会在那个主题下面活成一个标签。</p>
+<section class="book-section" id="section-000028" aria-label="胁迫的妥协"><h2>胁迫的妥协</h2><div class="scene" id="scene-000073" data-theme="t067"><div class="prose"><p>每个人出生的年代都会被写上一个主题，<br>而长大之后，人只是学会在那个主题下面活成一个标签。</p>
 <p>「平成的废物。」<br>——他们是这样叫他的。</p>
 <p>星期一早上，会议室的门被推开，藤原茂走了进来。</p>
 <p>空调低声嗡鸣，送出的暖气却没什么温度。</p>
@@ -1234,7 +1250,7 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
   const tints = document.getElementById('scene-tints');
   const strength = document.getElementById('scene-strength');
   const strengthValue = document.getElementById('scene-strength-value');
-  const strengthMultipliers = [1, 2, 5, 10];
+  const strengthMultipliers = [1, 2, 5];
   const toc = document.getElementById('mobile-toc');
   const styles = Array.from(style.options, item => item.value);
   let preferences = {};
@@ -1242,7 +1258,8 @@ main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25r
   if (styles.includes(preferences.style)) style.value = preferences.style;
   if (Number.isInteger(preferences.size) && preferences.size >= 16 && preferences.size <= 26) size.value = preferences.size;
   if (typeof preferences.tints === 'boolean') tints.checked = preferences.tints;
-  if (strengthMultipliers.includes(preferences.strengthMultiplier)) strength.value = String(strengthMultipliers.indexOf(preferences.strengthMultiplier));
+  const savedStrength = preferences.strengthMultiplier === 10 ? 5 : preferences.strengthMultiplier;
+  if (strengthMultipliers.includes(savedStrength)) strength.value = String(strengthMultipliers.indexOf(savedStrength));
   function apply(save = true) {
     const strengthMultiplier = strengthMultipliers[Number(strength.value)] ?? 1;
     root.dataset.bookStyle = style.value;
