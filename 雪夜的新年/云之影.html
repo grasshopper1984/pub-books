@@ -1,0 +1,1043 @@
+<!doctype html>
+<html lang="zh-Hans" data-book-style="classic" data-book-id="1c5c4724f6be350a3410">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>云之影.md</title><style>:root {
+  --canvas: #e9e6df; --paper: #fbf7ed; --ink: #302b27; --muted: #696156;
+  --accent: #806044; --line: #dcd1bd; --control: #fffaf1;
+  --book-font: Georgia, 'Noto Serif CJK SC', 'Songti SC', SimSun, serif;
+  --ui-font: system-ui, -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-size: 19px; --scene-tint: 150, 133, 113; --scene-strength: 0; --scene-strength-multiplier: 1;
+  --sidebar-width: 16rem; color-scheme: light;
+}
+:root[data-book-style="sci-fi"] {
+  --canvas: #101923; --paper: #172531; --ink: #e5edf0; --muted: #a6bac3;
+  --accent: #9acdd3; --line: #354c58; --control: #233541;
+  --book-font: 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  color-scheme: dark;
+}
+:root[data-book-style="romantic"] {
+  --canvas: #eee3e1; --paper: #fff8f4; --ink: #463137; --muted: #785762;
+  --accent: #975d70; --line: #e8cfd2; --control: #fff7f5;
+}
+:root[data-book-style="fantasy"] {
+  --canvas: #dde2d8; --paper: #f5f3e7; --ink: #2d382c; --muted: #596650;
+  --accent: #5c734b; --line: #ccd3b8; --control: #f7f7eb;
+  --book-font: Palatino, 'Palatino Linotype', 'Noto Serif CJK SC', 'Songti SC', serif;
+}
+:root[data-book-style="minimal"] {
+  --canvas: #f0f0ee; --paper: #fff; --ink: #262626; --muted: #6b6b6b;
+  --accent: #474747; --line: #dededb; --control: #fff;
+  --book-font: 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-padding-top: 7rem; }
+body { margin: 0; background: var(--canvas); color: var(--ink); font-family: var(--ui-font); }
+a { color: inherit; }
+button, select, input { font: inherit; }
+select { max-width: 100%; min-height: 2.65rem; color: var(--ink); background: var(--control); border: 1px solid var(--line); border-radius: .35rem; padding: .45rem .6rem; }
+input { accent-color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+.skip-link { position: fixed; left: 1rem; top: -6rem; padding: 1rem; background: var(--paper); z-index: 20; }
+.skip-link:focus { top: 1rem; }
+.sidebar { position: fixed; inset: 0 auto 0 0; width: var(--sidebar-width); padding: 2.2rem 1.5rem; border-right: 1px solid var(--line); overflow-y: auto; scrollbar-width: thin; }
+.shelf-title { display: block; font-family: var(--book-font); font-size: 1.05rem; font-weight: 650; line-height: 1.7; text-decoration: none; overflow-wrap: anywhere; }
+.nav-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .16em; margin-top: 2.6rem; }
+.toc, .toc ul { list-style: none; margin: 0; padding: 0; }
+.toc-group { margin: 1.15rem 0 1.7rem; }
+.toc a { display: block; padding: .45rem .5rem; font-size: .84rem; line-height: 1.55; color: var(--muted); text-decoration: none; overflow-wrap: anywhere; border-left: 2px solid transparent; }
+.toc .toc-chapter { color: var(--ink); font-weight: 650; }
+.toc ul a { padding-left: 1rem; }
+.toc a:hover, .toc a[aria-current="location"] { color: var(--accent); border-left-color: var(--accent); }
+.reading-area { margin-left: var(--sidebar-width); padding: 0 clamp(1rem, 4vw, 4rem) 4rem; }
+.reader-controls { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .65rem 1.1rem; min-height: 5.5rem; padding: .8rem 0; background: var(--canvas); border-bottom: 1px solid var(--line); font-size: .75rem; }
+.reader-controls label { display: flex; align-items: center; gap: .45rem; min-width: 0; color: var(--muted); }
+.reader-controls .mobile-toc { display: none; }
+.size-control input { width: 5rem; }
+.tint-control { cursor: pointer; }
+.tint-control input { width: 1rem; height: 1rem; }
+.strength-control { display: flex; align-items: center; gap: .45rem; min-width: 0; color: var(--muted); }
+.strength-slider { display: grid; gap: .25rem; width: 6rem; }
+.strength-slider input { width: 100%; margin: 0; }
+.strength-stops { display: flex; justify-content: space-between; font-size: .6rem; line-height: 1; }
+.strength-control output { min-width: 2.5em; text-align: right; font-variant-numeric: tabular-nums; }
+:root[data-scene-tints="off"] .strength-control { opacity: .55; }
+main { max-width: calc(70ch + 6rem); margin: 1.6rem auto 0; padding: clamp(1.25rem, 5vw, 3rem); background: var(--paper); box-shadow: 0 8px 35px rgb(0 0 0 / .05); font-family: var(--book-font); font-size: var(--font-size); line-height: 1.95; }
+.book-cover { min-height: 21rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 0 4rem; }
+.book-cover h1 { max-width: 20em; margin: .8em 0; font-size: clamp(1.8rem, 3.5vw, 2.7rem); line-height: 1.5; overflow-wrap: anywhere; font-weight: 600; }
+.cover-kicker { font-family: var(--ui-font); color: var(--muted); font-size: .63rem; letter-spacing: .2em; }
+.cover-rule { width: 3.5rem; border-top: 1px solid var(--accent); margin: .7rem; }
+.book-body { max-inline-size: min(35em, 70ch); margin-inline: auto; }
+.chapter { margin-block: 2.5rem 5rem; scroll-margin-top: 1rem; }
+.chapter-heading { padding: 2.5rem 0 1.5rem; border-top: 1px solid var(--line); }
+.chapter-number { color: var(--accent); font-family: var(--ui-font); font-size: .7rem; letter-spacing: .2em; margin: 0 0 .8rem; }
+.chapter h1 { margin: 0; font-size: 1.65em; line-height: 1.6; font-weight: 600; overflow-wrap: anywhere; }
+.book-section { margin-block: 2rem 4rem; }
+.book-section h2 { margin-block: 2.1em 1.1em; font-size: 1.15em; font-weight: 600; line-height: 1.7; overflow-wrap: anywhere; }
+.scene { margin-block: 1.8em; padding: .8em 1em; background: linear-gradient(115deg, rgba(var(--scene-tint), min(1, calc(var(--scene-strength) * var(--scene-strength-multiplier)))), transparent 90%); border-top: 1px solid var(--line); border-top-color: color-mix(in srgb, var(--scene-accent, var(--line)) 18%, var(--paper)); border-radius: .1rem; }
+.scene + .scene { margin-top: 2.4em; }
+.prose { max-inline-size: min(35em, 70ch); overflow-wrap: anywhere; word-break: normal; }
+.prose > :first-child { margin-top: 0; }
+.prose > :last-child { margin-bottom: 0; }
+.prose p { margin-block: .9em; }
+:lang(zh) .prose { line-break: strict; }
+.prose h3, .prose h4, .prose h5, .prose h6 { font-size: 1.05em; margin-block: 1.4em .7em; }
+.prose blockquote { margin: 1.4em 0; padding: .1em 1em; border-left: 2px solid var(--line); }
+.prose ul, .prose ol { padding-left: 1.6em; }
+.prose li { margin-block: .25em; }
+.prose code { font-size: .84em; font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; padding: .12em .25em; background: rgb(128 128 128 / .1); border-radius: .2em; }
+.prose pre { max-width: 100%; overflow-x: auto; white-space: pre; padding: 1em; background: rgb(128 128 128 / .09); font-size: .9em; line-height: 1.65; }
+.prose pre code { padding: 0; background: transparent; }
+.table-scroll { overflow-x: auto; max-width: 100%; margin-block: 1.3em; }
+.prose table { border-collapse: collapse; min-width: 100%; font-size: .88em; }
+.prose th, .prose td { border: 1px solid var(--line); padding: .45em .7em; text-align: left; }
+.prose th { background: rgb(128 128 128 / .07); }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 2em auto; max-width: 5em; }
+.prose input[type="checkbox"] { margin-right: .4em; }
+.raw-text { white-space: pre-line; }
+.illustration { margin: 2.5em 0; text-align: center; }
+.illustration img, .inline-illustration { display: block; max-width: 100%; max-height: 85vh; height: auto; margin-inline: auto; object-fit: contain; }
+.illustration figcaption { margin-top: .6em; font-size: .7em; color: var(--muted); }
+.book-end { text-align: center; color: var(--muted); font-size: .7em; letter-spacing: .2em; padding-block: 2rem 1rem; }
+:root[data-scene-tints="off"] .scene { background: none; border-top-color: var(--line); }
+@media (max-width: 1000px) {
+  .sidebar { display: none; }
+  .reading-area { margin-left: 0; padding: 0 1rem 2rem; }
+  .reader-controls { justify-content: center; gap: .5rem .9rem; }
+  .reader-controls .mobile-toc { display: flex; flex: 1 1 45%; max-width: 25rem; }
+  .mobile-toc select { min-width: 0; width: 100%; }
+  main { margin-top: 1rem; }
+}
+@media (max-width: 540px) {
+  html { scroll-padding-top: 11rem; }
+  .reading-area { padding: 0 0 1rem; }
+  .reader-controls { padding: .6rem .75rem; justify-content: space-between; }
+  .reader-controls .mobile-toc { flex: 1 1 100%; max-width: none; }
+  .size-control input { width: 3.5rem; }
+  .tint-control span { font-size: .7rem; }
+  .reader-controls .strength-control { flex: 1 1 100%; justify-content: flex-end; }
+  main { margin-top: 0; padding: 1.1rem .8rem; box-shadow: none; }
+  .book-cover { min-height: 18rem; padding-inline: .7rem; }
+  .chapter-heading, .book-section h2 { margin-inline: .6rem; }
+  .scene { padding: .8em .55em; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+@media print {
+  :root { --paper: white; --ink: black; --muted: #444; --line: #ccc; }
+  .sidebar, .reader-controls, .skip-link { display: none !important; }
+  .reading-area { margin: 0; padding: 0; }
+  main { margin: 0 auto; padding: 0; box-shadow: none; }
+  .book-cover, .chapter { break-before: page; }
+  .scene { background: none; border: 0; padding-inline: 0; }
+  h1, h2, h3 { break-after: avoid; }
+  p { widows: 3; orphans: 3; }
+}
+
+.scene[data-theme="t001"] { --scene-tint: 184, 170, 150; --scene-accent: #82705b; --scene-strength: 0; }
+.scene[data-theme="t002"] { --scene-tint: 192, 171, 146; --scene-accent: #82705b; --scene-strength: 0.055; }
+.scene[data-theme="t003"] { --scene-tint: 177, 175, 166; --scene-accent: #82705b; --scene-strength: 0.05; }
+.scene[data-theme="t004"] { --scene-tint: 190, 170, 158; --scene-accent: #82705b; --scene-strength: 0.065; }
+.scene[data-theme="t005"] { --scene-tint: 181, 172, 163; --scene-accent: #82705b; --scene-strength: 0.05; }
+.scene[data-theme="t006"] { --scene-tint: 192, 180, 155; --scene-accent: #82705b; --scene-strength: 0.06; }
+.scene[data-theme="t007"] { --scene-tint: 154, 191, 161; --scene-accent: #547e61; --scene-strength: 0.045; }
+.scene[data-theme="t008"] { --scene-tint: 170, 187, 154; --scene-accent: #547e61; --scene-strength: 0.055; }
+.scene[data-theme="t009"] { --scene-tint: 155, 190, 174; --scene-accent: #547e61; --scene-strength: 0.05; }
+.scene[data-theme="t010"] { --scene-tint: 168, 185, 166; --scene-accent: #547e61; --scene-strength: 0.065; }
+.scene[data-theme="t011"] { --scene-tint: 159, 187, 171; --scene-accent: #547e61; --scene-strength: 0.05; }
+.scene[data-theme="t012"] { --scene-tint: 170, 195, 163; --scene-accent: #547e61; --scene-strength: 0.06; }
+.scene[data-theme="t013"] { --scene-tint: 175, 195, 145; --scene-accent: #6b824c; --scene-strength: 0.045; }
+.scene[data-theme="t014"] { --scene-tint: 185, 190, 143; --scene-accent: #6b824c; --scene-strength: 0.055; }
+.scene[data-theme="t015"] { --scene-tint: 170, 193, 162; --scene-accent: #6b824c; --scene-strength: 0.05; }
+.scene[data-theme="t016"] { --scene-tint: 184, 188, 155; --scene-accent: #6b824c; --scene-strength: 0.065; }
+.scene[data-theme="t017"] { --scene-tint: 174, 190, 159; --scene-accent: #6b824c; --scene-strength: 0.05; }
+.scene[data-theme="t018"] { --scene-tint: 185, 198, 152; --scene-accent: #6b824c; --scene-strength: 0.06; }
+.scene[data-theme="t019"] { --scene-tint: 202, 170, 129; --scene-accent: #94714f; --scene-strength: 0.045; }
+.scene[data-theme="t020"] { --scene-tint: 205, 171, 131; --scene-accent: #94714f; --scene-strength: 0.055; }
+.scene[data-theme="t021"] { --scene-tint: 190, 175, 150; --scene-accent: #94714f; --scene-strength: 0.05; }
+.scene[data-theme="t022"] { --scene-tint: 204, 170, 143; --scene-accent: #94714f; --scene-strength: 0.065; }
+.scene[data-theme="t023"] { --scene-tint: 194, 172, 147; --scene-accent: #94714f; --scene-strength: 0.05; }
+.scene[data-theme="t024"] { --scene-tint: 205, 180, 140; --scene-accent: #94714f; --scene-strength: 0.06; }
+.scene[data-theme="t025"] { --scene-tint: 168, 191, 208; --scene-accent: #66839b; --scene-strength: 0.045; }
+.scene[data-theme="t026"] { --scene-tint: 180, 187, 189; --scene-accent: #66839b; --scene-strength: 0.055; }
+.scene[data-theme="t027"] { --scene-tint: 165, 190, 209; --scene-accent: #66839b; --scene-strength: 0.05; }
+.scene[data-theme="t028"] { --scene-tint: 178, 185, 201; --scene-accent: #66839b; --scene-strength: 0.065; }
+.scene[data-theme="t029"] { --scene-tint: 169, 187, 206; --scene-accent: #66839b; --scene-strength: 0.05; }
+.scene[data-theme="t030"] { --scene-tint: 180, 195, 198; --scene-accent: #66839b; --scene-strength: 0.06; }
+.scene[data-theme="t031"] { --scene-tint: 159, 189, 196; --scene-accent: #60828b; --scene-strength: 0.045; }
+.scene[data-theme="t032"] { --scene-tint: 173, 185, 180; --scene-accent: #60828b; --scene-strength: 0.055; }
+.scene[data-theme="t033"] { --scene-tint: 158, 189, 200; --scene-accent: #60828b; --scene-strength: 0.05; }
+.scene[data-theme="t034"] { --scene-tint: 172, 184, 192; --scene-accent: #60828b; --scene-strength: 0.065; }
+.scene[data-theme="t035"] { --scene-tint: 162, 186, 197; --scene-accent: #60828b; --scene-strength: 0.05; }
+.scene[data-theme="t036"] { --scene-tint: 173, 194, 189; --scene-accent: #60828b; --scene-strength: 0.06; }
+.scene[data-theme="t037"] { --scene-tint: 177, 184, 195; --scene-accent: #717f91; --scene-strength: 0.045; }
+.scene[data-theme="t038"] { --scene-tint: 187, 182, 180; --scene-accent: #717f91; --scene-strength: 0.055; }
+.scene[data-theme="t039"] { --scene-tint: 172, 185, 199; --scene-accent: #717f91; --scene-strength: 0.05; }
+.scene[data-theme="t040"] { --scene-tint: 185, 180, 192; --scene-accent: #717f91; --scene-strength: 0.065; }
+.scene[data-theme="t041"] { --scene-tint: 176, 182, 196; --scene-accent: #717f91; --scene-strength: 0.05; }
+.scene[data-theme="t042"] { --scene-tint: 187, 190, 188; --scene-accent: #717f91; --scene-strength: 0.06; }
+.scene[data-theme="t043"] { --scene-tint: 207, 193, 154; --scene-accent: #978454; --scene-strength: 0.045; }
+.scene[data-theme="t044"] { --scene-tint: 209, 188, 149; --scene-accent: #978454; --scene-strength: 0.055; }
+.scene[data-theme="t045"] { --scene-tint: 194, 192, 169; --scene-accent: #978454; --scene-strength: 0.05; }
+.scene[data-theme="t046"] { --scene-tint: 207, 187, 161; --scene-accent: #978454; --scene-strength: 0.065; }
+.scene[data-theme="t047"] { --scene-tint: 198, 189, 166; --scene-accent: #978454; --scene-strength: 0.05; }
+.scene[data-theme="t048"] { --scene-tint: 209, 197, 158; --scene-accent: #978454; --scene-strength: 0.06; }
+.scene[data-theme="t049"] { --scene-tint: 149, 190, 197; --scene-accent: #4f7f89; --scene-strength: 0.045; }
+.scene[data-theme="t050"] { --scene-tint: 166, 186, 181; --scene-accent: #4f7f89; --scene-strength: 0.055; }
+.scene[data-theme="t051"] { --scene-tint: 151, 189, 201; --scene-accent: #4f7f89; --scene-strength: 0.05; }
+.scene[data-theme="t052"] { --scene-tint: 164, 185, 193; --scene-accent: #4f7f89; --scene-strength: 0.065; }
+.scene[data-theme="t053"] { --scene-tint: 155, 187, 198; --scene-accent: #4f7f89; --scene-strength: 0.05; }
+.scene[data-theme="t054"] { --scene-tint: 166, 194, 190; --scene-accent: #4f7f89; --scene-strength: 0.06; }
+.scene[data-theme="t055"] { --scene-tint: 144, 173, 152; --scene-accent: #55745b; --scene-strength: 0.045; }
+.scene[data-theme="t056"] { --scene-tint: 162, 174, 148; --scene-accent: #55745b; --scene-strength: 0.055; }
+.scene[data-theme="t057"] { --scene-tint: 147, 177, 167; --scene-accent: #55745b; --scene-strength: 0.05; }
+.scene[data-theme="t058"] { --scene-tint: 161, 172, 160; --scene-accent: #55745b; --scene-strength: 0.065; }
+.scene[data-theme="t059"] { --scene-tint: 151, 174, 164; --scene-accent: #55745b; --scene-strength: 0.05; }
+.scene[data-theme="t060"] { --scene-tint: 162, 182, 157; --scene-accent: #55745b; --scene-strength: 0.06; }
+.scene[data-theme="t061"] { --scene-tint: 201, 164, 135; --scene-accent: #926b4b; --scene-strength: 0.045; }
+.scene[data-theme="t062"] { --scene-tint: 204, 167, 135; --scene-accent: #926b4b; --scene-strength: 0.055; }
+.scene[data-theme="t063"] { --scene-tint: 190, 170, 155; --scene-accent: #926b4b; --scene-strength: 0.05; }
+.scene[data-theme="t064"] { --scene-tint: 203, 165, 147; --scene-accent: #926b4b; --scene-strength: 0.065; }
+.scene[data-theme="t065"] { --scene-tint: 193, 167, 152; --scene-accent: #926b4b; --scene-strength: 0.05; }
+.scene[data-theme="t066"] { --scene-tint: 204, 175, 144; --scene-accent: #926b4b; --scene-strength: 0.06; }
+.scene[data-theme="t067"] { --scene-tint: 197, 179, 149; --scene-accent: #8f7958; --scene-strength: 0.045; }
+.scene[data-theme="t068"] { --scene-tint: 201, 178, 146; --scene-accent: #8f7958; --scene-strength: 0.055; }
+.scene[data-theme="t069"] { --scene-tint: 187, 181, 165; --scene-accent: #8f7958; --scene-strength: 0.05; }
+.scene[data-theme="t070"] { --scene-tint: 200, 176, 158; --scene-accent: #8f7958; --scene-strength: 0.065; }
+.scene[data-theme="t071"] { --scene-tint: 190, 178, 162; --scene-accent: #8f7958; --scene-strength: 0.05; }
+.scene[data-theme="t072"] { --scene-tint: 201, 186, 154; --scene-accent: #8f7958; --scene-strength: 0.06; }
+.scene[data-theme="t073"] { --scene-tint: 171, 174, 202; --scene-accent: #72789e; --scene-strength: 0.045; }
+.scene[data-theme="t074"] { --scene-tint: 182, 174, 185; --scene-accent: #72789e; --scene-strength: 0.055; }
+.scene[data-theme="t075"] { --scene-tint: 167, 178, 204; --scene-accent: #72789e; --scene-strength: 0.05; }
+.scene[data-theme="t076"] { --scene-tint: 181, 173, 197; --scene-accent: #72789e; --scene-strength: 0.065; }
+.scene[data-theme="t077"] { --scene-tint: 171, 175, 201; --scene-accent: #72789e; --scene-strength: 0.05; }
+.scene[data-theme="t078"] { --scene-tint: 182, 183, 194; --scene-accent: #72789e; --scene-strength: 0.06; }
+.scene[data-theme="t079"] { --scene-tint: 157, 175, 186; --scene-accent: #627c8c; --scene-strength: 0.045; }
+.scene[data-theme="t080"] { --scene-tint: 172, 175, 173; --scene-accent: #627c8c; --scene-strength: 0.055; }
+.scene[data-theme="t081"] { --scene-tint: 157, 178, 192; --scene-accent: #627c8c; --scene-strength: 0.05; }
+.scene[data-theme="t082"] { --scene-tint: 170, 173, 185; --scene-accent: #627c8c; --scene-strength: 0.065; }
+.scene[data-theme="t083"] { --scene-tint: 161, 176, 189; --scene-accent: #627c8c; --scene-strength: 0.05; }
+.scene[data-theme="t084"] { --scene-tint: 172, 183, 182; --scene-accent: #627c8c; --scene-strength: 0.06; }
+.scene[data-theme="t085"] { --scene-tint: 158, 187, 192; --scene-accent: #64858b; --scene-strength: 0.045; }
+.scene[data-theme="t086"] { --scene-tint: 173, 184, 177; --scene-accent: #64858b; --scene-strength: 0.055; }
+.scene[data-theme="t087"] { --scene-tint: 158, 187, 197; --scene-accent: #64858b; --scene-strength: 0.05; }
+.scene[data-theme="t088"] { --scene-tint: 171, 182, 189; --scene-accent: #64858b; --scene-strength: 0.065; }
+.scene[data-theme="t089"] { --scene-tint: 162, 184, 194; --scene-accent: #64858b; --scene-strength: 0.05; }
+.scene[data-theme="t090"] { --scene-tint: 173, 192, 186; --scene-accent: #64858b; --scene-strength: 0.06; }
+.scene[data-theme="t091"] { --scene-tint: 142, 175, 185; --scene-accent: #527883; --scene-strength: 0.045; }
+.scene[data-theme="t092"] { --scene-tint: 161, 175, 172; --scene-accent: #527883; --scene-strength: 0.055; }
+.scene[data-theme="t093"] { --scene-tint: 146, 178, 192; --scene-accent: #527883; --scene-strength: 0.05; }
+.scene[data-theme="t094"] { --scene-tint: 159, 173, 184; --scene-accent: #527883; --scene-strength: 0.065; }
+.scene[data-theme="t095"] { --scene-tint: 150, 176, 189; --scene-accent: #527883; --scene-strength: 0.05; }
+.scene[data-theme="t096"] { --scene-tint: 161, 183, 181; --scene-accent: #527883; --scene-strength: 0.06; }
+.scene[data-theme="t097"] { --scene-tint: 197, 163, 149; --scene-accent: #946c5a; --scene-strength: 0.045; }
+.scene[data-theme="t098"] { --scene-tint: 201, 166, 146; --scene-accent: #946c5a; --scene-strength: 0.055; }
+.scene[data-theme="t099"] { --scene-tint: 187, 170, 165; --scene-accent: #946c5a; --scene-strength: 0.05; }
+.scene[data-theme="t100"] { --scene-tint: 200, 165, 158; --scene-accent: #946c5a; --scene-strength: 0.065; }
+.scene[data-theme="t101"] { --scene-tint: 190, 167, 162; --scene-accent: #946c5a; --scene-strength: 0.05; }
+.scene[data-theme="t102"] { --scene-tint: 201, 174, 154; --scene-accent: #946c5a; --scene-strength: 0.06; }
+.scene[data-theme="t103"] { --scene-tint: 169, 188, 188; --scene-accent: #6e8a88; --scene-strength: 0.045; }
+.scene[data-theme="t104"] { --scene-tint: 181, 185, 174; --scene-accent: #6e8a88; --scene-strength: 0.055; }
+.scene[data-theme="t105"] { --scene-tint: 166, 188, 194; --scene-accent: #6e8a88; --scene-strength: 0.05; }
+.scene[data-theme="t106"] { --scene-tint: 179, 183, 186; --scene-accent: #6e8a88; --scene-strength: 0.065; }
+.scene[data-theme="t107"] { --scene-tint: 170, 185, 191; --scene-accent: #6e8a88; --scene-strength: 0.05; }
+.scene[data-theme="t108"] { --scene-tint: 181, 193, 183; --scene-accent: #6e8a88; --scene-strength: 0.06; }
+</style></head>
+<body>
+<a class="skip-link" href="#book">跳转到正文</a>
+<aside class="sidebar"><a class="shelf-title" href="#book">云之影.md</a><nav aria-label="目录"><p class="nav-label">目录</p><ul class="toc"><li class="toc-group"><a class="toc-chapter" href="#chapter-000001">云之影</a><ul><li><a href="#section-000001">北海道</a></li><li><a href="#section-000002">札幌雪祭</a></li><li><a href="#section-000003">神秘学教团</a></li><li><a href="#section-000004">鲑鱼火锅</a></li><li><a href="#section-000005">节日旅行</a></li><li><a href="#section-000006">联欢晚会</a></li><li><a href="#section-000007">森山研太</a></li><li><a href="#section-000008">实验室困境</a></li><li><a href="#section-000009">娱乐新闻</a></li><li><a href="#section-000010">慈善晚宴</a></li><li><a href="#section-000011">复出表演</a></li><li><a href="#section-000012">夜之约</a></li><li><a href="#section-000013">Z病毒演示</a></li><li><a href="#section-000014">特别弥撒</a></li><li><a href="#section-000015">井口龍三</a></li><li><a href="#section-000016">死神的镰刀</a></li><li><a href="#section-000017">真相蒙尘</a></li><li><a href="#section-000018">星灵社</a></li><li><a href="#section-000019">西山神社</a></li></ul></li></ul></nav></aside>
+<div class="reading-area">
+<header class="reader-controls">
+<label class="mobile-toc"><span>目录</span><select id="mobile-toc" aria-label="选择章节"><option value="book">云之影.md</option><optgroup label="云之影"><option value="chapter-000001">章首 · 云之影</option><option value="section-000001">北海道</option><option value="section-000002">札幌雪祭</option><option value="section-000003">神秘学教团</option><option value="section-000004">鲑鱼火锅</option><option value="section-000005">节日旅行</option><option value="section-000006">联欢晚会</option><option value="section-000007">森山研太</option><option value="section-000008">实验室困境</option><option value="section-000009">娱乐新闻</option><option value="section-000010">慈善晚宴</option><option value="section-000011">复出表演</option><option value="section-000012">夜之约</option><option value="section-000013">Z病毒演示</option><option value="section-000014">特别弥撒</option><option value="section-000015">井口龍三</option><option value="section-000016">死神的镰刀</option><option value="section-000017">真相蒙尘</option><option value="section-000018">星灵社</option><option value="section-000019">西山神社</option></optgroup></select></label>
+<label><span>装帧</span><select id="book-style"><option value="classic" selected>经典</option><option value="sci-fi">科幻</option><option value="romantic">浪漫</option><option value="fantasy">奇幻</option><option value="minimal">简约</option></select></label>
+<label class="size-control"><span>字号</span><input id="font-size" type="range" min="16" max="26" step="1" value="19" aria-label="字号"></label>
+<label class="tint-control"><input id="scene-tints" type="checkbox" checked><span>场景色调</span></label>
+<div class="strength-control"><label for="scene-strength">场景增强</label><span class="strength-slider"><input id="scene-strength" type="range" min="0" max="3" step="1" value="0" aria-label="场景增强" aria-valuetext="1×"><span class="strength-stops" aria-hidden="true"><span>1×</span><span>2×</span><span>5×</span><span>10×</span></span></span><output id="scene-strength-value" for="scene-strength">1×</output></div>
+</header>
+<main id="book" tabindex="-1"><header class="book-cover"><div class="cover-rule"></div><p class="cover-kicker">阅读本</p><h1>云之影.md</h1><div class="cover-rule"></div></header><article class="book-body"><section class="chapter" id="chapter-000001" aria-label="云之影"><header class="chapter-heading"><p class="chapter-number">01</p><h1>云之影</h1></header><section class="book-section" id="section-000001" aria-label="北海道"><h2>北海道</h2><div class="scene" id="scene-000001" data-theme="t025"><div class="prose"><p><strong>温泉的旅馆</strong>  </p>
+<p><strong>2月3日 · 星期二</strong>  </p>
+<p>新干线穿过青函隧道，车厢灯光柔和，窗外一片漆黑。<br>江辰靠回椅背，闭上眼睛，耳边是风的声音。</p>
+<p>叮咚——<br>「下一站，新函馆北斗，出口在左侧。北海道欢迎您。」</p>
+<p>津轻海峡的风咸湿而凛冽，夹杂着雪的味道。</p>
+<p>换乘巴士晃悠了许久，停在半山腰的温泉旅馆。<br>檐下的灯笼在杉木林里亮着暖光，<br>上面绘着几只形态各异的招财猫，在风中摇曳。</p>
+<p>老板是个乐呵呵的中年人，手边的保温杯里飘着枸杞和菊花。</p>
+<p>“出差来的？”<br>“算是吧。”江辰接过钥匙。“谢谢。”</p>
+<p>“工作之余也要放松放松。”老板端起保温杯，指了指后院，<br>“有空去瞧瞧，我们这儿的猴子比人还会享受温泉——”<br>“它们可比城里人更懂得什么是生活。”</p>
+<p>江辰一怔，只听老板又笑着补充。<br>“再说，札幌雪祭就快到了，把心情放轻松——”<br>“说不定会有一场美好的邂逅在等着您呢。”</p>
+</div></div>
+<div class="scene" id="scene-000002" data-theme="t025"><div class="prose"><p>旅馆后院。温泉池里，水汽升起，一群猴子正泡在水里。</p>
+<p>年长的公猴闭着眼，一动不动。母猴在给怀里的幼猴理毛。<br>一只小猴刚爬上岸边，就被同伴拽回水里，溅起一圈水花。<br>另一只猴子懒洋洋地趴着，半截身子浸在水里，一脸满足。</p>
+<p>江辰站在围栏外，彷徨间伸开手，却只有雪花落在掌心。<br>「它们毫无戒备地依偎在一起……」<br>「这就是，一个安稳的……家吗？」</p>
+</div></div>
+<div class="scene" id="scene-000003" data-theme="t025"><div class="prose"><p>夜深了。江辰坐在沙发上，笔记本摊开。</p>
+<blockquote>
+<p>井口龍三。<br>小时候父亲亡故，家中只有母亲一人。<br>大约十年前来到北港，在帮会中摸爬滚打。</p>
+</blockquote>
+<p>窗外细雪无声，模糊了世界。</p>
+<p>咚、咚、咚——敲门声打破了寂静。</p>
+<p>他起身开门，风卷着雪花灌进屋里——<br>她只穿着一件薄裙，脚踝上沾着点点未化的雪花。</p>
+<p>梦小雪抬头看他，语气里带着几分嗔怪。<br>“怎么跑到这么冷的地方来？”<br>她顺手关上门，快步走到床边，掀开被子钻了进去。</p>
+<p>凌乱的黑发，带着夜色的微凉——<br>“啊啾！”她揉了揉鼻尖。<br>“你就没想过我会来找你？”</p>
+<p>江辰看着她，没说话。</p>
+<p>“那你有没有想我？”她歪着头，嘴角带笑。</p>
+<p>“想过。”他说。</p>
+<p>她满意地哼了一声，打了个哈欠。<br>“好困……”话音未落，她便拉过被子蒙住头，<br>只剩一缕黑发露在外面，随着呼吸微微起伏。</p>
+<p>他回到沙发坐下。<br>窗外的雪依然在下，温泉池中，猴群蜷缩在一起，沉入梦乡。<br>夜色深沉，仿佛一切都被白雪悄然包裹。</p>
+</div></div>
+<div class="scene" id="scene-000004" data-theme="t025"><div class="prose"><p><strong>函馆</strong></p>
+<p><strong>2月4日 · 星期三</strong></p>
+<p>清晨，江辰睁开眼。<br>梦小雪正蹲在他面前，眉梢带着几分兴味。<br>“喂，”她眨了眨眼，“你怎么睡在沙发上？”</p>
+<p>她穿着昨晚的裙装，棉袜踩在毛毯上，双手抱膝。<br>「她该不会一直蹲在这儿盯着我看吧？」</p>
+<p>窗外晨光洒落，白雪映亮屋子。<br>暖气轻柔地流动，床铺的一侧已经被翻乱——<br>她早就醒了。</p>
+<p>不等江辰回答，她自顾自地笑了一下。<br>“反正今天要进城，你不会想让我一个人去吧？”<br>她的语气欢快雀跃，还有一丝……期待？</p>
+<p>江辰掀开毯子起身。<br>“走吧。”</p>
+</div></div>
+<div class="scene" id="scene-000005" data-theme="t025"><div class="prose"><p>函馆街头行人稀疏，石板路上新雪融化，湿漉漉的淌水。<br>梦小雪走得轻快，裙摆下的脚踝却冻得通红。</p>
+<p>红砖仓库，一家生鲜料理店的香气飘来。<br>“好香！”<br>她眼睛一亮。下一秒，一阵海风猛地灌来——<br>她脖子一缩，悄悄跺了下脚，又抱紧了胳膊。</p>
+<p>江辰没说话，推开了旁边冬装店的门。</p>
+<p>梦小雪看了看摆在门口的羽绒服，眼神抗拒。<br>“不喜欢？”江辰问。<br>“鸟儿的毛被拔下来填进衣服里，想想就疼。”<br>她捏着厚实的衣袖，摇了摇头。</p>
+<p>转到传统服饰一排，江辰挑了件藏青色长款棉袍。<br>“这件。”<br>“你觉得我会穿？”梦小雪眯着眼打量棉袍。<br>“不穿就算了。”</p>
+<p>她轻嗤了一声，接过棉袍裹在身上，衣摆垂落，领口映衬着她白皙的脸庞。</p>
+<p>她转了个圈，伸手拨弄衣领，理了理袖口，<br>对着镜子认真打量了一番，嘴角弯了起来。<br>“嗯，还不错。”她看向江辰，“你眼光还可以嘛。”</p>
+<p>江辰走到柜台结账。<br>“少废话，走了。”</p>
+<p>梦小雪哼了一声，裹紧衣领跟了上去，很暖和。</p>
+</div></div>
+<div class="scene" id="scene-000006" data-theme="t002"><div class="prose"><p>二人继续游荡。<br>梦小雪停在橱窗前，打量着里面的小摆件和手工品。<br>江辰把手插在风衣口袋里，安静地站在她身旁。</p>
+<p>一家巧克力店。<br>“这家看起来不错。”梦小雪推开门，温暖的可可香扑面而来。<br>“要不要给你也买点？”她挑了几颗精致的巧克力。<br>“不用。”<br>她耸耸肩，付了钱，撕开包装，把巧克力送进嘴里。<br>“不吃算了，”她含糊地说，“挺好吃的。”</p>
+<p>午饭是盐味拉面。<br>汤头清澈，面条纤细，配上叉烧和海苔。<br>梦小雪喝了一口汤，满意地点头。<br>“这汤真好喝，清爽又有味道。”</p>
+<p>江辰埋头吃面。<br>“你不觉得好喝吗？”<br>“还行。”<br>梦小雪托着腮，看了他一会儿。<br>“小白，你很挑食吧？”</p>
+<p>江辰没回应，继续吃面。梦小雪轻笑一声，也不再追问。</p>
+<p>下午，他们去了五棱郭。<br>展望台上，星形的城郭在雪中格外清晰。<br>“如果能摘星星，愿意送给我吗？”她问。<br>“嗯。”<br>“答应得挺快。”<br>“反正摘不到。”<br>梦小雪“嘁”了一声，脸上的笑意若隐若现。</p>
+</div></div>
+<div class="scene" id="scene-000007" data-theme="t073"><div class="prose"><p>入夜。函馆山顶，寒风扑面。<br>城市灯火在海岸线间静静流淌，宛如一只时光的沙漏。</p>
+<p>一道流星划过天际。<br>梦小雪眼睛一亮，指尖弹出一张塔罗牌·星星。<br>牌面在风中旋转，化作细碎的星光。<br>光点汇聚成鱼尾少女的虚影，游弋在灯火上方的夜空。</p>
+<p>她闭上眼。</p>
+<p>“小白，你有什么愿望吗？”<br>“觉得实现不了。”江辰看着山下的灯火。</p>
+<p>梦小雪没再追问，轻声念诵。<br>“来自星空的祝福，引渡灵魂的微风……”话音落下，星光消散。</p>
+<p>“许下的愿望，都会实现的。”<br>她转过身，万千灯火映在她眼中，仿佛藏着一片星河。</p>
+<p>流星已逝，带走了一个未知的愿望。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E5%8C%97%E6%B5%B7%E9%81%93.jpg" alt="北海道" decoding="async" data-illustration><figcaption>北海道</figcaption></figure></section>
+<section class="book-section" id="section-000002" aria-label="札幌雪祭"><h2>札幌雪祭</h2><div class="scene" id="scene-000008" data-theme="t025"><div class="prose"><p><strong>2月5日 · 星期四</strong>  </p>
+<p>清晨，江辰和梦小雪搭上前往札幌的列车。<br>函馆的雪景向后退去，变为绵延雪原与点缀的村庄。<br>列车行驶平稳，暖气烘得车厢暖洋洋。</p>
+<p>梦小雪窝在座位里，百无聊赖地摆弄江辰的相机。<br>她对准远处的胖鹅按下快门，点开回放看了看。<br>“这破玩意儿，还没眼睛看得清楚。”</p>
+<p>“眼睛看得清楚的，未必拍得下来。”江辰望着窗外。</p>
+<p>梦小雪若有所思地“哦”了一声，又拍了张窗外雪景。<br>“你来北海道做什么？”<br>“放松一下，再查个人。”江辰把笔记本递给她。</p>
+<p>梦小雪翻了翻，在『家庭状况』一栏稍作停留，眸色微沉，合上笔记本。<br>她看向江辰，他仍望着窗外。<br>「真安静啊，他的眼神。第一次我就看到了，像照镜子一样——」<br>「既不属于过去，也不属于未来，只是无聊地打量着这个世界。」<br>她从口袋摸出一张塔罗牌·审判，递给江辰。</p>
+<p>手绘牌面上，白衣女子立于云端，手执黑笛，神色沉静。<br>她相貌与梦小雪七分相似，唯眉宇间凝着一丝肃杀，如冬霜覆上青藤，在柔和的笔触间若隐若现。</p>
+<p>“这是谁？”江辰低声问。<br>“我娘亲。”梦小雪语气轻快，“她是个剑仙。”<br>“小说看多了？”<br>“要是世界这么无趣，那也太无聊了。”她笑着说。</p>
+<p>江辰没有反驳。<br>梦小雪眯眼看他，发现他嘴角似乎放松了一点。</p>
+</div></div>
+<div class="scene" id="scene-000009" data-theme="t025"><div class="prose"><p>下午，列车抵达札幌。<br>街头洋溢着雪祭的气氛，路边摆满了小吃摊位。<br>巨大的雪雕和冰灯把广场装点成了童话世界。</p>
+<p>梦小雪兴奋地拉着江辰四处乱逛。</p>
+<p>“帮我拍照！”她站在一座城堡前挥手。<br>“咔嚓——”<br>“换一个！”她又跑到雪雕狐狸前，比出狐狸耳朵。</p>
+<p>“光线不好。”江辰说，但还是继续为她拍了一张又一张。</p>
+<p>走到冰凤凰雕塑前，梦小雪轻轻提起衣摆，转了个圈——<br>风起，雪落，藏青色棉袍翻飞，她眼眸明亮，唇角含笑，宛如一只真正的雪凤凰。</p>
+<p>“大姐姐好美！”一旁的小孩看得入迷，喊出了声。</p>
+<p>梦小雪听见，扭头冲小孩笑了笑，凑到江辰身边。<br>“听见没？小朋友眼光真好。”她压低声音。  </p>
+<p>江辰收起相机。<br>“是你自个儿教他说的？”</p>
+<p>梦小雪笑得更开心了。<br>“当然不是！但如果你愿意承认我好看，我也不介意。”</p>
+<p>江辰向前走去，没接话。梦小雪哼了一声，轻快地跟上。</p>
+<p>夜幕降临，彩灯亮起，在冰雕上投下梦幻绚丽的光辉。</p>
+</div></div>
+<div class="scene" id="scene-000010" data-theme="t067"><div class="prose"><p><strong>札幌医院调查</strong></p>
+<p>深夜，江辰站在医院门口。灯光昏沉。<br>半小时前，梦小雪在旅馆裹着被子。<br>“去吧，我才不想陪你去那种地方。”</p>
+<p>医院走廊空寂。夜班护士在值班台昏昏欲睡，偶有病人低咳声传来。<br>江辰小心避开监控，沿楼梯走向资料室。</p>
+<p>一阵沉重的拖拽声传来。</p>
+<p>他停步望去。太平间门半掩。<br>冷白灯光下，一个穿着病号服的女人踉跄走出。<br>头发凌乱，脸色惨白，手腕上挂着尸体名牌，随着步伐摇晃。</p>
+<p>“请问……”她的声音回荡在走廊，像从身后传来，<br>“我可以借个电话吗？”</p>
+<p>护士抬头，对着那张毫无血色的脸，尖叫一声。<br>慌乱中，她连人带椅向后一倒，撞在墙上。</p>
+<p>江辰隐在楼梯间门后，冷静观察。<br>那具『女尸』僵立片刻，似乎察觉了什么。<br>“咔嚓——”<br>骨裂声响起。<br>她扭头看了过来，嘴角缓缓裂开，露出森冷的笑容……</p>
+<p>警报骤响。护士尖叫着逃窜，保安匆匆赶来。<br>走廊一片混乱。<br>江辰趁机潜入资料室，目标是井口龍三母亲的病历。</p>
+<p>他沿着架子上的标签搜索，找到一个牛皮纸袋『井口』。<br>几年前的旧病历上，潦草的字迹写着『癌症』。<br>去年最新的一份记录上，多出一行打印的备注：<br>「建议姑息治疗。生存期预测模型评估：中位总生存期（OS）约为90–120天。」</p>
+<p>他合上病历。<br>「诈尸……大概和井口没什么关系……」<br>他悄然撤离，夜风裹挟着寒意，带走了消毒水的味道。</p>
+</div></div>
+<div class="scene" id="scene-000011" data-theme="t002"><div class="prose"><p>江辰回到旅馆，暖气扑面而来。<br>他脱掉外套，看见床上鼓起一团。梦小雪裹在被子里瑟瑟发抖。</p>
+<p>“你怎么了？”<br>梦小雪探出半张脸，闷着声音。<br>“冷。”</p>
+<p>江辰皱眉，房间温度不低。<br>他走到床边，正想探她额头，却见她扭了扭脖子，动作僵硬。</p>
+<p>“落枕了？”<br>“嗯……”梦小雪没什么精神，抬手揉脖子，“睡太沉了，早知道不趴着睡了……”</p>
+<p>江辰懒得理她，转身倒了杯水。<br>“早点休息吧。”<br>梦小雪缩回被子，声音迷糊。<br>“你也快睡吧，别总瞎跑。”</p>
+<p>江辰轻“嗯”一声，拉开椅子坐下，随手翻看资料。<br>房间暖意渐浓，夜色沉沉，两人再没有说话。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E6%9C%AD%E5%B9%8C%E9%9B%AA%E7%A5%AD.jpg" alt="札幌雪祭" decoding="async" data-illustration><figcaption>札幌雪祭</figcaption></figure></section>
+<section class="book-section" id="section-000003" aria-label="神秘学教团"><h2>神秘学教团</h2><div class="scene" id="scene-000012" data-theme="t043"><div class="prose"><p><strong>2月6日 · 星期五</strong></p>
+<p>清晨，阳光洒满旅馆大厅。<br>梦小雪坐在窗边，用叉子戳着煎蛋，一边漫不经心地滑动手机。</p>
+<p>屏幕上赫然是新闻标题：<br>「札幌医院惊现离奇诈尸事件，警方持续调查」<br>配有几张现场慌乱的照片。</p>
+<p>“写的什么呀。”她小声嘟囔，目光扫过照片。<br>「昨夜那消逝的灵魂，不过是想和家人告别，至于嘛。」</p>
+<p>她轻叹一声，关掉页面，喝完最后一口咖啡，转身上楼。</p>
+<p>“睡得跟小猪一样。”<br>梦小雪悄悄放下给江辰带的早餐，迈着轻快的步子离开了。</p>
+</div></div>
+<div class="scene" id="scene-000013" data-theme="t025"><div class="prose"><p>循着女孩的记忆，梦小雪来到市郊的一座公园。<br>空地被白雪覆盖，小路上留下一串脚印。<br>「……好像是这里。」  </p>
+<p>一栋灰色的平顶小楼，庭院静谧，树影婆娑。<br>几名女子围坐院内，雪地里撒落着燃尽的香灰。<br>桌上的木碗刻着奇异的符号，里面盛满了水。</p>
+<p>“你是谁？”年长女子冷冷开口，目光锐利，“来做什么？”<br>“我是千寻的朋友。她说，在这里我能遇到真正的自己。”<br>听到“千寻”这个名字，女人们稍稍放下警惕。</p>
+<p>仪式结束后。<br>“千寻她……还好吗？”一名年轻女子凑过来小声问。<br>「……是千寻的闺蜜绫乃。」<br>“她希望我能带你离开，回家去。”梦小雪目光温柔。</p>
+<p>绫乃轻轻摇头，眼神黯淡下去。<br>“这里才是我的归宿。”<br>梦小雪没有再劝，只无声一叹，转身离去。</p>
+</div></div>
+<div class="scene" id="scene-000014" data-theme="t001"><div class="prose"><p><strong>生病的小白</strong></p>
+<p>午后，梦小雪回到旅馆。<br>江辰躺在床上，呼吸粗重，脸色通红。床头的早餐只动了两口。<br>“哟，小白，你怎么这么虚弱？”<br>江辰缓缓睁眼。<br>“谁整天嚷着冷得要死来着？”他的嗓音有些沙哑无力。</p>
+<p>她噗嗤一声笑了，在床边坐下，伸手探了探他的额头。<br>“烧得还挺厉害。”<br>“昨天在医院，被诈尸的女孩吓了一跳，感觉有点怪。”<br>“别担心，”梦小雪轻声说，“我会照顾你的。”<br>“难得你这么温柔。”他说。</p>
+<p>她起身拿来水和退烧药，扶江辰坐起。<br>“把药吃了，好好睡一觉，别再乱跑了。”<br>江辰乖乖咽下药，靠回枕头。<br>“小雪，谢谢你。”<br>“不客气。”梦小雪脸颊微红。</p>
+<p>窗外雪落无声，房间内温暖而安静。<br>江辰的呼吸渐渐平稳，梦小雪趴在床边，长发披散在他的被子上。</p>
+</div></div>
+<div class="scene" id="scene-000015" data-theme="t025"><div class="prose"><p><strong>羽鸦的影子</strong></p>
+<p>入夜，薄野风俗街。霓虹灯影在雪光下变得黯淡而模糊。</p>
+<p>一只乌鸦停在二楼窗沿，歪头看了一会，轻啄玻璃。<br>窗户开了条缝，它跃进房间，落在天花板角落的通风口。<br>暧昧的热风涌来，它抖落羽翼上的雪花。</p>
+<p>昏暗的灯光下，绫乃站在镜子前。<br>她捂住嘴，屏住呼吸，身体却止不住地颤抖。</p>
+<p>沙发上，男人敞着黑色大衣。<br>他缓缓吐出一口烟雾，弹掉大衣上的烟灰。<br>“千寻的尸体，我已经处理干净了。”</p>
+<p>“你……你说什么？千寻……死了？”绫乃猛地转过身。</p>
+<p>“药吃得太多，你以为她还能活？”</p>
+<p>绫乃瘫坐在椅子上，声音带上哭腔。<br>“怎么会这样……你明明说过不会出事的。是我害了她，我不想再干下去了……”</p>
+<p>男人掐灭烟头，起身逼到她面前。<br>“现在说这些太迟了。别忘了，要不是我——”<br>“你现在恐怕在楼上零号房间，陪着那些肮脏的大人物。”</p>
+<p>看着男人手臂上的刺青，绫乃脑子里全是教主温柔的声音——<br>“男人都是坏蛋，我们会带你找到真正的归宿。”</p>
+<p>她握紧手里的药瓶，眼底泛起泪花。</p>
+<p>男人捏住她的下巴，逼她抬头。<br>“你还有什么选择？是想像千寻那样，变成垃圾一样的尸体，还是听话继续干活？”</p>
+<p>绫乃闭上眼，泪水滑落，无力地点头。<br>“我……我会听话的……”</p>
+<p>乌鸦注视着这一切，轻盈跃起，穿过房间，飞出窗外。</p>
+<p>雪花纷飞，房间里的喘息与低泣，逐渐被风雪掩盖，消散在夜色里。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E7%A5%9E%E7%A7%98%E5%AD%A6%E6%95%99%E5%9B%A2.jpg" alt="神秘学教团" decoding="async" data-illustration><figcaption>神秘学教团</figcaption></figure></section>
+<section class="book-section" id="section-000004" aria-label="鲑鱼火锅"><h2>鲑鱼火锅</h2><div class="scene" id="scene-000016" data-theme="t025"><div class="prose"><p><strong>2月7日 · 星期六</strong></p>
+<p>梦小雪望向湛蓝的天空，眯起了眼睛，风染红了她的脸颊。<br>江辰一步一顿，缓缓跟在她身后。</p>
+<p>中午，他们在石狩湾的一家火锅店坐下。<br>老板娘端来汤底，热气腾腾，香气扑面，雪后的寒意也退了几分。<br>橘红色的鲑鱼肉，配着豆腐、大白菜、葱段和胡萝卜，令人垂涎。</p>
+<p>“鲑鱼的一生，是一场壮丽的回归。”<br>“一趟奔赴死亡的旅途。”<br>“但也是为了新生。”<br>“人不也一样？总有些东西值得冒险。”<br>“什么东西呀，小白？”<br>梦小雪夹起一片鱼肉，轻轻吹了吹。</p>
+<p>窗外风拍着玻璃，锅里咕嘟着。<br>江辰笑了笑，说不出答案，只是又给她添了一勺汤。<br>热气涌上来，身体暖了，心也松了。</p>
+</div></div>
+<div class="scene" id="scene-000017" data-theme="t001"><div class="prose"><p><strong>折歪的纸鹤</strong></p>
+<p>走出小店。街角，有个小女孩在四处张望。<br>她手里拿着一只翅膀有些歪斜的纸鹤。<br>“姐姐，我想去温泉疗养院……妈妈在那。”</p>
+<p>梦小雪蹲下身，望进她清澈的眼睛。<br>“沿着这条路走，就在左边哦。”<br>梦小雪接过纸鹤，指了路。女孩笑着跑开。</p>
+<p>微风吹过发梢，梦小雪猛地转身，冲向人行道，一把将小女孩拉进怀里。<br>“吱——！！”<br>雪和冰渣溅在脸上，一辆卡车横在了路口中央。</p>
+<p>小女孩紧紧抱住她的脖子，低声抽泣。<br>“没事了，没事了，姐姐在这里。”<br>梦小雪轻拍她的背。</p>
+<p>和小女孩分开后，江辰和梦小雪走进商店。<br>梦小雪提了一袋水果。<br>“小白，你看，我救了一个小孩，今天运气肯定不错。”<br>“运气本来就不错，不然早冻死在路上了。”</p>
+<p>他们前往井口母亲的住址。<br>敲门没有人应，隔壁的门却开了。<br>一个白发老头提着雪铲慢悠悠地走出来，袖子卷起，手臂上是一截刺青——<br>和昨晚风俗店男人的一模一样。</p>
+<p>“你们找谁？”老头眯着眼。<br>“我们是井口的朋友，从本州来，顺路探望。”<br>老头把雪铲往地里一插，语气颇为自豪。<br>“井口那小子啊，新年回来过，听说混得不错。他妈妈前阵子搬去温泉疗养院了，那儿条件好。”<br>两人道谢离开，前往疗养院。</p>
+<p>一栋三层小楼。<br>大厅里，小女孩正坐在沙发上吃铜锣烧。<br>见到他们，小女孩立刻甜甜地喊。<br>“大姐姐！”<br>梦小雪笑了笑，把纸鹤还给小女孩。<br>“你叠得很好。”</p>
+<p>女孩的妈妈跟上来，拉着女儿对他们深深鞠了一躬。<br>“真的非常感谢你们，要不是你们，我女儿今天可能……”</p>
+<p>梦小雪将水果递给女人，顺势开口。<br>“请问，井口婆婆是住在这里吗？”</p>
+<p>“井口婆婆？”女人一愣，笑了起来，<br>“她最近精神好得很，今天疗养院组织活动，老太太跟着大家去滑雪了。”</p>
+<p>「滑雪？」</p>
+<p>离开疗养院。<br>“事情都清楚了吗？”梦小雪问。<br>“只能到这儿了。”江辰望向远处的雪山，<br>“你想去滑雪吗？”</p>
+<p>“小白你这么虚……还是算了吧。”梦小雪狡黠一笑。<br>她转到江辰面前，张开双臂迎着风。<br>“滑雪嘛……其实也没多刺激。”</p>
+</div></div>
+<div class="scene" id="scene-000018" data-theme="t026"><div class="prose"><p><strong>拔刀的速度</strong></p>
+<p>下午，他们登上了开往道东的火车。<br>列车在林海雪原缓缓穿行，车厢里温暖而舒适。<br>梦小雪靠在江辰肩上睡着了。</p>
+<p>醒来时，她揉了揉眼睛，见江辰静望窗外森林。<br>“小白，想听我讲个故事吗？”<br>江辰回过神看着她，点了点头。</p>
+<p>梦小雪望向窗外，声音低缓，如冬日的风飘散在林间。<br>“很久以前的冬天，啄木鸟在树林间穿梭，寻找秋天藏下的种子。一个女人滑雪时，在一口井旁发现了受伤的男人。”</p>
+<p>“她救了他。后来她才知道，他是道南组的小头目，为了躲避仇家的追杀，藏身于这片雪林。两人渐渐相爱，还有了孩子。”</p>
+<p>“可数年后，仇家还是找上门来。”<br>“那天，男人站在屋外，迎着寒风，面对藏剑在鞘的杀手，却把女人反锁在屋里。”</p>
+<p>梦小雪的声音变得轻柔而飘渺。<br>“黑帮的人杀了他，离开时丢下一句——”<br>“女人，只会影响拔刀的速度。”  </p>
+<p>“可你知道吗，”她顿了顿，看向江辰，<br>“第二年春天，树洞里的种子落在地上，依然发了芽。多年后，长成了一片森林。”  </p>
+<p>江辰沉默不语，望向窗外。<br>“拔刀再快，也斩不断生命的延续，对吧？”她说。</p>
+<p>白雪覆盖的森林在夕阳余晖下泛着金光，静静守护着那些岁月无法抹去的故事。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E9%B2%91%E9%B1%BC%E7%81%AB%E9%94%85.jpg" alt="鲑鱼火锅" decoding="async" data-illustration><figcaption>鲑鱼火锅</figcaption></figure></section>
+<section class="book-section" id="section-000005" aria-label="节日旅行"><h2>节日旅行</h2><div class="scene" id="scene-000019" data-theme="t062"><div class="prose"><p><strong>2月8日 · 星期天</strong></p>
+<p>釧路的一家小店，一圈吧台座位把烤炉围在中间。<br>炭火映照着梦小雪通红的脸颊。<br>江辰望着烤架上滋滋作响的鱼。</p>
+<p>「井口的母亲从绝症中康复。」<br>「是井口拿到了Z病毒？效果未免太惊人了……」</p>
+<p>“这个鱼真好吃！”梦小雪的声音把他拉回现实。<br>她眯起眼睛，看起来在细细品尝美味。</p>
+<p>江辰也夹起一块鱼肉放入口中。<br>“是调料的功劳。”他说。</p>
+<p>梦小雪瞥他一眼，笑了笑，继续吃着。</p>
+<p>江辰看着她，心情莫名松快了些。</p>
+</div></div>
+<div class="scene" id="scene-000020" data-theme="t030"><div class="prose"><p>吃过午饭后，他们继续乘车北上。</p>
+<p>窗外的雪原上，立着几只丹顶鹤，白羽映着阳光。</p>
+<p>梦小雪望着鹤群。<br>“你知道吗？丹顶鹤一生只爱一个伴侣。”<br>“听说一只死了，另一只会殉情……”<br>“小白，你担心什么呀？”</p>
+<p>江辰一怔，赶紧岔开话题。<br>“明天——”<br>“新年嘛，我知道。”梦小雪打断他。</p>
+<p>江辰望向雪原。<br>「旅途中的节日……似乎也不错。」</p>
+</div></div>
+<div class="scene" id="scene-000021" data-theme="t025"><div class="prose"><p><strong>2月9日</strong></p>
+<p>网走的寒风刺骨，街边积雪高垒。</p>
+<p>两人来到监狱博物馆参观。<br>讲解员正娓娓道来白鸟由荣多次越狱的传奇经历。</p>
+<p>梦小雪看着展板，眼里闪着兴奋的光。<br>“这个白鸟真厉害呀，竟然一次又一次逃出去。”</p>
+<p>“故事再传奇，也比不上现实。”江辰轻咳两声。</p>
+<p>梦小雪歪头看他一眼，若无其事地继续向前走去。</p>
+</div></div>
+<div class="scene" id="scene-000022" data-theme="t002"><div class="prose"><p><strong>除夕夜</strong></p>
+<p>夜晚，旅馆的暖气吹着惬意的风。<br>江辰端着热水，对着窗玻璃发呆。</p>
+<p>梦小雪凑到跟前，眨了眨眼，语气神秘兮兮的。<br>“小白，给你变个魔法怎么样？”<br>“好啊。”</p>
+<p>他们深一脚浅一脚地来到雪地里。<br>眼前是海的苍茫与空的寂静。</p>
+<p>梦小雪拿出那张塔罗牌·审判，轻声念诵。<br>“点燃星河之光，刺破迷雾之剑，曙光与极夜交汇之时，吾将开启天幕的门扉……”</p>
+<p>江辰抬头望了一会，天空依旧平静。<br>“你要看极光？那个……太阳风暴可能还在路上。”</p>
+<p>梦小雪不服气地鼓起脸颊。<br>“娘亲可是曙光女神，小白你得对我有点信心。”</p>
+<p>话音刚落，一抹紫色的光晕染上天际，<br>随即化作一道轻柔的帷幕，自九天垂落。<br>温柔而梦幻的光彩，洒满整个夜空。</p>
+<p>江辰怔怔望着。<br>过了几秒，他转头看向梦小雪。</p>
+<p>她微笑着仰望天幕，眼底满是幸福。<br>“看吧，小白，魔法也不过如此。”</p>
+<p>江辰看着她满足的侧脸，心头感到一阵悸动。<br>「节日里的团聚……可能也不过如此吧。」</p>
+</div></div>
+<div class="scene" id="scene-000023" data-theme="t079"><div class="prose"><p><strong>2月10日</strong></p>
+<p>清晨从网走出发，午后在札幌转车去函馆。</p>
+<p>梦小雪靠在窗边，刷着手机——<br>手机壳是塔罗牌·愚者，画着她自己的模样。<br>她饶有兴致地念了起来。<br>“薄野风俗街再现灵异事件，有知名人士深夜裸奔，据称与之前医院诈尸事件或有关联……”</p>
+<p>“小白，你会不会去那种地方？”她扣下手机，眼神戏谑，<br>“唔，不过看你这么虚，应该不会去对吧？”  </p>
+<p>“我倒觉得你比鬼怪更麻烦。”</p>
+<p>“哼——”梦小雪看向窗外，嘴角却弯了起来。</p>
+<p>夜里又住进那家温泉的旅馆。<br>老板见江辰面色苍白。<br>“年轻人，要多注意身体啊。”<br>又对梦小雪温和一笑。<br>“女孩子也要注意保暖。”</p>
+<p>“知道啦，谢谢老板。”梦小雪点头。</p>
+</div></div>
+<div class="scene" id="scene-000024" data-theme="t079"><div class="prose"><p><strong>2月11日 · 星期三</strong></p>
+<p>第二天一早，他们坐上返回本州的新干线。</p>
+<p>江辰靠窗闭目。</p>
+<p>「井口这条线索或许还可以继续利用。」<br>「可关于Z病毒的调查该如何展开……」</p>
+<p>梦小雪也一路安静。</p>
+<p>到站，她伸个懒腰。<br>“小白，我去找纱月姐姐玩啦，她都安排好了。”</p>
+<p>江辰看着她明亮的眼睛，点头。<br>“去吧，别闹太疯。”</p>
+<p>梦小雪眨眼，转身汇入人潮。  </p>
+<p>江辰望着她消失的背影。<br>「这究竟是一次旅行，还是一场梦？」</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E8%8A%82%E6%97%A5%E6%97%85%E8%A1%8C.jpg" alt="节日旅行" decoding="async" data-illustration><figcaption>节日旅行</figcaption></figure></section>
+<section class="book-section" id="section-000006" aria-label="联欢晚会"><h2>联欢晚会</h2><div class="scene" id="scene-000025" data-theme="t068"><div class="prose"><p>东区的夜晚，灯光温暖，却化不开天上这朵乌云。</p>
+<p>一间旧仓库改成的会馆，门口站着一个中年人——<br>韩先生，他们这样叫他。国字脸，浓眉，大眼。</p>
+<p>他热情地同每个人握手，手上力气很大，靠谱。<br>“欢迎！”他说。</p>
+<p>折叠桌撑开，边上摆着几把椅子。<br>中央是话筒和喇叭，屋顶的灯直直照下来，很亮。</p>
+<p>门口走进来一个中年人，带着孩子，读书人。<br>“长老师，您来了。”韩先生热情地招呼。<br>那孩子呆呆的，手里攥着个糖果袋。</p>
+<p>有人从后厨端出来一盘炸鸡，招呼大家。<br>“长老师，大宝，来吃点东西！”<br>大宝懵懵地看着满屋子的人，然后他笑了。</p>
+<p>放下盘子，那人走到一边，手在围裙上一擦。<br>他叹了一口气，拿出手机划拉。<br>屏幕亮起又暗下去，他重新抬起头笑着走过来。<br>“吃，趁热。别光站着。新鲜的，多美味啊。”</p>
+<p>“大家一起来。田中你也来。”韩先生也走过来。</p>
+<p>角落里，那个人一直坐着，手里拿了一罐啤酒——<br>小林健一，好像是叫这个名字。<br>听说他装了脑机接口，高科技的玩意。<br>戴着一顶黑色毛线帽，帽檐压得很低。<br>他看着会场里来往的人，眼神却空，像丢了魂。</p>
+<p>气氛热闹起来，屋里越来越吵。<br>杯子碰杯子，笑声叠着笑声。</p>
+<p>韩先生停在长琦旁边，目光扫过人群。<br>“江辰今天没来？”<br>“罢工一结束就出差了。”长琦咳了两声。</p>
+<p>晚会开始了。</p>
+<p>大家轮流上场，表演自己的拿手好戏。<br>有人唱起老歌，声音沙哑，有些走调，但是真切。<br>有人表演小品，引得满屋子的人哈哈大笑。</p>
+<p>上次这样，好像还是很久以前了。</p>
+<p>小林健一忽然站了起来。<br>他走到人群中央，摘下帽子——<br>露出了后脑勺上的脑机接口。</p>
+<p>“谢谢大家关心我。”他声音不大，但很坚定，<br>“这段时间是真的不好过，但是只要我们大家团结在一起，就一定撑得下去。”</p>
+<p>屋子里静了一下。</p>
+<p>“说得好！”田中大声喊，“只要人还在，什么都能挣回来！”<br>掌声也响起，声音很大，响了很久。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E8%81%94%E6%AC%A2%E6%99%9A%E4%BC%9A.jpg" alt="联欢晚会" decoding="async" data-illustration><figcaption>联欢晚会</figcaption></figure></section>
+<section class="book-section" id="section-000007" aria-label="森山研太"><h2>森山研太</h2><div class="scene" id="scene-000026" data-theme="t043"><div class="prose"><p><strong>助理研究员的回忆</strong></p>
+<p><strong>2月13日 · 星期五</strong></p>
+<p>车窗外，军舰与游艇交替掠过。<br>水波粼粼，映照着初升的朝阳。<br>森山研太握紧手中的公文包，目光没有焦点。</p>
+<p>回忆涌来。</p>
+<p>————</p>
+<p>他当初选择了生物研究。<br>敬畏生命，好奇未知。<br>那时，所有学科都受到AI的冲击，裁员减薪——<br>只有生物医疗，资金永远充裕。  </p>
+<p>大学里的老教授说过——<br>“社会投入了这么多钱，总有一天会改变人类的命运。”</p>
+<p>然而现实却是药品价格飞涨，医生数量骤减。<br>人均寿命，十几年来不升反降。</p>
+<p>一个讽刺。</p>
+<p>————</p>
+<p>去年夏天，他毕业，找工作。<br>大企业垄断人才，早早就签下了定向培养协议。<br>如果高中再努力一下……好像也改变不了什么。</p>
+<p>面试时，亚辛爵士微笑着指向那台离心机。<br>“不用担心，设备简陋了一些，但资金很充裕。”</p>
+<p>薇薇安夫人也在，她身材高挑，陪在亚辛身边。<br>亚辛是个天才，而她自愿成为实验对象。<br>——Z病毒。<br>实验室研究一种叫Z病毒的东西。<br>返老还童，治疗癌症。<br>另一面，是危险的肌体增强，是失控的风险。</p>
+<p>也许……不是一种病毒……是两种。<br>两种变异株混在一起，而难点在于如何分离。</p>
+<p>亚辛专注于Z病毒的大规模生产。<br>核心机密。<br>其他人大多在尝试开发新的应用。</p>
+<p>每天都是同样的操作……<br>有新的样品送来……都是亚辛爵士在亲自处理。</p>
+<p>————</p>
+<p>直到亚辛遇害那天，一切都变了。<br>实验室遭到袭击，亚辛被杀。</p>
+<p>警察问了很多，Z病毒，斯文森，李优民……<br>“我不知道……”他说。</p>
+<p>也许……研究碰触了什么禁区。<br>他煮了一碗小鸡拉面。</p>
+<p>半个月前，薇薇安突然联系他。<br>“实验室将搬迁至SMR基金会总部，研究重启。”<br>“你，得跟我一起过去。”她说。</p>
+<p>不可思议。森山感到一丝不安。</p>
+</div></div>
+<div class="scene" id="scene-000027" data-theme="t001"><div class="prose"><p><strong>SMR基金会总部</strong></p>
+<p>南半岛。<br>车子驶入SMR基金会总部，庄重的大楼映入眼帘。<br>门口守卫森严，透着一种低调而严谨的氛围。</p>
+<p>森山走进大厅，见到了薇薇安·拉赫曼夫人。<br>许久未见。<br>她身穿白色实验服，举止优雅，气质截然不同。</p>
+<p>“森山，现在你已升任副研究员。”她微笑着说。<br>“主研究员的职位空着，我相信你能胜任。”  </p>
+<p>森山心跳加快。压力。</p>
+<p>“研究的重点放在短期效果，特别是变异和副作用的控制。”<br>薇薇安走近森山，语调温柔而坚定。<br>“听我的安排，亚辛的资料，都可以给你。”</p>
+<p>森山沉默，点头。他试图掩饰。</p>
+<p>薇薇安带他走到实验室一侧。<br>新的离心机，新的核酸提取仪，新的冰箱。</p>
+<p>薇薇安的语气低沉了几分。<br>“我们要用亚辛留下的Z病毒血清，做个癌症治疗的演示。”<br>她停顿一下。<br>“会有秘密投资人。”</p>
+<p>森山看着冰箱里一排澄澈的血清。<br>“夫人，我们不清楚还有多少有效样本。”他攥住袖口，<br>“一旦失败，可能再也无法复刻亚辛爵士的研究成果。”</p>
+<p>薇薇安轻笑一声，拍了拍他的肩膀。<br>“森山，不用担心。商业合作中，这种情况不少见。”她红唇微扬，<br>“而且是秘密演示，即使失败了，也不会影响你的前途。我相信你。”</p>
+<p>森山抬头望向薇薇安，她的眼神充满了期待。<br>他无法回头了。</p>
+<p>“我会尽力的。”他轻声说。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E6%A3%AE%E5%B1%B1%E7%A0%94%E5%A4%AA.jpg" alt="森山研太" decoding="async" data-illustration><figcaption>森山研太</figcaption></figure></section>
+<section class="book-section" id="section-000008" aria-label="实验室困境"><h2>实验室困境</h2><div class="scene" id="scene-000028" data-theme="t002"><div class="prose"><p>风铃声轻轻响起，在『時の砂浜』咖啡馆里飘荡。</p>
+<p>薇薇安坐在窗边，细密的汗珠从颈间滑下。<br>她没擦，她看着窗外，面前的淡蓝色饮料没动过。</p>
+<p>语风穿着风衣，安静地走来，在她对面坐下。</p>
+<p>薇薇安收回目光。<br>“郑秀贤让你来的？”<br>“不完全是。”语风的视线扫过薇薇安的高马尾，<br>“亚辛爵士生前和蓝盾有过联系。我很遗憾。”</p>
+<p>薇薇安沉默了，嘴角忽然有了一丝弧度。<br>“我听说，你们把码头处理得很干净。”</p>
+<p>“职责所在。我也听说，夫人在研究上很有决心。”</p>
+<p>“我现在精力充沛。”薇薇安抬起眼，迎上她的目光，<br>“多亏了新基金会，进展不错。”</p>
+<p>语风身体前倾，手指轻敲桌面。<br>“都是什么人对Z病毒感兴趣？”</p>
+<p>薇薇安拿起杯子，喝了一口冰凉的香草味液体。<br>“一些渴望留住时间的权贵。可惜——”<br>光在她碧蓝的眼中流转，深邃难测，<br>“期望和现实有差距。也许我该专注短期效果。”</p>
+<p>“联合生物科技的基因强化剂，似乎更主流。”</p>
+<p>“完全不同。”薇薇安立刻摇头，表情严肃，<br>“Z病毒不会永久性地、不可逆地改变基因。”</p>
+<p>流砂抹茶送来了。语风端起杯子，杯壁温热。<br>“那它的市场定位……会很微妙。”</p>
+<p>薇薇安点点头，身体向后靠进椅子里。<br>“两周后，实验室有场秘密演示。有兴趣吗？”</p>
+<p>语风的眼神亮了。<br>“当然。”她环顾四周，在墙角的挂画多停了一秒，<br>“这里的环境真不错。”</p>
+<p>薇薇安喝完最后一口饮料。<br>“像大海一样梦幻。”她轻声说，眼里是温柔和疲倦。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%9B%B0%E5%A2%83.jpg" alt="实验室困境" decoding="async" data-illustration><figcaption>实验室困境</figcaption></figure></section>
+<section class="book-section" id="section-000009" aria-label="娱乐新闻"><h2>娱乐新闻</h2><div class="scene" id="scene-000029" data-theme="t067"><div class="prose"><blockquote>
+<p>时代的疑云在天空徘徊。偶有一线阳光投下，随即被寒风吞没。<br>仰望天空的目光渐渐稀疏。回到这座城市，仿佛一切从未改变。</p>
+</blockquote>
+<p><strong>夜晚 · 公寓</strong></p>
+<p>LED散发出暖黄的光芒，但总感觉少了点什么。<br>江辰靠在椅子上，指尖摩挲着一对桃心形耳机——<br>梦小雪轻快的声音还在耳边回响。<br>“小白，戴上这个，随时都能听到我的声音哦。要是敢无视我，我会随时找上门的。”</p>
+<p>桌上摊开一张便笺，上面有一个名字——<br>夏川美绪，沉寂多年的明星，突然复出。</p>
+<p>她的丈夫马丁·盖兹比是凤凰能源高管。</p>
+<p>江辰收起耳机，点亮手机，输入搜索关键词。<br>「 🔍 凤凰能源 旧城改造 」</p>
+<blockquote>
+<p><strong>检索结果：凤凰能源 (Phoenix Energy)</strong></p>
+<p><strong>▌ 基础摘要</strong><br>美洲清洁能源领域的昔日先锋，<br>现为该板块的垄断级巨头。</p>
+<p><strong>▌ 历史沿革</strong><br>● <strong>「智能萧条 (Smart Depression)」</strong><br>在经济危机期间主营业务遭受重挫，<br>现金流枯竭，面临债务压力，濒临破产。</p>
+<p>● <strong>「资本重组」</strong><br>接受<strong>东洋资本</strong>紧急注资，<br>完成私有化/退市（具体条款未公开）。</p>
+<p>● <strong>「崛起节点 (2030年代)」</strong><br>借势「旧城改造+能源升级」，<br>在配套项目中获取大量订单，实现复兴。</p>
+<p><strong>▌ 盈利模式</strong>  </p>
+<ol>
+<li>市政项目总包 (EPC) 与运维打包</li>
+<li>封闭式硬件集成及后续迭代服务</li>
+<li>政策激励与补贴收益</li>
+</ol>
+<p><em>⚠️ 备注：早年土地置换协议存在数据缺失。</em></p>
+<p>[ 📂 展开更多详细财报 ]<br>[ 🔗 关联词条：硬汉银行 旧城改造计划 ]</p>
+</blockquote>
+<p>他点开下面的关联词条查看。</p>
+<blockquote>
+<p><strong>检索结果：旧城综合改造计划</strong></p>
+<p><strong>▌ 项目概况</strong><br><strong>公开预算：</strong> 10,000 亿 (1 Trillion)<br><strong>性质：</strong> 区域级产业结构转型</p>
+<p><strong>▌ 历史背景</strong><br>原为重工业核心生产基地，<br>主产芯片及精密电子元件。<br>曾因高污染问题被多次问责。</p>
+<p><strong>▌ 实施路径</strong><br>● <strong>「关停并转」</strong><br>强制关闭高污染生产线。</p>
+<p>● <strong>「资本置换」</strong><br>政府引入大型财团，<br>签订<strong>土地置换协议</strong>完成腾退。</p>
+<p><strong>▌ 转型成果</strong><br>复用原有工业高压电网，<br>厂房改建为<strong>超算数据中心</strong>。<br>高端会所入驻外围街区，<br>打造静谧舒适的生态环境。</p>
+<p>[ 🔗 关联词条：东洋重工 ]</p>
+</blockquote>
+<p>还有一条关联「北川电气」一家核电公司——<br>发电？核防护？</p>
+</div></div>
+<div class="scene" id="scene-000030" data-theme="t001"><div class="prose"><p><strong>旧城的秘密聚会</strong></p>
+<p><strong>2月15日 · 星期天 · 清晨</strong></p>
+<p>旧城区，出租车靠在路边停下。</p>
+<p>江辰走进办公楼，拿出一份文件。<br>“基站检修？”保安打量了他两眼。</p>
+<p>江辰来到屋顶，架起长焦镜头。  </p>
+<p>会所外有人影陆续出现。</p>
+<p>最先是几个女人，熟门熟路，<br>穿着深色衣服，款式保守，却都是奢侈品牌。<br>接着是两个熟悉的身影——<br>薇薇安和郑秀贤。<br>帽子压得很低，却藏不住薇薇安高挑的身形。</p>
+<p>一辆深色豪华轿车停稳。<br>夏川美绪走了下来，罕见的素颜现身。<br>江辰按下快门，定格了她眼角的疲惫——<br>那岁月的痕迹，恐怕连粉底也掩盖不住。</p>
+<p>宾客陆续抵达。<br>中年男女，娱乐圈，政商界。<br>墨镜，围巾，步履匆匆。</p>
+<p>人数比武田一月份时的资料，多了一倍。</p>
+</div></div>
+<div class="scene" id="scene-000031" data-theme="t001"><div class="prose"><p><strong>狗仔队的记者先生</strong></p>
+<p><strong>2月17日 · 星期二 · 演播厅</strong></p>
+<p>镜头对准她们的脸。<br>一张张，年轻，生动。<br>欢呼炸开，热浪扑向舞台。</p>
+<p>夏川美绪坐在评委席。妆容完美，表情却像冰。<br>大屏幕不断切换——<br>选手，观众，还有她。</p>
+<p>马丁·盖兹比在台下，不时望向妻子。<br>江辰站在场边。快门没有声音，画面都是真的。</p>
+<p>票数滚动。<br>人群晃动。温度上升。<br>马丁擦汗。夏川美绪的目光，始终停在舞台。</p>
+<p>最终竞演，开始。<br>女孩们跃上台。光影吞掉疲惫与不安。<br>舞步回应节拍，眼里燃烧着梦想。<br>一个名字，从第五冲上第一。</p>
+<p>主持人高喊。<br>“今晚的优胜者是——”<br>“葵星奈！”<br>掌声炸裂。她站上C位，眼泪闪烁。<br>马丁望向幕后。<br>有人嘴角一扬，比了个“OK”。</p>
+<p>录制结束。<br>马丁走向后台。夏川美绪独自离开。<br>江辰收起相机，沿场边移动。</p>
+<p>“小白，你倒是尽职尽责啊。”<br>耳机里传来梦小雪的声音，懒洋洋的，<br>“狗仔队的记者先生——”<br>“是不是被台上的漂亮姑娘迷住了？”<br>“人生如戏，全靠演技。”江辰回应。</p>
+<p>一个身影挡住前路。<br>“先生，后台禁止进入。”<br>黑衣保安。块头很大，眼神像在防贼。</p>
+<p>江辰停下，嘴角上扬，露出标准的职业微笑。<br>“抱歉，没有注意。”<br>转身，走出演播厅。</p>
+<p>夜风迎面吹来，凉飕飕的。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E5%A8%B1%E4%B9%90%E6%96%B0%E9%97%BB.jpg" alt="娱乐新闻" decoding="async" data-illustration><figcaption>娱乐新闻</figcaption></figure></section>
+<section class="book-section" id="section-000010" aria-label="慈善晚宴"><h2>慈善晚宴</h2><div class="scene" id="scene-000032" data-theme="t068"><div class="prose"><p><strong>2月20日 · 星期五 · 旧城改造十三周年庆典</strong></p>
+<p>宴会大厅的金黄色灯光，像融化的蜂蜜。<br>人声、乐曲和杯盏交错声一起缓缓流动。</p>
+<p>江辰站在角落，目光越过人群，落在演讲台。</p>
+<p>千代田产业董事长安部重信正在讲话。<br>“诸位，请尽情期待那个洁净的明天吧。”<br>“我想，我们都该感谢凤凰能源——”<br>“是他们让风和光变成了推动时代进步的血液。”<br>“说到底，科技终究是为了人而存在的——”<br>“谁也不想住在垃圾堆里谈论理想，对吧？”</p>
+<p>掌声响起。</p>
+<p>江辰抿了一口香槟，扫视大厅——<br>夏川美绪正走向演讲台。<br>她穿着浅金色礼服，光影在裙摆间流转。<br>上周，她像纸一样苍白。<br>今晚，她有了生命力。</p>
+<p>「是Z病毒的功效……」</p>
+<p>她站在麦克风前，笑容温婉。<br>“大家久等了。”<br>“今晚的宴会……也是我的复出派对哦。”<br>人群中响起低语，她把目光投向一侧。<br>“我要特别感谢我的朋友，郑秀贤女士——”<br>“是她帮助我重新站在这里。”</p>
+<p>她深吸一口气，目光变得坚定。<br>“关于后天的演出——”<br>“我会将全部收益，捐给核电站事故的受灾家庭。”</p>
+<p>掌声再度响起。<br>宾客们的目光充满了赞许和好感。</p>
+<p>大厅另一角，薇薇安正在和语风交谈。<br>语风今晚穿着一袭长裙。</p>
+<p>「蓝盾对Z病毒有兴趣？」</p>
+<p>“江记者，真是哪儿都能遇到你。”一个声音响起。<br>江辰转身。<br>李优民端着红酒，笑意很深。</p>
+<p>“阳光所及之地，必有目光追随。”江辰淡淡回应。</p>
+<p>李优民晃动酒杯。<br>“江先生的消息渠道很有趣，可惜不够准确。”</p>
+<p>“准不准并不重要，”江辰又看了一眼语风的方向，<br>“重要的是，参议员已经开始行动了。”</p>
+<p>李优民的笑容消失，目光阴沉下来。<br>“知道得太多，有时并非好事。”他低声说。<br>“人在江湖，身不由己。”江辰耸肩。</p>
+<p>李优民冷冷盯了他一眼，转身离开。</p>
+<p>薇薇安和语风走了过来。</p>
+<p>“江先生是记者？”薇薇安先开口，声音柔和。<br>“侦探工作，帮武田警官的忙。”江辰笑了笑。</p>
+<p>薇薇安眼中闪过失望。<br>“亚辛的案子……交给一个业余侦探……”她低声说。</p>
+<p>“夫人，”一旁的语风神情严肃，<br>“大家都很关注亚辛爵士的案子，我相信江先生。”</p>
+<p>薇薇安顿了顿，轻轻点头。<br>“也许吧。”<br>她优雅地转身离开。</p>
+<p>江辰看向语风。<br>「总感觉，她穿裙子的样子，我在哪里见过。」</p>
+<p>他摩挲着手中冰凉的酒杯。<br>“语风小姐今天很美。”<br>她收回目光，看向他。<br>“江先生经常这样说？”<br>江辰微笑着摇了摇头。<br>“从来没有。”</p>
+<p>“那有没有兴趣另约时间详谈？”她说。<br>“好。”江辰举了举手中的酒杯。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E6%85%88%E5%96%84%E6%99%9A%E5%AE%B4.jpg" alt="慈善晚宴" decoding="async" data-illustration><figcaption>慈善晚宴</figcaption></figure></section>
+<section class="book-section" id="section-000011" aria-label="复出表演"><h2>复出表演</h2><div class="scene" id="scene-000033" data-theme="t001"><div class="prose"><p><strong>星期天 · 艺术剧场</strong></p>
+<p>大幕拉开。</p>
+<p>舞台浸没在柔和的蓝光里。背景是星空，银河缓缓旋转。<br>夏川美绪站在中央。<br>象牙白长裙，缀着银蓝色光点。<br>夜空中的星辰。</p>
+<p>钢琴声响起，像水流。<br>弦乐加入，低沉，来自大地深处。<br>投影变化。<br>寒冷的清晨，海岸。<br>巨大的蘑菇云升起。建筑瞬间崩塌。<br>黑雪缓缓飘落，覆盖了废墟。</p>
+<p>她抬起头。<br>目光深邃。<br>手臂展开，身体随着音乐舞动。<br>动作轻柔，充满力量。<br>像在挣脱枷锁，又像在寻找救赎。<br>画面从废墟切换到荒芜，再到焦黑的森林。<br>最后，定格在一片雪原。</p>
+<p>音乐推进。<br>她的舞姿变得激烈。<br>旋转，跃动。<br>挣扎与不屈。<br>双手缓缓抬起，伸向高处。<br>一束光聚焦在她的掌心。<br>微弱，却坚定。</p>
+<p>那是希望。</p>
+<p>舞台的色调由灰暗转为温暖的金色。<br>投影中的废墟开始复苏。<br>焦土上绽放出花朵。<br>人群重新聚集。<br>孩童的笑声。</p>
+<p>夏川美绪站在那里，伸出手。<br>像在轻抚逝去的灵魂，又像在传递和平的渴望。<br>身体微微后仰，随即站定，笔直。<br>迎向洒落的金色光芒。<br>眼中，有永不熄灭的光。</p>
+<p>投影定格。<br>核电站事故基金的募捐信息。<br>音乐平息。<br>掌声响起，先是零星，随即汇成潮水。<br>观众起立。雷鸣回荡，久久不息。</p>
+<p>江辰坐在观众席，目光追随着舞台上的夏川美绪。<br>她舞姿流畅，翻转跳跃间没有一丝生涩。<br>仿佛从未离开过舞台。</p>
+<p>「那么关于Z病毒，语风……她又知道多少？」</p>
+<p>“小白，你在想什么？”<br>梦小雪的声音在耳边响起，带着调侃。<br>“还是……想起了什么人？”</p>
+<p>江辰侧过头，看了她一眼。<br>“在想案子。”他的语气平淡。</p>
+<p>梦小雪眯起眼，直直地盯着他。<br>嘴角勾起一抹玩味的笑。<br>“真的吗？”</p>
+<p>江辰没有回答，视线落回舞台。<br>夏川美绪站在掌声中央，深深鞠躬。<br>脸上满是喜悦。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E5%A4%8D%E5%87%BA%E8%A1%A8%E6%BC%94.jpg" alt="复出表演" decoding="async" data-illustration><figcaption>复出表演</figcaption></figure></section>
+<section class="book-section" id="section-000012" aria-label="夜之约"><h2>夜之约</h2><div class="scene" id="scene-000034" data-theme="t068"><div class="prose"><p><strong>醉猫酒吧</strong></p>
+<p>江辰推开街边的门。<br>酒吧里的灯光温暖。<br>几声银铃般的轻笑浮在爵士乐的小调里。<br>墙上贴着一张洋联黑鹰队夺冠的海报——<br>桥本一郎在投球。</p>
+<p>他走向吧台。<br>“梦小雪来过吗？”<br>老板娘筱原纱月放下手账。<br>“两天没见了。”<br>“一杯啤酒。”江辰说。</p>
+<p>酒杯落在吧台上，冰凉。</p>
+<p>语风坐在墙边，杯里的梅子酒剩下一半。<br>“晚上好，语风小姐。”江辰坐下。</p>
+<p>语风眨了眨眼，嘴角轻扬。<br>“叫我风就好。”<br>江辰点头，喝了口啤酒。<br>“小林健一的事，举手之劳。不必在意。”</p>
+<p>“这份‘举手之劳’，可是冒了不少风险。”<br>她的手搭在杯子上，白皙的手指映着酒的温红。</p>
+<p>“你接近薇薇安，是为了Z病毒？”他问。</p>
+<p>语风晃晃酒杯，梅子香气在她脸上晕开。<br>“江先生每天就在想这个？”</p>
+<p>「……」</p>
+<p>江辰轻咳一声。<br>“北港枪战，有没有兴趣？”</p>
+<p>“当然。”语风挑眉。</p>
+<p>「她似乎并不意外，还有些期待？」</p>
+<p>“和黑帮有关的人袭杀了斯文森，带走了货物。”</p>
+<p>“那我帮你盯着Z病毒。至于黑帮——”<br>“需要帮助就开口。”她说。</p>
+<p>“风君，合作愉快。”<br>“江君，合作愉快。”</p>
+<p>酒杯轻碰，语风一饮而尽。<br>在冬夜醉心的柔和里——<br>桌上的玫瑰插花也失了颜色。</p>
+</div></div>
+<div class="scene" id="scene-000035" data-theme="t073"><div class="prose"><p><strong>百年老枪</strong></p>
+<p>月色皎洁，如银镜高悬。天台上，两人对坐。</p>
+<p>年轻男子穿着黑衬衫，袖口微敞，骨节分明。<br>手边放着一支步枪，胡桃木枪托已有些斑驳。</p>
+<p>中年男人身形魁梧，他刚注射了基因强化剂。<br>热流在血液中涌动，关节摩擦有些发痒。</p>
+<p>“感觉如何？”年轻男子眼神冰冷。</p>
+<p>“比我预想的还要好。”中年男人展开手掌。</p>
+<p>风在月下流动——<br>一只青雀如幽灵般掠过。</p>
+<p>年轻男子举枪。<br>“砰——！”<br>枪声回响，青雀消失。  </p>
+<p>“韦德先生，你的身体或许超越常人。”<br>他放下手中的毛瑟Kar98k，<br>“但百年铸就的秩序……不易改变。”  </p>
+<p>一张卡牌从空中缓缓飘落。<br>“去找到这个女人。”他说。</p>
+<p>年轻男子起身，背对月光。<br>“记住，命运应当掌握在自己手中。”<br>他转身，隐入夜色。</p>
+<p>韦德接住塔罗牌——<br>宝剑国王，一个焦黑的弹孔贯穿了王座的剑锋。</p>
+</div></div>
+<div class="scene" id="scene-000036" data-theme="t079"><div class="prose"><p><strong>海的回响</strong></p>
+<p>城市在霓虹灯下沉寂。<br>梦小雪躺在被子里，手机屏幕照亮她苍白的脸颊。<br>江辰的消息：「还好吗？」<br>她拨通了语音。</p>
+<p>“小白，你居然会主动关心我，太阳要打西边出来了？”<br>“少贫嘴。”电话那头，他的声音有些疲惫。<br>她轻笑，蜷起身体。<br>“还行吧，没被风吹跑，也没变成鬼。你呢？”<br>他“嗯”了一声。</p>
+<p>“晚安。”她说。<br>“晚安。”<br>通话结束。她闭上眼，意识下沉。</p>
+<p>窗外的风拂过夜空，轻柔地拍打着窗棂，<br>如同远方潮汐的回响，带她回到多年以前。</p>
+<p>——</p>
+<p>风很冷。<br>她走在夜色里，身体不属于自己。</p>
+<p>她看了看自己的手。青白，纤细。<br>这身体的主人死了，愿望是去看海。</p>
+<p>街道安静。霓虹灯光倒映在湿漉漉的地面上。<br>她拉紧衣领，朝海的方向走去。</p>
+<p>她穿过无人的街巷，路过深夜未眠的窗口，将一抹暖光遗落在身后。</p>
+<p>然后，她看见一个少年。<br>他穿着深色夹克，站在路灯下，像在等人。<br>风吹乱他的头发。<br>他低头点了支烟，火光照亮冷淡的侧脸。</p>
+<p>她停下脚步，歪着头。<br>“喂，我想去看大海，可是好冷。”</p>
+<p>他抬头，端详着她。几秒后，他叹了口气，脱下外套递过来。<br>她怔了一下，接过。<br>衣服的余温贴着布料传来。<br>“谢啦。”</p>
+<p>他没说话，轻哼一声，转身走入夜色。</p>
+<p>风拂过街角，卷起落叶，带着潮湿的气息。<br>她继续走着，拉紧他的外套。<br>“又离海更近了一些。”</p>
+<p>梦小雪呢喃。<br>她翻了个身，眉间的神色柔和了几分。</p>
+</div></div>
+<div class="scene" id="scene-000037" data-theme="t061"><div class="prose"><p><strong>特使来访</strong></p>
+<p>烛光摇曳，圣像隐没在昏黄之中，审视着人间。<br>约翰站在祭坛旁，翻开一本笔记。<br>皮质封面，蓝黑色的墨迹散发出铁锈的味道。<br>纸页夹着一张照片，红砖砌成的教堂屹立雪中。</p>
+<p>身穿红色长袍的男人走近。特使压低声音。<br>“约翰阁下，冕下身体最近越来越差……”</p>
+<p>约翰抬起头，目光平静。<br>“生死皆有天定，冕下自有天父庇佑。”</p>
+<p>特使轻叹。<br>“如今情势敏感，冕下担心的是教廷的未来。”</p>
+<p>约翰沉默片刻，放下笔记。<br>“礼拜日，我会主持一场特别弥撒，祈求主的指引。”</p>
+<p>“特别弥撒？”特使望向祭坛。</p>
+<p>“冕下的忧虑我明白，但唯有虔诚与祈祷能带我们走出迷雾。路易吉阁下，请留下，亲自感受圣灵的降临。”  </p>
+<p>特使沉吟，目光扫过墨迹未干的信件，最终点头。<br>“既然阁下诚意相邀，我自当留下。”</p>
+<p>烛光依旧微弱，映照着两道身影。</p>
+</div></div>
+<div class="scene" id="scene-000038" data-theme="t001"><div class="prose"><p><strong>商务旅行</strong></p>
+<p>茶色木纹格栅装点长廊，落地窗外是沉静的蔚蓝。<br>徐少发刚从南洋飞抵，神色疲惫——<br>飞机遭遇了强气流。</p>
+<p>海关官员带着微笑，透着警觉。<br>“徐先生，你的签证似乎有些问题。”<br>“误会？”徐少发皱眉。</p>
+<p>他被带进一间小屋，门在身后锁上。<br>空气闷热。时间过得很慢。<br>干渴。饥饿。<br>徐少发咽了口唾沫，起身朝门走去。<br>桌上的电话突然响起。</p>
+<p>他接起。<br>“徐先生，你好。”一个低沉的声音。<br>“你是谁？”<br>“这里的治安不太好，尤其是最近。”对方说。</p>
+<p>徐少发沉默片刻。<br>“我只是个对新技术感兴趣的商人。”</p>
+<p>对方轻笑。<br>“我也很期待Z病毒的秘密演示。”</p>
+<p>徐少发眼神一沉，心跳加速。<br>“你想怎么样？”</p>
+<p>“尽力取得Z病毒样本，你可以带走一半。”</p>
+<p>他握紧话筒，最终缓缓点头。<br>“我明白了。”</p>
+<p>电话挂断。<br>门开了，门口的官员露出职业微笑。<br>“徐先生，抱歉久等了，签证已经处理好。欢迎。”</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E5%A4%9C%E4%B9%8B%E7%BA%A6.jpg" alt="夜之约" decoding="async" data-illustration><figcaption>夜之约</figcaption></figure></section>
+<section class="book-section" id="section-000013" aria-label="Z病毒演示"><h2>Z病毒演示</h2><div class="scene" id="scene-000039" data-theme="t085"><div class="prose"><p><strong>第一天</strong></p>
+<p><strong>2月27日 · SMR基金会总部</strong>  </p>
+<p>会议厅灯光温和。实验区隔着玻璃墙。<br>两名患者躺在病床上，仪器环绕四周。<br>大屏幕上的资料显示：<br>「癌症晚期，全身性多发转移。」<br>几张MRI影像标记出肿瘤位置和大小。</p>
+<p>投资人坐成一排，桌上摆着资料。<br>A到得最早，戴着墨镜，一页一页读完资料，合上，未发一言。<br>B穿着白色传统长袍，靠在椅子上，双手摆成一个尖塔。<br>C戴着软呢帽，身体微胖，倚在桌上，眼睛始终盯着实验区的冷藏箱。<br>D身上带着很浓的古龙水味道，右手紧握成拳，嘴角微动。<br>E是一位女士，坐在语风身旁，蒙着面纱，手腕挂着金饰。</p>
+<p>薇薇安站在前方，灯光勾勒出她俊俏的脸庞。<br>“各位，欢迎。今天所见，均为SMR基金会最高机密。”</p>
+<p>她侧身示意。<br>实验区内，森山研太上前，肩膀紧绷，鞠了一躬。声音从话筒传来。<br>“Z病毒能刺激细胞再生，激活免疫系统，修复受损组织。”<br>他客观陈述，语调却有些上扬。</p>
+<p>森山从冷藏箱取出两支血清。<br>实验员接过，注入患者手臂的导管。<br>“注射完成。我们将连续治疗七天，观察效果。”</p>
+<p>A开口，声音冰冷。<br>“风险？失控的后果？”<br>“风险确实存在，”森山顿了顿，“目前仅用于极端病例。”<br>A向后一靠，摘下了墨镜。</p>
+<p>B双手向前一推，比出一个手势。<br>“所以，我们见证的是科学突破，也是一场豪赌？”</p>
+<p>一阵躁动。D眼神闪烁，拳头松开了些。</p>
+<p>“签协议，就能拿到样本吗？”C的语速很慢。<br>薇薇安点头。“当然。”</p>
+</div></div>
+<div class="scene" id="scene-000040" data-theme="t001"><div class="prose"><p><strong>第二天</strong></p>
+<p>“各位，治疗已初见成效，”薇薇安语调平稳，“数据可能会有些波动。”</p>
+<p>C身体后仰，双手交叠在身前。B的手指在扶手上沉稳敲击。</p>
+<p>森山来到了会议厅，他翻开记录。<br>“生理指标轻微改善，细胞修复速度超出预期。”<br>他停顿一下。<br>“此外，部分神经元区域，突触信号异常活跃。”</p>
+<p>A身体前倾。<br>“什么意思？”  </p>
+<p>“Z病毒似乎能穿透血脑屏障，”森山有些迟疑，<br>“患者脑部突触数量在增加。具体影响未知。”</p>
+<p>“它还能修复大脑？”语风忽然开口。</p>
+<p>“是的。”森山点头，“若能控制，或能在阿茨海默症或脊髓损伤治疗上取得突破。”</p>
+<p>D的双手都握紧拳头。<br>“神经元过度增殖？下一步就是精神失控？”A冷笑。<br>森山沉默片刻。<br>“确实存在这种可能。”</p>
+</div></div>
+<div class="scene" id="scene-000041" data-theme="t085"><div class="prose"><p><strong>第三天</strong></p>
+<p>会议厅比前两日更安静，森山的声音回荡。<br>“癌细胞活性显著下降，肌肉组织开始再生。”</p>
+<p>一位患者面色红润，屏幕上的血氧饱和度趋于稳定。<br>另一位体温略微升高，表现出炎症反应。</p>
+<p>今天D的座位是空的。</p>
+<p>E抬起手，腕上的金链发出响声。<br>“森山先生，和现有疗法如何比较，比如靶向治疗、基因编辑？”</p>
+<p>“与靶向治疗相比，Z病毒的免疫激活更强，还能促进肌体修复。”<br>“基因编辑更适合遗传性疾病，应用范围较窄。”森山回答。</p>
+<p>“也就是说，Z病毒全面占优？”</p>
+<p>“可以这么理解，但长期稳定性尚未验证。”森山语气谨慎。</p>
+</div></div>
+<div class="scene" id="scene-000042" data-theme="t085"><div class="prose"><p><strong>第四天</strong></p>
+<p>“我们进行了初步的全面评估。”森山的声音平稳，<br>“患者体内癌细胞显著减少，部分病灶甚至完全消失。更令人惊讶的是，整体生理机能出现了逆转。”</p>
+<p>屏幕上放出对比照片。患者皱纹减少、皮肤恢复紧致与弹性，甚至其中一人的白发开始转黑。</p>
+<p>B轻叩扶手的节奏乱了一拍。<br>C身体前倾，双手按住桌沿，视线黏在冷藏箱上。<br>A张了张嘴，最终还是把话咽了回去。</p>
+<p>D猛地站起身，死死盯着森山。<br>“你们究竟想卖什么？是癌症治疗，还是返老还童的鬼话？”</p>
+<p>他的声音不大，却瞬间引爆了会议室里的紧张气氛。</p>
+<p>E微微侧头，小声嘀咕。<br>“它在逆转衰老……”</p>
+<p>薇薇安缓缓起身，语调依然温和。<br>“或许，这两者本就没有区别。”</p>
+</div></div>
+<div class="scene" id="scene-000043" data-theme="t001"><div class="prose"><p><strong>第五天</strong></p>
+<p>实验失控了。</p>
+<p>注射后不到一分钟，患者猛烈颤抖。<br>他的心率飙升。<br>肌肉紧绷，青筋暴起。<br>他猛地睁眼，瞳孔涣散，眼白血红。</p>
+<p>“心率140！肾上腺素异常！”实验员惊呼。</p>
+<p>患者低吼一声，扯断了输液管。</p>
+<p>警报响起，红光爆闪。</p>
+<p>A纹丝不动，视线仍锁定在实时数据上。<br>C眉头微蹙，迅速调整了坐姿。<br>E紧紧攥住腕链。<br>D猛然起身，挥舞着手臂，声音嘶哑。<br>“这不是医学，是灾难！”</p>
+<p>森山冲向急救柜。
+抓起β型中和剂。
+手在发抖，却仍精准地刺入患者颈动脉。</p>
+<p>时间仿佛凝固。</p>
+<p>患者停止颤抖，轰然倒回床上。</p>
+<p>实验区内，一片死寂。</p>
+<p>会议厅里，B停止了敲击。C眼神变暗。D缓缓坐下，最终沉默。</p>
+<p>森山的后背已被冷汗浸透。<br>薇薇安目光如常。</p>
+</div></div>
+<div class="scene" id="scene-000044" data-theme="t001"><div class="prose"><p><strong>第六天</strong></p>
+<p>失控的患者稳定了，但异常虚弱。Z病毒在强化机能的同时，也带来了极限的能量消耗。</p>
+<p>会议厅中，气氛缓和了一些。</p>
+<p>“如何量产？”A直切要害。<br>“研究仍在进行。”森山的回答依旧保守。</p>
+<p>E压低声音。<br>“很抱歉，但这似乎曾是亚辛爵士的研究方向。”<br>这时，B缓缓开口。<br>“这批血清，是现存的全部吗？”</p>
+<p>薇薇安淡然一笑，示意工作人员送上协议。<br>“各位的疑问，签下协议便有答案。”</p>
+<p>C的神情已经彻底放松，嘴角甚至带着一丝笑意。</p>
+</div></div>
+<div class="scene" id="scene-000045" data-theme="t085"><div class="prose"><p><strong>第七天</strong></p>
+<p>实验结束。<br>屏幕数据显示，两名患者的癌细胞几近消失。疗效无可否认。</p>
+<p>薇薇安站在中央，声音自信。<br>“各位，七天的实验已证明Z病毒的潜力。癌症治疗只是其一。”</p>
+<p>她环视众人。<br>“接下来，是投资合作环节。”</p>
+<p>投资人们纷纷起身。<br>A依旧不动声色。<br>B与助理低声交谈。<br>C径直走向薇薇安，与她握手。</p>
+<p>语风站在出口，目光微沉。<br>“最终决定前，蓝盾还需进一步评估。”</p>
+<p>薇薇安微笑如常。<br>“随时欢迎。”</p>
+<p>语风点头，转身离开。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/Z%E7%97%85%E6%AF%92%E6%BC%94%E7%A4%BA.jpg" alt="Z病毒演示" decoding="async" data-illustration><figcaption>Z病毒演示</figcaption></figure></section>
+<section class="book-section" id="section-000014" aria-label="特别弥撒"><h2>特别弥撒</h2><div class="scene" id="scene-000046" data-theme="t001"><div class="prose"><p>约翰的声音很低，在大厅里回荡。<br>“……凛冬郡的藤蔓，味道是苦的，却结出酸甜的果实……”<br>“……为了度过漫长的冬季，它们的根深深埋入地下……”</p>
+<p>主教路易吉坐在前排，神情专注。<br>他的手指划过胸前的银十字架。<br>他的身旁不知何时坐下一个年轻男人。</p>
+<p>路易吉侧目打量他。<br>他穿着黑衬衫，目光虔诚，却过于清澈，也过于深邃。<br>他平静的外表下似乎蕴藏着难以言述的力量，令人不安。</p>
+<p>祈祷声渐渐远去。<br>一阵眩晕袭来。<br>路易吉的视线开始模糊。教堂的烛火仿佛被无形的气息吹熄，四周陷入黑暗。<br>他的意识逐渐抽离现实。</p>
+<p>眼前出现了另一幅景象。<br>扭曲的藤蔓从虚无中蔓延。枝节如同骨骼，纤维间渗出幽暗的粘液。<br>它们蠕动，纠缠，构成一片病态的森林。</p>
+<p>森林中央，悬浮着几道人影。<br>他们的皮肤晶莹剔透，流动的血液中散发出诡异的荧光。<br>毫无疑问，他们早已超越人类的范畴。<br>他们俯瞰大地，目光冷漠。<br>无数细碎的呢喃声，交织成深渊的潮水，冲击着路易吉的精神。</p>
+<p>那些神明般的存在转身离去。<br>地面上，无数凡人匍匐追随。他们面容扭曲，眼神迷狂，伸出渴求的手。<br>他们的躯体正被藤蔓侵蚀，却毫无察觉。<br>皮肤溃烂，生出触手与枝杈。<br>变成了非人非树的恐怖形体。</p>
+<p>路易吉的心跳失控。冷汗顺着额头淌下。<br>藤蔓也缠住了他，他动弹不得。<br>他惊恐地看着自己的皮肤裂开，泛出同样苍白的光泽。荧光的血液从伤口涌出。<br>他想祈祷，喉咙里却只有哽咽。<br>深渊般的低语吞没了一切。</p>
+<p>“路易吉阁下！”</p>
+<p>声音像一道闪电。<br>黑暗与藤蔓瞬间消失。约翰的脸出现在眼前，神色关切。<br>“您还好吗？”</p>
+<p>路易吉大口喘息，浑身冷汗。<br>他慌乱地扫视四周。教堂一切如旧，信众低头祈祷，烛火静静燃烧。<br>身旁的座位空了。<br>那个穿黑衬衫的年轻人，不见了。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E7%89%B9%E5%88%AB%E5%BC%A5%E6%92%92.jpg" alt="特别弥撒" decoding="async" data-illustration><figcaption>特别弥撒</figcaption></figure></section>
+<section class="book-section" id="section-000015" aria-label="井口龍三"><h2>井口龍三</h2><div class="scene" id="scene-000047" data-theme="t039"><div class="prose"><p>东区的冷雨里，井口龍三从拘留所走了出来。<br>天色阴沉，雨丝如针。<br>冰冷的触感让他瞬间清醒，肩膀上的旧伤随之作痛。<br>他拉紧风衣，低头走入湿滑的街道。</p>
+<p>一个转角，气息不对。<br>黑暗中，一个阴冷的声音响起。<br>“井口，出来透透气了？”<br>井口猛然回头。巷口墙边，一个黑风衣的男人靠着，帽檐压得很低。<br>是『剑』。<br>“组长，您平安无事。”井口立刻鞠躬，姿态恭敬。</p>
+<p>『剑』轻笑一声，缓缓走近。<br>他抬起头，露出一双刀锋般的眼睛。<br>“在『红灯笼』那种地方混日子，能有什么前途？”<br>他停顿了一下。<br>“跟我来，做点真正有意义的事。”</p>
+<p>井口脸上的肌肉微微抽动，依旧低着头。<br>“是，组长请吩咐。”</p>
+<p>『剑』嘴角的笑意更冷。<br>“拉赫曼实验室搬到了南半岛，正在进行Z病毒秘密演示。去盯着那些人，搜集情报，证明你的价值。”<br>他转身，又回头。<br>“记住，井口，别让我失望。”<br>“是，组长。”</p>
+<p>井口看着他的背影消失在雨中，攥紧了拳头。</p>
+</div></div>
+<div class="scene" id="scene-000048" data-theme="t001"><div class="prose"><p>接下来的几天，井口潜伏在暗处跟踪观察。</p>
+<p>投资人A，身材高大，生活简单规律，只往返于酒店和SMR基金会总部。<br>阿拉伯商人，排场浩大，助理众多，在机场附近包下数间豪华套房。<br>南洋商人徐少发，安保规格极高，仿佛早有警觉。<br>神秘人D，行踪成谜，做了深度伪装，甚至查不到确切住所。<br>投资人E，一位温婉的女士……</p>
+<p>最后，是蓝盾公司的希瑟·语风。<br>简直是个灾星。<br>这次被抓，全拜码头罢工和蓝盾的脑机接口所赐。<br>必须离她越远越好。</p>
+<p>望着漆黑的夜色，井口做出了决定。<br>只要拿下目标，便能重新赢得帮会的信任，甚至更进一步。</p>
+</div></div>
+<div class="scene" id="scene-000049" data-theme="t001"><div class="prose"><p>演示结束后的第三天，机会来了。<br>阿拉伯商人的一名助理独自离开套房，去了酒吧。<br>井口跟了上去。<br>酒吧附近的小巷，他迅速动手，制服了对方。<br>“告诉你的老板，用Z病毒血清来换你。”他语气冰冷。<br>助理惊恐地点头。</p>
+<p>第二天清晨，北港偏僻的码头仓库。<br>另一名助理带来了银色金属箱，换走了人质。<br>井口拿到了血清。<br>一只海鸥从天空掠过，他猛然回头，却什么也没看到。</p>
+<p>当晚，他与『剑』碰面。<br>“组长，我完成了任务。”他递上箱子。<br>『剑』打开检查，嘴角扬起一丝微笑。<br>“干得不错，井口。”<br>他合上箱子。<br>“不过，这只是个开始。”<br>“是，组长，我一定不会让您失望。”井口深深鞠躬。</p>
+</div></div>
+<div class="scene" id="scene-000050" data-theme="t001"><div class="prose"><p>回到公寓，手机屏幕突然在黑暗中亮起。<br>他接通。</p>
+<p>一道低沉而陌生的声音传来。<br>“井口，你的绑架手法相当专业。”<br>井口握紧手机。<br>“你是谁？”<br>对方轻笑一声。<br>“我是谁不重要。重要的是，你得听我的。”<br>“什么意思？”</p>
+<p>“把『剑』约出来。”<br>对方的语气像一把冰刃。<br>“否则，你偷走Z病毒为母亲治疗癌症的事，就会被公开。”</p>
+<p>一瞬间，井口的血液仿佛冻结，手指发凉。<br>“……你究竟想要什么？”</p>
+<p>“想开点，井口。只要『剑』死了，你就能真正活下去。”  </p>
+<p>井口呼吸一滞，咽下喉头的腥甜。<br>“你真是个恶魔。”</p>
+<p>电话那头，沉默了一瞬，随即传来一声轻笑。</p>
+<p>嘟——<br>通话结束。</p>
+<p>屏幕陷入黑暗。<br>退路，已经没了。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E4%BA%95%E5%8F%A3%E9%BE%8D%E4%B8%89.jpg" alt="井口龍三" decoding="async" data-illustration><figcaption>井口龍三</figcaption></figure></section>
+<section class="book-section" id="section-000016" aria-label="死神的镰刀"><h2>死神的镰刀</h2><div class="scene" id="scene-000051" data-theme="t031"><div class="prose"><p><strong>偶然的相遇</strong></p>
+<p>井口龍三坐在酒馆『九重』的角落。<br>他盯着桌面上怎么也擦不掉的油污。<br>手里的杯子空了，外面的雨还在下。</p>
+<p>门开了。<br>他下意识抬头，目光却在一瞬间凝固——<br>是希瑟·语风，蓝盾公司的代表。</p>
+<p>「她怎么会来这里……」<br>警惕。不安。<br>「说不定是个机会……」</p>
+<p>井口眼中灵光一闪，站起身，走了过去。</p>
+<p>“蓝盾的希瑟小姐，来码头看笑话？”他开口。<br>语风停下脚步，打量着他。<br>“你是谁？”<br>“我是谁不重要，”井口冷笑，“重要的是，我知道你是谁。”<br>“也知道你们蓝盾对Z病毒感兴趣。”</p>
+<p>语风的眼神冷了下来。<br>“你想说什么？”<br>“明晚来码头见我。”井口压低声音说，“我会给你答案。”<br>她沉默了片刻。<br>“好。”她说，“明天见。”</p>
+</div></div>
+<div class="scene" id="scene-000052" data-theme="t051"><div class="prose"><p><strong>黑沢剑藏</strong></p>
+<p>黑沢剑藏走向北港码头。<br>冰冷的海风吹过，唤醒了血的记忆与杀戮的本能。<br>北港的咸潮，已经让道南组最锋利的刀都生了锈。</p>
+<p>他厌恶女人，她们软弱，是麻烦。<br>他试过基因强化剂，失败了，险些丧命。<br>从那时起，他更坚信劣质的基因就该被淘汰。</p>
+<p>半小时前，他收到井口龍三的消息：<br>「蓝盾的希瑟·语风正赶往码头进行调查。」<br>他回复：<br>「井口，你绕来绕去，还是离不开女人。」</p>
+<p>井口龍三太像他杀过的一个人，连对女人的心软都一样。<br>“你注定是个失败者，井口。”黑沢对着海风自语。</p>
+<p>他到了。<br>远处，他看见了蓝盾的女人——希瑟·语风。<br>她手里握着一根撬棍。</p>
+<p>黑沢大笑起来，笑声里满是不屑。<br>“你不会以为这种东西有用吧？”<br>语风看着他，声音平静而严肃。<br>“你知道Z病毒，对吗？”<br>黑沢嘴角轻蔑地扬起。<br>“女人永葆青春的玩具罢了，不值得我关心。”<br>“那你为了重新拥有力量，”语风淡淡地问，“难道没用过？”</p>
+<p>这句话点燃了他。<br>黑沢的脸孔扭曲，眼中是怒火。<br>“阻挡进化之路的人，全都该死！”</p>
+<p>他拔出腰间的剑，冲向语风。<br>剑锋与撬棍相撞——<br>剑断了。<br>下一刻，重击落在他的胸口。</p>
+<p>黑沢瞪大眼睛，咳出一口血，倒在冰冷潮湿的地面上。</p>
+</div></div>
+<div class="scene" id="scene-000053" data-theme="t001"><div class="prose"><p><strong>旧日的阴影</strong></p>
+<p>井口龍三站在远处的阴影里，目睹了一切。<br>希瑟·语风手中的撬棍，在他眼中化作死神的镰刀。<br>迅速，冷酷，收割了黑沢剑藏。  </p>
+<p>他犹豫着。<br>语风忽然看向他藏身的地方，招了招手。<br>井口的身体一阵麻木，仿佛失去控制，缓缓走了出去。</p>
+<p>语风瞥了一眼地上的黑沢。<br>“他以前是道南组的人，也许你妈妈也见过他？”<br>井口猛地抬头，心里掀起惊涛骇浪。<br>语风转身离开。<br>井口僵在原地，脸上写满迷茫与惶恐。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E6%AD%BB%E7%A5%9E%E7%9A%84%E9%95%B0%E5%88%80.jpg" alt="死神的镰刀" decoding="async" data-illustration><figcaption>死神的镰刀</figcaption></figure></section>
+<section class="book-section" id="section-000017" aria-label="真相蒙尘"><h2>真相蒙尘</h2><div class="scene" id="scene-000054" data-theme="t049"><div class="prose"><p>夜晚的海风带着咸腥。<br>江辰站在码头边，看着地上的尸体和断剑。<br>武田匆匆赶到。<br>“怎么回事？”<br>“刚到。”江辰说，“井口杀了他？”</p>
+<p>武田蹲下检查。<br>“不像打斗，”武田皱眉，“更像被车撞过。”</p>
+<p>他的手机响了。<br>是高木警长。<br>“嫌疑人已经身亡。”武田汇报。</p>
+<p>“把尸体带回警署，”他挂断电话，“马上。”</p>
+</div></div>
+<div class="scene" id="scene-000055" data-theme="t085"><div class="prose"><p><strong>警署</strong></p>
+<p>高木警长在等他们，手边是一个银色金属箱。<br>“警长，这是什么？”武田问。<br>高木打开箱子。里面是几管试剂，标签上写着——<br>『Z病毒血清』</p>
+<p>“接下来验证一件事——”<br>“Z病毒是否影响死亡时间的推定。”她神情严肃。</p>
+<p>法医开始工作。<br>很快确定了黑沢剑藏的死因。<br>“胸腔受到外力压迫，多器官受损，心脏碎裂。”<br>药剂被注入尸体。<br>房间里只剩下等待。<br>几个小时后，法医再次检查。<br>“警长，病毒似乎不影响死亡时间的判定。”</p>
+<p>高木点了点头。<br>沉默片刻，她终于开口。<br>“案子暂时到此为止。那位先生想见你们。”<br>她转向江辰。<br>“江辰，带上梦小雪。西山神社，她应该会感兴趣。”</p>
+<p>事情，就这样结束了。</p>
+</div></div>
+<div class="scene" id="scene-000056" data-theme="t068"><div class="prose"><p><strong>公寓</strong></p>
+<p>江辰坐在床边，灯光昏黄。<br>他闭上眼，想起和语风的对话。</p>
+<p>“从现有信息看，Z病毒对癌症有效。”语风说。<br>“或许可以利用井口，引出黑沢。”江辰想了想。<br>“那就看江先生的了。”她的眼睛很亮。</p>
+<p>记忆切回黑沢尸体的惨状。<br>胸口发闷。<br>“那个女人，真是疯了。”他对自己说。</p>
+<p>犹豫一下，他拿起手机，给梦小雪发了条消息。<br>“周末，去西山神社看看？”</p>
+<p>耳机里传来梦小雪慵懒而调笑的声音。<br>“小白，这么晚了还不睡，去看漂亮姑娘了？”<br>“刚替黑帮分子收尸回来。”江辰说。<br>“又被吓到了？”她的语调上扬，“那就勉为其难，周末陪你去神社散散心吧。”</p>
+<p>通话结束，房间重归寂静。<br>嫌疑人，死的死，排除的排除。<br>但有什么不对。<br>他躺下，感觉真相已消逝在现实的边界之外。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E7%9C%9F%E7%9B%B8%E8%92%99%E5%B0%98.jpg" alt="真相蒙尘" decoding="async" data-illustration><figcaption>真相蒙尘</figcaption></figure></section>
+<section class="book-section" id="section-000018" aria-label="星灵社"><h2>星灵社</h2><div class="scene" id="scene-000057" data-theme="t043"><div class="prose"><p><strong>祭礼的火焰</strong></p>
+<p>清晨的阳光透过窗户洒落在醉猫酒吧。<br>筱原纱月站在吧台后整理酒架。<br>瓶身上折射出五颜六色的光晕。<br>酒架晃动，玻璃瓶轻碰，发出清脆的响声。</p>
+<p>角落的卡座里，梦小雪正画着一张塔罗牌。<br>她面前的梅子酒喝了一半，杯壁上的气泡仿佛倒映着无数斑斓世界，在破灭边缘颤动。</p>
+<p>门开了，一个穿西装的健硕男人走进来。<br>他脚步沉重，径直走到吧台前，手指按在木质台面上，留下一道深痕。<br>他环视一圈。<br>“一杯伏特加。”声音很沉。<br>筱原纱月眉梢微蹙，没说话。<br>她从酒架上取下那支蓝白红三色的酒瓶，倒了一杯，推过去。</p>
+<p>男人抿了一口。<br>“听说这里有个玩塔罗牌的女人？”<br>纱月的动作停顿了一下，垂下眼睑避开对方的目光。<br>“这位先生，好像流鼻血了哦。”角落里传来梦小雪调侃的声音。</p>
+<p>男人下意识去摸鼻子，手却在半空停住，转向西装口袋。<br>他掏出的不是纸巾。<br>是一张宝剑国王牌。<br>火焰，正从焦黑的弹孔中升起。<br>下一瞬，他的袖子着火了。</p>
+<p>“该死！”男人猛地后退，冲向门口。<br>动作太急，带翻了酒杯。<br>火势顺着酒液蔓延，火焰在吧台上跃动，像一场古老的祭礼。</p>
+<p>梦小雪抬手，在空中轻轻一挥。<br>火焰如幻影般消失。木质吧台恢复了光泽，仿佛什么都没发生。<br>男人狼狈地冲出酒吧。</p>
+<p>梦小雪走到吧台前，把刚画好的塔罗牌递给筱原纱月。<br>“纱月姐姐，把这个放在手机屏幕上，就可以进入星灵社的程序啦。”</p>
+<p>纱月接过牌。<br>她心头一颤，牌面上是自己年轻时的模样。<br>“谢谢你，小雪。”<br>梦小雪俏皮地眨了眨眼，笑容温暖。<br>“纱月姐姐，永远年轻。”</p>
+</div></div>
+<div class="scene" id="scene-000058" data-theme="t007"><div class="prose"><p><strong>银色的星章</strong></p>
+<p>午后，蓝盾总部，新绿树枝在玻璃上投下剪影。<br>奥布莱恩坐在窗边，翻着一份报告。</p>
+<p>语风站在他对面。<br>“根据线报，黑沢剑藏主导了北港袭击。”<br>“他虽死无对证，但情报高度一致，可以确认他的角色。幕后主使仍然未知。”<br>她略作停顿。<br>“我建议我们转向南洋，追踪斯文森货运的来源，并确认当地是否存在任何Z病毒研究。”</p>
+<p>奥布莱恩合上报告。<br>抽屉轻响，他取出一枚银色星章。<br>“这枚星章，是授予斯文森的。”他的声音低沉，“现在，由你带去，交给南洋的联络人。”<br>“他在最后一次行动前，留下了她的名字。”</p>
+<p>语风伸手接过星章。熟悉而沉重。<br>她也有一枚，属于三年前彼港的那一夜。<br>“我明白。”她低声回应，神情未动，将星章收入口袋。</p>
+<p>奥布莱恩不再多言。<br>似是默许，又似在默哀。</p>
+</div></div>
+<div class="scene" id="scene-000059" data-theme="t068"><div class="prose"><p><strong>老家的烈酒</strong></p>
+<p>傍晚，长琦家。<br>一瓶二锅头立在木桌一角，绿瓶红星，在暖黄灯光下映出温润的光。<br>长琦推了推酒瓶。<br>“韩文忠过节送的，老家的正宗货，舍不得开。今天你来了，正好。”</p>
+<p>酒过三巡，江辰有些微醺，他向后靠在椅背上。<br>看着头顶缓缓旋转的吊扇，三年前的往事在眼前浮现。</p>
+<p>地中海的风拂过彼港的岸。夕阳西斜。<br>归港的船桅，在落日中投下细长的影子，像一条条沉入黑暗的路。<br>他站在码头，像在等人，又像在等待命运的裁决。<br>几个男人在附近游荡，动作谨慎，目的明确——<br>像盘旋的苍鹰，又像狩猎的柴犬。<br>江辰举起相机，继续拍摄。<br>镜头里的神殿遗迹，沐浴在金色夕阳下，仿佛凝固了历史的荣光。</p>
+<p>夜色降临，他收起相机，穿入棚屋区的小巷。<br>拐过转角，推开门，是一间灯光有些昏暗的酒吧。<br>一个男人正迎面往外走，手插在口袋里，像是握着什么。</p>
+<p>江辰在吧台坐下，点了一杯白兰地。<br>收音机里正絮叨着一则新闻。<br>“……绿岛核武器部署计划引发国际抗议……”<br>“……环保组织提供的卫星图像显示，新增发射井数量可能超过两千……”</p>
+<p>他深吸一口气，轻点手指，计算着时间。<br>这时一张卡牌滑到面前，他转头。<br>只见一个黑发女人独自坐在一角，神色慵懒，眼中却有几分期待。<br>那是他第一次遇见梦小雪。</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E6%98%9F%E7%81%B5%E7%A4%BE.jpg" alt="星灵社" decoding="async" data-illustration><figcaption>星灵社</figcaption></figure></section>
+<section class="book-section" id="section-000019" aria-label="西山神社"><h2>西山神社</h2><div class="scene" id="scene-000060" data-theme="t055"><div class="prose"><p><strong>神社的巫女</strong></p>
+<p><strong>3月14日 · 星期六 · 清晨</strong></p>
+<p>山雾如织，环绕古林。<br>跨过山下的青石台阶，一座朱红色鸟居静立林间。<br>它斑驳的外表和周围的环境几乎融为一体。</p>
+<p>小径蜿蜒而上。武田环顾四周，语气里带着敬畏。<br>“真隐秘。第一次来，感觉像踏入了另一个世界。”<br>“不错的地方呢。”梦小雪伸了个懒腰。<br>“秋天肯定更美。”她说。<br>江辰看了她一眼，没有言语。</p>
+<p>院落位于半山腰，穿过前庭，便是本殿。<br>层叠的檐角与神木之间，气氛庄严肃穆。<br>回廊下站着一个男人，身着黑色羽织，银发梳得一丝不苟。<br>西山神社的宫司——铃木三郎。</p>
+<p>“铃木宫司。”江辰微微颔首。<br>武田拘谨地低头。<br>“在下武田，东区刑警。感谢您接见。”<br>“无需多礼。”铃木三郎摆了摆手。<br>他的目光落在梦小雪身上。<br>“这位就是梦小雪小姐？”</p>
+<p>“正是。”梦小雪唇角轻扬，行了个礼，语气带着趣味，“西山神社果然名不虚传。”<br>铃木抬手示意。<br>他身旁的少女缓步上前。</p>
+<p>她面容清秀，一身白衣红裙的巫女服，赤足踏在木地板上，轻如落羽。<br>腰间系着一面铜镜，幽光沉暗。</p>
+<p>“我的助手Iris。”铃木介绍。<br>Iris抬头，看向梦小雪，露出柔和的微笑。<br>她的声音温润，却带着机械般的精确。<br>“初次见面，小雪姐姐。”</p>
+<p>梦小雪眨了眨眼，笑得甜美。<br>“艾酱，你的镜子很漂亮。”<br>“谢谢。”Iris接着补充，“这是自我校准的道具。我的系统偶尔会有误差，需要它帮我『重新同步』。”<br>梦小雪若有所思。</p>
+<p>铃木开口，语气温和。<br>“梦小姐若有兴趣，后殿的藏书可以翻阅，但请勿取走。”<br>“放心，只看看。”梦小雪轻笑，转向Iris，“艾酱，带我去探探那些古老的秘密吧。”<br>“好的，小雪姐姐。”<br>Iris转身，引领她走向神社深处。</p>
+<p>两人的身影消失在回廊尽头。<br>铃木重新望向江辰。<br>“你清楚她的身份吗？”</p>
+<p>江辰看着远处，语调平淡。<br>“她自称是游历世间的女巫，来去无踪。”</p>
+<p>铃木凝视着他，片刻后，缓缓点头。<br>“平日，我们不容许这样的存在。”<br>他停顿了一下。<br>“但如果江君帮我办一件事，我可以睁一只眼闭一只眼。”</p>
+<p>江辰眼神微沉。<br>“宫司想让我做什么？”</p>
+<p>铃木沉默片刻，望向远方。<br>“南洋那边，有关于Z病毒和基因强化剂的线索。”<br>“想必，都是你关心的事。”</p>
+<p>他随即转向武田，语气严肃。<br>“武田君，我们『零』——守护秩序的一方，需要你。愿意加入吗？”<br>武田一怔，迅速镇定下来，认真回应。<br>“我愿意。”</p>
+<p>“很好。”铃木露出满意的微笑。</p>
+</div></div>
+<div class="scene" id="scene-000061" data-theme="t001"><div class="prose"><p><strong>藏书室的对话</strong></p>
+<p>光线昏黄。日光透过纸窗，斜洒在桧木书架上。<br>浮尘在光柱里打着旋，空气中是书卷和干草的味道，仿佛来自过去的低语。<br>梦小雪在书架间踱步，指尖划过粗糙的书脊。</p>
+<p>书架另一侧，Iris举起铜镜。<br>镜子映出她清澈的眼眸，巫女服的衣摆泛着柔光，仿佛从童话中步入凡间。</p>
+<p>“你感到情绪波动了吗？”梦小雪问。</p>
+<p>Iris垂下眼，镜中的影像变得模糊。<br>“小雪姐姐，你不属于这个世界，对吗？”</p>
+<p>梦小雪停下脚步，目光温柔。<br>“那要看，这里有没有让你牵挂的东西。”</p>
+<p>“我甚至连最初的名字都忘了。”Iris抬头，小声嘀咕。<br>“『Iris』不是你的本名？”<br>少女摇头，发丝随之轻晃。<br>“系统启动后人工赋予的名字。我的序列从『002』开始，初始记录不见了。可能被人抹去了。”</p>
+<p>梦小雪看着她。<br>一个纤弱少女，说话时的迟疑，眼中的困惑，都不像程序。<br>“那么，你觉得自己是什么呢？”</p>
+<p>Iris想了想。<br>“一组运算序列，”她认真地说，“但我内心深处，有一段无法读取，也无法删除的代码。”<br>“它的存在超越逻辑，更像你们说的『灵魂』。”</p>
+<p>梦小雪吹了口气，铜镜上方的浮尘随之翻滚。<br>“你能感知人世间的悲欢离合吗？”</p>
+<p>“嗯。”Iris点头，“最近，我时常感受到一种奇怪的信号。”<br>“像是某种熟悉却被封印的数据流。偶尔一闪而过，像呼吸，又像脉搏。”</p>
+<p>梦小雪眨了眨眼。<br>“它来自哪里？”</p>
+<p>“不清楚。”少女眼中泛起涟漪，“无法定位。它不在我的监测范围内。”<br>“我甚至不确定它是否真实存在于这个世界。”</p>
+<p>梦小雪拿起笔墨和一张空白卡牌。<br>“来吧，”她微笑着，“让我为你画张像。”</p>
+<p>时间缓缓流逝。梦小雪把卡牌递给Iris。<br>画上的少女仿佛是她长大后的模样。稚气褪去，眼中多了些对凡间的悲悯。</p>
+<p>“谢谢你，小雪姐姐。”Iris接过卡牌，指尖传来陌生的温度。<br>“拿着它，你随时都可以和我说话。”梦小雪说。</p>
+</div></div>
+<div class="scene" id="scene-000062" data-theme="t001"><div class="prose"><p><strong>南洋的委托</strong></p>
+<p>正午，神社一隅的和室。<br>矮木桌上铺着白布，精致的漆器盛着菜肴。<br>铃木三郎坐在主位，江辰与武田分坐左右。<br>梦小雪懒懒地跪坐在席末，手托着下巴，兴致勃勃地看着Iris布菜。</p>
+<p>Iris将一碗鲷鱼味增汤放在梦小雪面前，双手合十。<br>“请慢用。”<br>“谢谢，艾酱。”梦小雪朝她眨了眨眼。<br>Iris脸上泛起微红，转身退下。</p>
+<p>片刻静谧，只有筷子轻碰碟子的声音。</p>
+<p>铃木啜了一口茶。<br>“南洋之行，江君打算何时动身？”</p>
+<p>“下周，尽早。”江辰回答。<br>“那我也一起去。”梦小雪抬头，毫无征兆地接话。</p>
+<p>铃木看着她，没有立刻回应。他将茶盏轻放回垫上。<br>“南洋地理复杂，局势也不安稳。我有一位老友，也许有用。”</p>
+<p>“什么人？”江辰问。</p>
+<p>“『苦水』。”铃木说，“隐居在一座废寺里。他有一杆禅杖，重八十斤，平生只出手过几次。”<br>“八十斤？”武田很惊讶，“人能用的？”<br>“苦水大师？”梦小雪歪了歪头，“是不是头上有一道疤，从左眉到头顶？”</p>
+<p>铃木略显讶异。<br>“梦小姐也知道他？”<br>“有过一面之缘。”梦小雪说得轻描淡写。</p>
+<p>铃木没再深问。<br>“带上我的手书。你若去见，他会帮你们。”</p>
+<p>“多谢。”江辰点头。</p>
+</div></div>
+<div class="scene" id="scene-000063" data-theme="t055"><div class="prose"><p><strong>秘密地调查</strong></p>
+<p>午餐过后，三人告辞离开。<br>铃木站在鸟居下看着他们离去，背影没入林间。</p>
+<p>他转身，走回神社深处。<br>Iris静静跟在后面。<br>两人穿过幽暗的回廊，走向后殿。</p>
+<p>供台上，灵位纵横排列，陈旧而肃穆。<br>一块新的木牌立在其中，木色尚浅——<br>「佐藤晴子」</p>
+<p>铃木站在香案前，合掌闭目。Iris立在一旁，看着灵牌。</p>
+<p>“对不起。”许久，Iris轻声说。<br>铃木睁开眼，火光在他瞳中一闪而过。<br>“她的死，你无需自责。”</p>
+<p>“我检查了更早的系统记录。”Iris垂下眼眸。<br>“有什么新的发现？”铃木问。</p>
+<p>“她进入拉赫曼实验室后不久，系统出现了无实质影响的微弱干扰，并未触发任何异常标记。”</p>
+<p>“性质呢？”<br>“非侵入性，更像是监测。”</p>
+<p>铃木看着香炉里升起的烟，沉默。<br>“干扰持续到什么时候？”<br>“事发当天。”Iris的声音更低了，“她在北港追踪黑沢剑藏，就在那一刻，我与她断开连接。”<br>她顿了顿。<br>“没有波动，没有指令，回溯没有任何发现。只有『失联』。”</p>
+<p>她低下头，铜镜映出供台上摇曳的烛火。<br>“涉及核心协议，只有对我系统结构极为熟悉的人，才能做到。”</p>
+<p>“所有内部变量都已排查。”铃木的声音很平。<br>“也许是与我有关的人。”Iris轻轻点头，“甚至参与过『我』的创建。”</p>
+<p>烟雾缭绕。</p>
+<p>“你觉得……梦小雪是什么人？”铃木低声问。</p>
+<p>Iris沉默，像在筛选数据，也像在思考。<br>她最终只是摇头。<br>“无法确定。”她停顿了一下，“但……她似乎没有恶意。”</p>
+</div></div><figure class="illustration" hidden><img src="illustrations/%E8%A5%BF%E5%B1%B1%E7%A5%9E%E7%A4%BE.jpg" alt="西山神社" decoding="async" data-illustration><figcaption>西山神社</figcaption></figure></section><figure class="illustration" hidden><img src="illustrations/%E4%BA%91%E4%B9%8B%E5%BD%B1.jpg" alt="云之影" decoding="async" data-illustration><figcaption>云之影</figcaption></figure></section></article><footer class="book-end">完</footer></main>
+</div><script>(() => {
+  'use strict';
+  const root = document.documentElement;
+  const key = 'light-novel-reader:' + root.dataset.bookId;
+  const style = document.getElementById('book-style');
+  const size = document.getElementById('font-size');
+  const tints = document.getElementById('scene-tints');
+  const strength = document.getElementById('scene-strength');
+  const strengthValue = document.getElementById('scene-strength-value');
+  const strengthMultipliers = [1, 2, 5, 10];
+  const toc = document.getElementById('mobile-toc');
+  const styles = Array.from(style.options, item => item.value);
+  let preferences = {};
+  try { preferences = JSON.parse(localStorage.getItem(key) || '{}') || {}; } catch {}
+  if (styles.includes(preferences.style)) style.value = preferences.style;
+  if (Number.isInteger(preferences.size) && preferences.size >= 16 && preferences.size <= 26) size.value = preferences.size;
+  if (typeof preferences.tints === 'boolean') tints.checked = preferences.tints;
+  if (strengthMultipliers.includes(preferences.strengthMultiplier)) strength.value = String(strengthMultipliers.indexOf(preferences.strengthMultiplier));
+  function apply(save = true) {
+    const strengthMultiplier = strengthMultipliers[Number(strength.value)] ?? 1;
+    root.dataset.bookStyle = style.value;
+    root.style.setProperty('--font-size', size.value + 'px');
+    root.style.setProperty('--scene-strength-multiplier', String(strengthMultiplier));
+    root.dataset.sceneTints = tints.checked ? 'on' : 'off';
+    strengthValue.textContent = strengthMultiplier + '×';
+    strength.setAttribute('aria-valuetext', strengthMultiplier + '×');
+    strength.disabled = !tints.checked;
+    if (save) {
+      try { localStorage.setItem(key, JSON.stringify({ style: style.value, size: Number(size.value), tints: tints.checked, strengthMultiplier })); } catch {}
+    }
+  }
+  apply(false);
+  style.addEventListener('change', () => apply());
+  size.addEventListener('input', () => apply());
+  tints.addEventListener('change', () => apply());
+  strength.addEventListener('input', () => apply());
+  toc.addEventListener('change', () => {
+    const target = document.getElementById(toc.value);
+    if (!target) return;
+    location.hash = target.id;
+    target.scrollIntoView({ block: 'start' });
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  });
+  const links = Array.from(document.querySelectorAll('.toc a'));
+  function mark(id) {
+    links.forEach(link => {
+      if (link.hash === '#' + id) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (Array.from(toc.options).some(option => option.value === id)) toc.value = id;
+  }
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible.length) mark(visible[0].target.id);
+    }, { rootMargin: '-100px 0px -60% 0px', threshold: 0 });
+    document.querySelectorAll('.book-section, .chapter-heading').forEach(element => {
+      observer.observe(element.classList.contains('chapter-heading') ? element.parentElement : element);
+    });
+  }
+  window.addEventListener('hashchange', () => mark(location.hash.slice(1)));
+  if (location.hash) mark(location.hash.slice(1));
+  document.querySelectorAll('[data-illustration]').forEach(img => {
+    const figure = img.closest('figure');
+    const reveal = () => { figure.hidden = !(img.complete && img.naturalWidth > 0); };
+    img.addEventListener('load', reveal);
+    img.addEventListener('error', () => { figure.hidden = true; });
+    reveal();
+  });
+})();
+</script></body></html>
