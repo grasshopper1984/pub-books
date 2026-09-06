@@ -1,22 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="400" viewBox="0 0 480 400" fill="none" role="img" aria-labelledby="title desc">
   <title id="title">A helping hand</title>
-  <desc id="desc">A friendly blue robot gently guides a human hand as it types characters on a notebook computer.</desc>
+  <desc id="desc">A cute round pink robot gently guides a human hand typing on a notebook computer with blue screen accents. The human wears a blue sleeve and a rugged digital sport watch.</desc>
   <!-- Self-contained vector artwork: transparent background, no fonts or external assets. -->
   <g stroke="#283B49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Robot antenna, ears, and body -->
-    <path d="M111 83V59"/>
-    <circle cx="111" cy="49" r="10" fill="#2686AE"/>
-    <rect x="45" y="116" width="21" height="36" rx="9" fill="#2686AE"/>
-    <rect x="164" y="116" width="21" height="36" rx="9" fill="#2686AE"/>
-    <path d="M96 181V201H131V181" fill="#E5F2F7"/>
-    <rect x="68" y="195" width="91" height="101" rx="29" fill="#2686AE"/>
-    <path d="M79 214C48 220 42 246 50 271"/>
-    <path d="M40 280L49 268L64 275" fill="#E5F2F7"/>
-    <rect x="59" y="85" width="113" height="99" rx="29" fill="#E5F2F7"/>
-    <rect x="77" y="111" width="77" height="45" rx="18" fill="#283B49" stroke="none"/>
-    <path d="M94 127V133M137 127V133" stroke="#FFF" stroke-width="8"/>
-    <path d="M109 141Q115 147 122 141" stroke="#79CCEB" stroke-width="4"/>
-    <path d="M99 220H120M109.5 209.5V230.5" stroke="#FFF" stroke-width="5"/>
+    <!-- Round pink robot with a heart, rosy cheeks, and a happy face -->
+    <path d="M111 76V58"/>
+    <circle cx="111" cy="48" r="11" fill="#ED91B5"/>
+    <circle cx="107" cy="44" r="3" fill="#FFF" stroke="none"/>
+    <ellipse cx="52" cy="134" rx="12" ry="19" fill="#ED91B5"/>
+    <ellipse cx="174" cy="134" rx="12" ry="19" fill="#ED91B5"/>
+    <path d="M98 182V207H128V182" fill="#FBE2ED"/>
+    <path d="M76 216C48 222 42 246 50 267"/>
+    <path d="M43 280Q34 266 47 262Q60 258 64 271" fill="#FBE2ED"/>
+    <ellipse cx="113" cy="246" rx="47" ry="53" fill="#ED91B5"/>
+    <ellipse cx="113" cy="135" rx="62" ry="59" fill="#FBE2ED"/>
+    <rect x="70" y="109" width="86" height="53" rx="26.5" fill="#283B49" stroke="none"/>
+    <path d="M85 130Q91 121 97 130M129 130Q135 121 141 130" stroke="#FFF" stroke-width="5"/>
+    <path d="M106 141Q113 150 120 141" stroke="#FFF" stroke-width="4"/>
+    <ellipse cx="84" cy="144" rx="6" ry="3.5" fill="#ED91B5" stroke="none"/>
+    <ellipse cx="142" cy="144" rx="6" ry="3.5" fill="#ED91B5" stroke="none"/>
+    <path d="M101 211C92 202 83 215 94 224L104 233L114 224C125 215 114 203 105 211L103 214Z" fill="#FFF" stroke="none"/>
     <!-- Notebook display -->
     <rect x="191" y="115" width="215" height="157" rx="14" fill="#E5F2F7"/>
     <rect x="205" y="129" width="187" height="127" rx="5" fill="#FFF" stroke="none"/>
@@ -39,12 +42,22 @@
     <path d="M397 241L385 268" stroke="#B88466" stroke-width="4"/>
     <!-- Sleeve -->
     <path d="M426 248L448 255L436 309L415 301Z" fill="#2686AE"/>
+    <!-- Rugged digital sport watch: ribbed strap, protective octagonal bezel -->
+    <g transform="translate(403 268) rotate(16)" stroke-width="3">
+      <rect x="-10" y="-29" width="20" height="61" rx="4" fill="#374A57"/>
+      <path d="M-6-23H6M-6-18H6M-6 23H6M-6 28H6" stroke="#7D909B" stroke-width="2"/>
+      <path d="M-18-8H-21V2H-18M18-8H21V2H18" fill="#374A57"/>
+      <path d="M-11-18H11L18-11V10L11 17H-11L-18 10V-11Z" fill="#374A57"/>
+      <rect x="-12" y="-10" width="24" height="20" rx="3" fill="#C6DFDA" stroke-width="2"/>
+      <path d="M-8-4H-3V0H-8V5H-3M3-4H8V5H3ZM0-1V0M0 3V4" stroke="#283B49" stroke-width="1.5"/>
+      <path d="M-4-14H4M-4 13H4" stroke="#ED91B5" stroke-width="2"/>
+    </g>
     <!-- Robot arm reaches over to support the human index finger -->
     <path d="M155 218L211 239L275 248" stroke="#283B49" stroke-width="24"/>
-    <path d="M155 218L211 239L275 248" stroke="#2686AE" stroke-width="10"/>
-    <circle cx="211" cy="239" r="12" fill="#E5F2F7" stroke-width="5"/>
+    <path d="M155 218L211 239L275 248" stroke="#ED91B5" stroke-width="10"/>
+    <circle cx="211" cy="239" r="12" fill="#FBE2ED" stroke-width="5"/>
     <path d="M277 237L291 239L301 249M274 255L284 263" stroke="#283B49" stroke-width="10"/>
-    <path d="M277 237L291 239L301 249M274 255L284 263" stroke="#E5F2F7" stroke-width="4"/>
+    <path d="M277 237L291 239L301 249M274 255L284 263" stroke="#FBE2ED" stroke-width="4"/>
     <!-- A small keypress accent -->
     <path d="M278 285L273 292M287 289V297" stroke="#2686AE" stroke-width="4"/>
   </g>
