@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="400" viewBox="0 0 480 400" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">A helping hand</title>
+  <desc id="desc">A friendly blue robot gently guides a human hand as it types characters on a notebook computer.</desc>
+  <!-- Self-contained vector artwork: transparent background, no fonts or external assets. -->
+  <g stroke="#283B49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Robot antenna, ears, and body -->
+    <path d="M111 83V59"/>
+    <circle cx="111" cy="49" r="10" fill="#2686AE"/>
+    <rect x="45" y="116" width="21" height="36" rx="9" fill="#2686AE"/>
+    <rect x="164" y="116" width="21" height="36" rx="9" fill="#2686AE"/>
+    <path d="M96 181V201H131V181" fill="#E5F2F7"/>
+    <rect x="68" y="195" width="91" height="101" rx="29" fill="#2686AE"/>
+    <path d="M79 214C48 220 42 246 50 271"/>
+    <path d="M40 280L49 268L64 275" fill="#E5F2F7"/>
+    <rect x="59" y="85" width="113" height="99" rx="29" fill="#E5F2F7"/>
+    <rect x="77" y="111" width="77" height="45" rx="18" fill="#283B49" stroke="none"/>
+    <path d="M94 127V133M137 127V133" stroke="#FFF" stroke-width="8"/>
+    <path d="M109 141Q115 147 122 141" stroke="#79CCEB" stroke-width="4"/>
+    <path d="M99 220H120M109.5 209.5V230.5" stroke="#FFF" stroke-width="5"/>
+    <!-- Notebook display -->
+    <rect x="191" y="115" width="215" height="157" rx="14" fill="#E5F2F7"/>
+    <rect x="205" y="129" width="187" height="127" rx="5" fill="#FFF" stroke="none"/>
+    <!-- Typed characters, drawn as paths so no font is required -->
+    <g stroke="#2686AE" stroke-width="6">
+      <path d="M240 167L226 179L240 191M274 167L288 179L274 191M263 162L251 196"/>
+      <path d="M302 191H319"/>
+    </g>
+    <path d="M227 221H273M287 221H311" stroke="#B7D7E5" stroke-width="5"/>
+    <!-- Keyboard deck and front lip -->
+    <path d="M191 272H406L437 326H151Z" fill="#E5F2F7"/>
+    <path d="M151 326H437L429 339Q426 345 417 345H172Q162 345 158 337Z" fill="#FFF"/>
+    <g stroke="#829DAC" stroke-width="4">
+      <path d="M200 288H388M187 303H398"/>
+      <path d="M215 283L208 306M240 283L235 306M265 283L263 306M291 283V306M317 283L320 306M343 283L349 306M369 283L378 306"/>
+    </g>
+    <path d="M268 317H324" stroke="#829DAC" stroke-width="4"/>
+    <!-- Human hand: extended index finger presses a key -->
+    <path d="M443 256L397 241L355 222Q346 218 339 224L319 245L292 259Q284 263 288 270Q291 276 300 273L325 263L315 280Q311 287 317 291Q323 295 328 287L341 271L333 288Q330 295 336 298Q343 302 347 294L360 274L354 290Q352 297 358 300Q365 303 369 295L380 276Q389 285 402 288L431 300Z" fill="#F2C8AA"/>
+    <path d="M397 241L385 268" stroke="#B88466" stroke-width="4"/>
+    <!-- Sleeve -->
+    <path d="M426 248L448 255L436 309L415 301Z" fill="#2686AE"/>
+    <!-- Robot arm reaches over to support the human index finger -->
+    <path d="M155 218L211 239L275 248" stroke="#283B49" stroke-width="24"/>
+    <path d="M155 218L211 239L275 248" stroke="#2686AE" stroke-width="10"/>
+    <circle cx="211" cy="239" r="12" fill="#E5F2F7" stroke-width="5"/>
+    <path d="M277 237L291 239L301 249M274 255L284 263" stroke="#283B49" stroke-width="10"/>
+    <path d="M277 237L291 239L301 249M274 255L284 263" stroke="#E5F2F7" stroke-width="4"/>
+    <!-- A small keypress accent -->
+    <path d="M278 285L273 292M287 289V297" stroke="#2686AE" stroke-width="4"/>
+  </g>
+</svg>
