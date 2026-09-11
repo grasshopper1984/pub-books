@@ -6,6 +6,10 @@
 * [第二章：云之影](./雪夜的新年/云之影.html)
 * [第三章：烛之舞](./雪夜的新年/烛之舞.html)
 
+# Articles - 文章
+
+## [AI-Economy](./articles/AI-Economy.html)
+
 # Style - 风格
 
 ## [Novel Theme Card](./novel-theme-cards.html)
