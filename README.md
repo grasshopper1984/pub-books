@@ -10,6 +10,10 @@
 
 ## [AI-Economy](./articles/AI-Economy.html)
 
+# Games - 游戏
+
+## [Raven-Tide](./games/Raven-Tide-v45.html)
+
 # Style - 风格
 
 ## [Novel Theme Card](./novel-theme-cards.html)
