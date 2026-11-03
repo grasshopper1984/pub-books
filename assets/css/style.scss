@@ -1,0 +1,60 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+header img {
+  display: block;
+  width: 220px;
+  margin: 0 0 16px;
+}
+
+header p {
+  line-height: 1.7;
+}
+
+section h2 {
+  margin: 40px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+section h2:first-child {
+  margin-top: 0;
+}
+
+section h3 {
+  margin: 24px 0 6px;
+  font-size: 20px;
+}
+
+section h3 + p {
+  margin-bottom: 12px;
+}
+
+section ol {
+  padding-left: 20px;
+}
+
+section ol li {
+  margin-bottom: 4px;
+}
+
+section hr {
+  margin: 40px 0 16px;
+}
+
+section hr + p {
+  font-size: 12px;
+  color: #9a9a9a;
+}
+
+@media print, screen and (max-width: 720px) {
+  header img {
+    width: 140px;
+  }
+}
