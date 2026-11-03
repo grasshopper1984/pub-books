@@ -1,4 +1,11 @@
 theme: jekyll-theme-minimal
 title: Luckynoob Books
-logo: /assets/images/pink-robot-logo.svg
+description: 小说 · 文章 · 游戏 · 风格
+lang: zh-Hans
+logo: /assets/images/logo.svg
 show_downloads: false
+defaults:
+  - scope:
+      path: README.md
+    values:
+      title: Luckynoob Books
